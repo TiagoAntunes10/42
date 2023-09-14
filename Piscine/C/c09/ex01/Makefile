@@ -1,34 +1,34 @@
-SOURCE_DIR = ~/srcs
-
-HEADER_DIR = ~/includes
-
+BINARY = bin
+SOURCE_DIR = ./srcs/
+HEADER_DIR = ./includes/
 CFILES = ft_putchar.c \
 	 ft_swap.c \
 	 ft_putstr.c \
 	 ft_strlen.c \
 	 ft_strcmp.c
-
-OFILES = $(CFILES:.c=.o)
-            
 HFILES = ft.h
 
 NAME = libft.a
 
-CFLAGS = -c -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror $(foreach D,$(SOURCE_DIR), -I$(D))
 
-all: $(NAME) clean
+OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 
-$(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+all: $(NAME)
 
+$(NAME): $(OBJECTS)
+	ar rcs $@ $^
+
+%.o:%.c
+	$(CC) $(CFLAGS) -c $@ $^
     
 clean: 
-	rm -rf $(OFILES)
-	echo rm -rf $(OFILES)
+	rm -rf $(OBJECTS)
         
 fclean: 
-	clean rm -rf $(NAME)
-	echo clean rm -rf $(NAME)
+	rm -rf $(OBJECTS) $(NAME)
 
-re: fclean $(NAME)
-    echo fclean $(NAME)
+re:
+	fclean
+	all	
