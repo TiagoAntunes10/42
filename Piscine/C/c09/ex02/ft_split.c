@@ -13,7 +13,7 @@ char	**ft_split(char *str, char *charset)
 	int		i;
 
 	count = count_words(str, charset);
-	words = malloc((count + 1) * sizeof(char *));
+	words = malloc((count + 1));
 	i = 0;
 	while (*str != '\0')
 	{
@@ -28,8 +28,6 @@ char	**ft_split(char *str, char *charset)
 		str += len;
 		i++;
 	}
-	words[count] = malloc(1);
-	words[count] = "0";
 	return (words);
 }
 
