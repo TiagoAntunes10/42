@@ -13,7 +13,7 @@ char	**ft_split(char *str, char *charset)
 	int		i;
 
 	count = count_words(str, charset);
-	words = malloc((count + 1));
+	words = malloc((count + 1) * sizeof(char *));
 	i = 0;
 	while (*str != '\0')
 	{
@@ -104,7 +104,7 @@ int	main(int argc, char **argv)
 		return (0);
 	words = ft_split(argv[1], argv[2]);
 	i = 0;
-	while (words[i][0] != '0')
+	while (words[i][0] != '\0')
 	{
 		printf("%s\n", words[i]);
 		i++;
