@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+//#include <string.h>
 
 int	ft_strlen(char *str);
 
@@ -29,10 +30,9 @@ int	ft_strlen(char *str)
 /*int	main(void)
 {
 	char	*str;
-	int	l;
 
 	str = "abcd";
-	l = ft_strlen(str);
-	printf("%d\n", l);
+	printf("%d\n", ft_strlen(str));
+	printf("%d\n", strlen(str));
 
 }*/

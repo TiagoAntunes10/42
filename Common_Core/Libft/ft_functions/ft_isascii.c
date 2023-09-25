@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_c_is'digiteric.c                                :+:      :+:    :+:   */
+/*   ft_isascii.int c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 18:00:09 by tialbert          #+#    #+#             */
-/*   Updated: 2023/08/30 18:00:12 by tialbert         ###   ########.fr       */
+/*   Created: 2023/08/30 18:01:13 by tialbert          #+#    #+#             */
+/*   Updated: 2023/09/01 11:09:04 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-//#include <ctype.h>
-//Confirmar se preciso de chamar a biblioteca aqui para correr as outras funções
 
-int	ft_isalnum(int c);
+int	ft_isascii(int c);
 
-int	ft_isalnum(int c)
+int	ft_isascii(int c)
 {
-	if (ft_isalpha(c) != 0 || ft_isdigit(c) != 0)
+	if (c <= 255)
 		return (c);
 	else
 		return (0);
@@ -28,7 +26,7 @@ int	ft_isalnum(int c)
 {
 	char	c;
 
-	c = '3';
-	printf("ft_isalnum: %d\n", ft_isalnum(c));
-	printf("isalnum: %d\n", isalnum(c));
+	c = 'h';
+	printf("ft_isascii: %d\n", ft_isascii(c));
+	printf("isascii: %d\n", isascii(c));
 }*/
