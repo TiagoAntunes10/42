@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
+/*   ft_c_is'digiteric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 18:01:13 by tialbert          #+#    #+#             */
-/*   Updated: 2023/09/01 11:09:04 by tialbert         ###   ########.fr       */
+/*   Created: 2023/08/30 18:00:09 by tialbert          #+#    #+#             */
+/*   Updated: 2023/08/30 18:00:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+//#include <ctype.h>
 
-int	ft_str_is_printable(char *str);
+int	ft_isdigit(int c);
 
-int	ft_str_is_printable(char *str)
+int	ft_isdigit(int c)
 {
-	int	a;
-
-	while (*str != '\0')
-	{
-		a = *str;
-		if (a >= 32)
-			str += 1;
-		else
-			return (0);
-	}
-	return (1);
+	if (c >= 48 && c <= 57)
+		return (c);
+	else
+		return (0);
 }
 
 /*int	main(void)
 {
-	char	*str;
-	int	i;
+	char	c;
 
-	str = "ASBSDHBsfdSHJB\n";
-	i = ft_str_is_printable(str);
-	printf("%d\n", i);
+	c = '3';
+	printf("ft_isdigit: %d\n", ft_isdigit(c));
+	printf("isdigit: %d\n", isdigit(c));
 }*/

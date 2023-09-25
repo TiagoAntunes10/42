@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_c_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,32 +11,24 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+//#include <ctype.h>
 
-int	ft_str_is_alpha(char *str);
+int	ft_isalpha(int c);
 
-int	ft_str_is_alpha(char *str)
+int	ft_isalpha(int c)
 {
-	int	a;
-
-	while (*str != '\0')
-	{
-		a = *str;
-		if (a >= 65 && a <= 91)
-			str += 1;
-		else if (a >= 97 && a <= 122)
-			str += 1;
-		else
-			return (0);
-	}
-	return (1);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (c);
+	else
+		return (0);
 }
 
 /*int     main(void)
 {
-        char    *str;
-	int	i;
+        char    c;
+		int	i;
 
-        str = "Adhd76a";
-        i = ft_str_is_alpha(str);
-        printf("%d\n", i);
+        c = "A";
+        printf("ft_isalpha: %d\n", ft_isalpha(c));
+		printf("isalpha: %d\n", isalpha(c));
 }*/
