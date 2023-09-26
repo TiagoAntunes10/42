@@ -3,15 +3,17 @@
 void    *ft_memset(void *s, int c, unsigned int n)
 {
     unsigned int    i;
+    char            *cs;
 
+    cs = (char *) s;
     i = 0;
     while (i < n)
     {
-        *s = c;
+        cs[i] = c;
         i++;
         s++;
     }
-    return (s);
+    return (cs);
 }
 
 /*

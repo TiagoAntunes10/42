@@ -29,7 +29,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 		j = 0;
 		while (src[j] != '\0')
 			j++;
-		return (j);
+		return (j + size);
 	}
 	j = cat (dest, src, size, j);
 	return (j);

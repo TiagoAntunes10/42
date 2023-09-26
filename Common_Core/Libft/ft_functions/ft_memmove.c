@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-void    *memcpy(void *dest, void *src, unsigned int n)
+void    *memmove(void *dest, void *src, unsigned int n)
 {
     unsigned int    i;
-    int             j;
+    char            *temp;
     char            *cdest;
     char            *csrc;
 
@@ -12,23 +12,13 @@ void    *memcpy(void *dest, void *src, unsigned int n)
     i = 0;
     while (i < n)
     {
-        j = 0;
-        while (j < n)
-        {
-            if (dest == src)
-                return (dest);
-            j++;
-            src++;
-        }
+        temp[i] = csrc[i];
         i++;
-        dest++;
-        src -= j;
     }
-    dest -= i;
     i = 0;
     while (i < n)
     {
-        cdest[i] = csrc[i];
+        cdest[i] = temp[i];
         i++;
     }
     return (cdest);
