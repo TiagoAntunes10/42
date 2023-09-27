@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n);
-
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int	i;
@@ -19,12 +17,8 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	i = 1;
 	while (i <= n)
 	{
-		if (*s1 > *s2)
-			return (1);
-		else if (*s1 < *s2)
-			return (-1);
-		else if (*s1 == '\0' && *s2 == '\0')
-			return (0);
+		if (*s1 != *s2)
+			return (*s1 - *s2);
 		s1 += 1;
 		s2 += 1;
 		i++;
@@ -40,9 +34,9 @@ int	main(void)
 	char	*s2;
 	unsigned int	n;
 
-	s1 = "hellt";
+	s1 = "hellodsfsi";
 	s2 = "hellodsfsi";
-	n = 5;
+	n = 15;
 	printf("%d\n", ft_strncmp(s1, s2, n));
 	printf("%d\n", strncmp(s1, s2, n));
 }*/

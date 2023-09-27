@@ -9,10 +9,9 @@
 /*   Updated: 2023/08/28 12:32:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-//#include <string.h>
 
-int	ft_strlen(char *str);
+//#include <stdio.h>
+//#include <string.h>
 
 int	ft_strlen(char *str)
 {
@@ -33,6 +32,5 @@ int	ft_strlen(char *str)
 
 	str = "abcd";
 	printf("%d\n", ft_strlen(str));
-	printf("%d\n", strlen(str));
-
+	printf("%ld\n", strlen(str));
 }*/

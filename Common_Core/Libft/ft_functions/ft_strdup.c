@@ -12,53 +12,28 @@
 
 #include <stdlib.h>
 
-char	*ft_strdup(char *src);
-int		ft_strlen(char *str);
-char	*ft_strcpy(char *dest, char *src);
+char			*ft_strdup(char *src);
+int				ft_strlen(char *str);
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
 
 char	*ft_strdup(char *src)
 {
-	int		l;
-	char	*str;
+	unsigned int		l;
+	char				*str;
 
 	l = ft_strlen(src);
 	str = malloc (l);
-	str = ft_strcpy(str, src);
+	ft_strlcpy(str, src, l + 1);
 	return (str);
 }
 
-int	ft_strlen(char *str)
-{
-	int	l;
-
-	l = 0;
-	while (*str != '\0')
-	{
-		++l;
-		++str;
-	}
-	return (l);
-}
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 /*#include <stdio.h>
+#include <string.h>
 int main(void)
 {
 	char	*src;
 
-	src = "Boas";
-	printf("%s\n", ft_strdup(src));
+	src = "Boas dfjb fhbb";
+	printf("ft_strdup: %s\n", ft_strdup(src));
+	printf("strdup: %s\n", strdup(src));
 }*/

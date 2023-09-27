@@ -50,7 +50,7 @@ int	find_str(char *str, char *to_find)
 	return (i);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 
 int	main(void)
@@ -60,5 +60,6 @@ int	main(void)
 
 	str = "teteste";
 	to_find = "teste";
-	printf("%s\n", ft_strnstr(str, to_find, 8));
-}*/
+	printf("ft_strnstr: %s\n", ft_strnstr(str, to_find, 8));
+	printf("strnstr: %s\n", strnstr(str, to_find, 8));
+}

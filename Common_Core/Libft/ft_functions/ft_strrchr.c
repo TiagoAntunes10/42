@@ -1,10 +1,11 @@
-#include <stdio.h>
+//#include <stdio.h>
 //#include <string.h>
+
 int ft_strlen(char *str);
 
 char    *ft_strrchr(char *s, int c)
 {
-    s += ft_strlen(s);
+    s += ft_strlen(s) - 1;
     while (*s != '\0')
     {
         if (*s == c)
@@ -18,14 +19,13 @@ char    *ft_strrchr(char *s, int c)
         return ("\0");
 }
 
-/*
-int main(void)
+/*int main(void)
 {
     char    *s;
     char    c;
 
     s = "hfdb hnjnhdfb";
-    c = 'h';
+    c = 'n';
     printf("ft_strrchr: %s\n", ft_strrchr(s, c));
     printf("strrchr: %s\n", strrchr(s, c));
 }*/
