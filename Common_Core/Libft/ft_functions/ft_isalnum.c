@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+//#include <stdio.h>
 //#include <ctype.h>
-//Confirmar se preciso de chamar a biblioteca aqui para correr as outras funções
 
-int	ft_isalnum(int c);
+int	ft_isalpha(int c);
+int	ft_isdigit(int c);
 
 int	ft_isalnum(int c)
 {
 	if (ft_isalpha(c) != 0 || ft_isdigit(c) != 0)
-		return (c);
+		return (8);
 	else
 		return (0);
 }
@@ -28,7 +28,7 @@ int	ft_isalnum(int c)
 {
 	char	c;
 
-	c = '3';
+	c = '8';
 	printf("ft_isalnum: %d\n", ft_isalnum(c));
 	printf("isalnum: %d\n", isalnum(c));
 }*/
