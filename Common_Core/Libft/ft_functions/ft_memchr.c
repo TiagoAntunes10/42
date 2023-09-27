@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#include <string.h>
+#include <string.h>
 
 void    *ft_memchr(void *s, int c, unsigned int n)
 {
@@ -21,7 +21,7 @@ void    *ft_memchr(void *s, int c, unsigned int n)
     return ("\0");
 }
 
-/*
+
 int main(void)
 {
     char    *s;
@@ -30,9 +30,9 @@ int main(void)
 
     s = "hfdb hnjnhdfb";
     c = 'j';
-    printf("ft_memchr_str: %s\n", ft_memchr(s, c, 10 * sizeof(char)));
-    printf("memchr_str: %s\n", memchr(s, c, 10 * sizeof (char)));
+    printf("ft_memchr_str: %s\n", ft_memchr(s, c, 10));
+    printf("memchr_str: %s\n", memchr(s, c, 10));
     c = 7;
-    printf("ft_memchr_arr: %d\n", ft_memchr(arr, c, 7 * sizeof(int)));
-    printf("memchr_arr: %d\n", memchr(arr, c, 7 * sizeof(int)));
-}*/
+    printf("ft_memchr_arr: %d\n", ft_memchr(arr, c, 7));
+    printf("memchr_arr: %d\n", memchr(arr, c, 7));
+}
