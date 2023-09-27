@@ -1,20 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
 void    ft_bzero(void *s, unsigned int n)
 {
     unsigned int    i;
+    char            *cs;
 
     i = 0;
+    cs = (char *) s;
     while (i < n)
     {
-        *s = 0;
+        *cs = 0;
+        cs++;
         i++;
-        s++;
     }
-    return (s);
 }
 
-/*
+
 int main(void)
 {
     char            *str;
@@ -22,15 +24,17 @@ int main(void)
     unsigned int    n;
     int             arr[7];
     int             arr2[7];
-    int             i;
+    unsigned int    i;
 
     str = "fhbfdh dhfhbhoasj nhahb";
     str2 = "fhbfdh dhfhbhoasj nhahb";
     n = 7;
-    printf("ft_bzero_str: %s\n", ft_bzero(str + 6, sizeof(char) * n));
-    printf("bzero_str: %s\n", bzero(str2 + 6, sizeof(char) * n));
-    arr = ft_bzero(arr, sizeof(int) * n);
-    arr2 = bzero(arr2, sizeof(int) * n);
+    ft_bzero(str + 6, n);
+    bzero(str2 + 6, n);
+    printf("ft_bzero_str: %s\n", str);
+    printf("bzero_str: %s\n", str2);
+    ft_bzero(arr, n);
+    bzero(arr2, n);
     i = 0;
     while (i < n)
     {
@@ -45,4 +49,4 @@ int main(void)
         i++;
     }
     printf("\n");
-}*/
+}
