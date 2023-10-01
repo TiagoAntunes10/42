@@ -1,7 +1,18 @@
-#include <stdio.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/01 11:01:31 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/01 11:01:41 by tialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    ft_bzero(void *s, unsigned int n)
+#include <stdio.h>
+
+void    ft_bzero(void *s, size_t n)
 {
     unsigned int    i;
     char            *cs;
@@ -10,12 +21,12 @@ void    ft_bzero(void *s, unsigned int n)
     cs = (char *) s;
     while (i < n)
     {
-        *cs = 0;
-        cs++;
+        cs[i] = 0;
         i++;
     }
 }
 
+#include <string.h>
 
 int main(void)
 {
@@ -36,16 +47,17 @@ int main(void)
     ft_bzero(arr, n);
     bzero(arr2, n);
     i = 0;
+    printf("ft_bzero_arr: ");
     while (i < n)
     {
-        printf("ft_bzero_arr: %d", arr[i]);
+        printf("%d, ", arr[i]);
         i++;
     }
-    printf("\n");
+    printf("\nbzero_arr: ");
     i = 0;
     while (i < n)
     {
-        printf("bzero_arr: %d", arr2[i]);
+        printf("%d, ", arr2[i]);
         i++;
     }
     printf("\n");

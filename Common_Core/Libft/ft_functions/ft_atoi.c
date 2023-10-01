@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str);
-int	convert(char *str);
+static int	convert(char const *str);
 
-int	ft_atoi(char *str)
+int	ft_atoi(char const *str)
 {
 	int	value;
 
@@ -28,7 +27,7 @@ int	ft_atoi(char *str)
 	return (value);
 }
 
-int	convert(char *str)
+static int	convert(char const *str)
 {
 	int	value;
 

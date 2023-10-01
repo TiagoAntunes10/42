@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 16:47:40 by tialbert          #+#    #+#             */
-/*   Updated: 2023/08/28 12:32:12 by tialbert         ###   ########.fr       */
+/*   Created: 2023/09/29 15:16:43 by tialbert          #+#    #+#             */
+/*   Updated: 2023/09/29 15:16:46 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-//#include <string.h>
+#include <unistd.h>
 
-int	ft_strlen(char const *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int	l;
-
-	l = 0;
-	while (*str != '\0')
+	while (*s != '\0')
 	{
-		++l;
-		++str;
+		write(fd, s, 1);
+		s = s + 1;
 	}
-	return (l);
 }
 
 /*int	main(void)
@@ -31,6 +26,5 @@ int	ft_strlen(char const *str)
 	char	*str;
 
 	str = "abcd";
-	printf("%d\n", ft_strlen(str));
-	printf("%ld\n", strlen(str));
+	ft_putstr_fd(str, 1);
 }*/

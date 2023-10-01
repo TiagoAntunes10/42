@@ -1,46 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 21:56:13 by tialbert          #+#    #+#             */
-/*   Updated: 2023/09/30 21:56:18 by tialbert         ###   ########.fr       */
+/*   Created: 2023/09/29 14:49:13 by tialbert          #+#    #+#             */
+/*   Updated: 2023/09/29 14:49:15 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-void    *ft_memchr(void const *s, int c, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int		i;
-	char				*cs;
+	unsigned int	i;
 
-	cs = (char *) s;
 	i = 0;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		if (cs[i] == c)
-		{
-			cs += i;
-			return (cs);
-			}
-		else
-			i++;
+		(*f)(i, &s[i]);
+		i++;
 	}
-	return ("\0");
 }
 
-/*
-#include <string.h>
+/*#include <stdio.h>
+void	f(unsigned int n, char *s)
+{
+	(void) n;
+	printf("%c", *s);
+}
+
 int main(void)
 {
     char    *s;
-    char    c;
 
-    s = "hfdb hnjnhdfb";
-    c = 'j';
-    printf("ft_memchr_str: %s\n", (char *) ft_memchr(s, c, 10));
-    printf("memchr_str: %s\n",  (char *) memchr(s, c, 10));
+    s = "SDFJNFN";
+    ft_striteri(s, f);
 }*/

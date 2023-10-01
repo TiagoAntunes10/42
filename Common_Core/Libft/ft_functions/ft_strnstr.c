@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	find_str(char *str, char *to_find);
+static int	find_str(char *str, char *to_find);
 
 char	*ft_strnstr(char *str, char *to_find, unsigned int n)
 {
@@ -36,7 +36,7 @@ char	*ft_strnstr(char *str, char *to_find, unsigned int n)
 	return ("\0");
 }
 
-int	find_str(char *str, char *to_find)
+static int	find_str(char *str, char *to_find)
 {
 	int	i;
 

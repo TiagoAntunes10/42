@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	cat(char *dest, char *src, int size, int j);
+static unsigned int	cat(char *dest, char *src, int size, int j);
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
@@ -34,7 +34,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	return (j);
 }
 
-unsigned int	cat(char *dest, char *src, int size, int j)
+static unsigned int	cat(char *dest, char *src, int size, int j)
 {
 	while (*src != '\0')
 	{
