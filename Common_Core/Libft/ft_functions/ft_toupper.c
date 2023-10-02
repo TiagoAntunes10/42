@@ -1,5 +1,4 @@
-//#include <stdio.h>
-//#include <ctype.h>
+
 
 int ft_toupper(int c)
 {
@@ -9,7 +8,11 @@ int ft_toupper(int c)
         return (c);
 }
 
-/*int main(void)
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void)
 {
     char    c;
 

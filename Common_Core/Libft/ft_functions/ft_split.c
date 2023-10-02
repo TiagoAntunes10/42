@@ -1,8 +1,8 @@
 #include <stdlib.h>
+#include "libft.h"
 
 static int		count_words(char const *str, char c);
 static int		ft_strlen(char const *str, char c);
-char			*ft_strlcpy(char *dest, char const *src, unsigned int n);
 
 char	**ft_split(char const *str, char c)
 {

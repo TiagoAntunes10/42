@@ -26,26 +26,25 @@ void    ft_bzero(void *s, size_t n)
     }
 }
 
+/*
 #include <string.h>
 
 int main(void)
 {
-    char            *str;
-    char            *str2;
+    char            str[] = "fhbfdh dhfhbhoasj nhahb";
+    char            str2[] = "fhbfdh dhfhbhoasj nhahb";
     unsigned int    n;
     int             arr[7];
     int             arr2[7];
     unsigned int    i;
 
-    str = "fhbfdh dhfhbhoasj nhahb";
-    str2 = "fhbfdh dhfhbhoasj nhahb";
     n = 7;
     ft_bzero(str + 6, n);
     bzero(str2 + 6, n);
     printf("ft_bzero_str: %s\n", str);
     printf("bzero_str: %s\n", str2);
-    ft_bzero(arr, n);
-    bzero(arr2, n);
+    ft_bzero(arr, n * sizeof(int));
+    bzero(arr2, n * sizeof(int));
     i = 0;
     printf("ft_bzero_arr: ");
     while (i < n)
@@ -61,4 +60,4 @@ int main(void)
         i++;
     }
     printf("\n");
-}
+}*/

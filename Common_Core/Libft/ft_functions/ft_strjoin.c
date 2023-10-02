@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-int			ft_strlen(char const *str);
 static char	*ft_join(char const *s1, char const *s2, char *str);
 
 char	*ft_strjoin(char const *s1, char const *s2)

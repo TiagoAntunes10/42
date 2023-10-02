@@ -10,56 +10,59 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	find_str(char *str, char *to_find);
+#include <stdio.h>
+static int	find_str(char *big, char const *small, size_t len, unsigned int count);
 
-char	*ft_strnstr(char *str, char *to_find, unsigned int n)
+char	*ft_strnstr(char const *big, char const *small, size_t len)
 {
 	int				i;
 	unsigned int	j;
+	char			*s;
 
-	if (*to_find == '\0')
-		return (str);
+	s = (char *) big;
 	j = 0;
-	while (j < n)
+	if (*small == '\0')
+		return (s);
+	while (j < len)
 	{
 		i = 0;
-		if (*to_find == *str)
-			i = find_str(str, to_find);
+		if (*small == *s)
+			i = find_str(s, small, len, j);
+		if (*(small + i) == '\0')
+			return (s);
 		else
-			str += 1;
-		if (*(to_find + i) == '\0')
-			return (str);
-		else
-			str += i;
+			s++;
 		j++;
 	}
 	return ("\0");
 }
 
-static int	find_str(char *str, char *to_find)
+static int	find_str(char *big, char const *small, size_t len, unsigned int count)
 {
 	int	i;
 
 	i = 0;
-	while (*to_find == *str && *to_find != '\0')
+	while (*small == *big && *small != '\0' && count < len)
 	{
-		to_find += 1;
-		str += 1;
+		small += 1;
+		big += 1;
 		i++;
+		count++;
 	}
 	return (i);
 }
 
-#include <stdio.h>
+/*
 #include <string.h>
 
 int	main(void)
 {
-	char	*str;
-	char	*to_find;
+	char	*big;
+	char	*small;
+	unsigned int	i;
 
-	str = "teteste";
-	to_find = "teste";
-	printf("ft_strnstr: %s\n", ft_strnstr(str, to_find, 8));
-	printf("strnstr: %s\n", strnstr(str, to_find, 8));
-}
+	i = 7;
+	big = "teteste";
+	small = "teste";
+	printf("ft_strnstr: %s\n", ft_strnstr(big, small, i));
+}*/

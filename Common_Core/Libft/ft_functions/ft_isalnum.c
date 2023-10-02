@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-//#include <ctype.h>
-
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {
@@ -24,7 +20,10 @@ int	ft_isalnum(int c)
 		return (0);
 }
 
-/*int	main(void)
+/*
+#include <stdio.h>
+#include <ctype.h>
+int	main(void)
 {
 	char	c;
 

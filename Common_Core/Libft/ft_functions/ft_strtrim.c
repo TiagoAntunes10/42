@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_strlen(char const *str);
+#include "libft.h"
+
 static int	ft_strlen_2(char const *str, char const *set, int end);
 static int	set_cmp(char s, char const *set);
 

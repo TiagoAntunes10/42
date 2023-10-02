@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-//#include <ctype.h>
-
 int	ft_isascii(int c)
 {
 	if (c <= 127)
@@ -21,7 +18,10 @@ int	ft_isascii(int c)
 		return (0);
 }
 
-/*int	main(void)
+/*
+#include <stdio.h>
+#include <ctype.h>
+int	main(void)
 {
 	char	c;
 

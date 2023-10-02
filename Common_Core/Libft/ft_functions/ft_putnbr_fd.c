@@ -12,7 +12,7 @@
 
 #include <unistd.h>
 
-void	write_nbr(long int nb, int fd);
+static void	write_nbr(long int nb, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -28,7 +28,7 @@ void	ft_putnbr_fd(int n, int fd)
 	return ;
 }
 
-void	write_nbr(long int nb, int fd)
+static void	write_nbr(long int nb, int fd)
 {
 	int	div;
 	int	mod;

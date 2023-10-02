@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 void    *ft_memcpy(void *dest, void const *src, size_t n)
 {
@@ -21,27 +20,20 @@ void    *ft_memcpy(void *dest, void const *src, size_t n)
 	return (cdest);
 }
 
-
+/*
+#include <string.h>
 int main(void)
 {
-    char            *dest;
-    char            *dest2;
+    char            dest[100];
+    char            dest2[100];
     char            *src;
     unsigned int    n;
-    int             *arr;
-    int             *arr3;
-    int             arr2[5] = {88, 5, 3, 6, 5};
+    int             arr[5];
+	int             arr3[5];
+	int const       arr2[5] = {88, 5, 3, 6, 5};
     unsigned int    i;
-    int             j;
-    int             k;
-    char            c;
-    char            s;
 
     src = "fhbfdhdhf";
-    dest = &c;
-    dest2 = &s;
-    arr = &j;
-    arr3 = &k;
     n = 10;
     printf("ft_memcpy_str: %s\n", (char *) ft_memcpy(dest, src, n));
     printf("memcpy_str: %s\n", (char *) memcpy(dest2, src, n));
@@ -64,4 +56,4 @@ int main(void)
         i++;
     }
     printf("\n");
-}
+}*/

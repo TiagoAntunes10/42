@@ -1,7 +1,6 @@
 #include <stdlib.h>
-#include <stdio.h>
 
-void    *ft_calloc(unsigned int nmem, unsigned int size)
+void    *ft_calloc(size_t nmem, size_t size)
 {
     void        *arr;
     long int    n;
@@ -16,6 +15,7 @@ void    *ft_calloc(unsigned int nmem, unsigned int size)
 }
 
 /*
+#include <stdio.h>
 int main(void)
 {
     int *arr;

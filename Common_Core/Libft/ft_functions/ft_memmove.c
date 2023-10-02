@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-void    *memmove(void *dest, void *src, unsigned int n)
+void    *ft_memmove(void *dest, void const *src, size_t n)
 {
     unsigned int    i;
-    char            *temp;
+    char            temp[n];
     char            *cdest;
     char            *csrc;
 
@@ -25,38 +25,43 @@ void    *memmove(void *dest, void *src, unsigned int n)
 }
 
 /*
+#include <string.h>
 int main(void)
 {
-    char            *dest;
-    char            *dest2;
+    char            dest[100];
+    char            dest2[100];
     char            *src;
     unsigned int    n;
     int             arr[7];
     int             arr3[7];
     int             arr2[7] = {4, 5, 87, 2, 6, 2, 4};
-    int             i;
+	int				*arr4;
+	int				*arr5;
+	int				a;
+	int				b;
+    unsigned int	i;
 
+	arr4 = &a;
+	arr5 = &b;
     src = "fhbfdhdhfhbhoasj nhahb";
-    dest = src + 4;
-    dest2 = src + 4;
     n = 7;
-    printf("ft_memcpy_str: %s\n", ft_memcpy(dest, src, sizeof(char) * n));
-    printf("memcpy_str: %s\n", memcpy(dest2, src, sizeof(char) * n));
-    arr = ft_memcpy(arr, arr2, sizeof(int) * n);
-    arr3 = memcpy(arr, arr2, sizeof(int) * n);
+    printf("ft_memmove_str: %s\n", (char *) ft_memmove(dest, src, sizeof(char) * n));
+    printf("memmove_str: %s\n", (char *) memmove(dest2, src, sizeof(char) * n));
+    arr4 = (int *) ft_memmove(arr, arr2, sizeof(int) * n);
+    arr5 = (int *) memmove(arr3, arr2, sizeof(int) * n);
     i = 0;
-    printf("ft_memcpy_arr: ");
+    printf("ft_memmove_arr: ");
     while (i < n)
     {
-        printf("%d ", arr[i]);
+        printf("%d ", arr4[i]);
         i++;
     }
     printf("\n");
     i = 0;
-    printf("memcpy_arr: ");
+    printf("memmove_arr: ");
     while (i < n)
     {
-        printf("%d ", arr3[i]);
+        printf("%d ", arr5[i]);
         i++;
     }
     printf("\n");

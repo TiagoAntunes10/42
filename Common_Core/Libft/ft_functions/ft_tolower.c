@@ -1,5 +1,4 @@
-//#include <stdio.h>
-//#include <ctype.h>
+
 
 int ft_tolower(int c)
 {
@@ -10,7 +9,11 @@ int ft_tolower(int c)
 }
 
 
-/*int main(void)
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void)
 {
     char    c;
 

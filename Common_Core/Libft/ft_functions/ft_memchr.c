@@ -25,7 +25,7 @@ void    *ft_memchr(void const *s, int c, size_t n)
 		{
 			cs += i;
 			return (cs);
-			}
+		}
 		else
 			i++;
 	}

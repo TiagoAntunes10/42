@@ -11,12 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-char			*ft_strdup(char *src);
-int				ft_strlen(char *str);
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
-
-char	*ft_strdup(char *src)
+char	*ft_strdup(char const *src)
 {
 	unsigned int		l;
 	char				*str;
@@ -27,7 +24,8 @@ char	*ft_strdup(char *src)
 	return (str);
 }
 
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 #include <string.h>
 int main(void)
 {

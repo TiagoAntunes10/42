@@ -1,23 +1,28 @@
-//#include <stdio.h>
-//#include <string.h>
 
-char    *ft_strchr(char *s, int c)
+
+char    *ft_strchr(char const *s, int c)
 {
-    while (*s != '\0')
+	char	*cs;
+
+	cs = (char *) s;
+    while (*cs != '\0')
     {
-        if (*s == c)
-            return (s);
+        if (*cs == c)
+            return (cs);
         else
-            s++;
+            cs++;
     }
-    if (*s == c)
-        return (s);
+    if (*cs == c)
+        return (cs);
     else
         return ("\0");
 }
 
+/*
+#include <stdio.h>
+#include <string.h>
 
-/*int main(void)
+int main(void)
 {
     char    *s;
     char    c;

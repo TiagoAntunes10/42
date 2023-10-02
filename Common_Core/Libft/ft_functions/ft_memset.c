@@ -23,43 +23,48 @@ void    *ft_memset(void *s, int c, size_t n)
     {
         cs[i] = c;
         i++;
-        s++;
     }
     return (cs);
 }
 
-
+/*
 #include <string.h>
 int main(void)
 {
-    char            *str;
-    char            *str2;
+    char            str [] = "fhbfdh dhfhbhoasj nhahb";
+    char            str2 [] = "fhbfdh dhfhbhoasj nhahb";
     unsigned int    n;
     char            c;
-    int             *arr;
-    int             *arr2;
+    int             arr[7];
+    int             arr2[7];
+	int				*arr3;
+	int				*arr4;
+	int				a;
+	int				b;
     unsigned int    i;
 
-    str = "fhbfdh dhfhbhoasj nhahb";
-    str2 = "fhbfdh dhfhbhoasj nhahb";
-    c = '.';
+	arr3 = &a;
+	arr4 = &b;
+    c = 0;
     n = 7;
-    printf("ft_memset_str: %s\n", ft_memset(str + 6, c, sizeof(char) * n));
-    printf("memset_str: %s\n", memset(str2 + 6, c, sizeof(char) * n));
-    arr = (int *) ft_memset(arr, c, sizeof(int) * n);
-    arr2 = (int *) memset(arr2, c, sizeof(int) * n);
+    printf("ft_memset_str: %s\n", (char *) ft_memset(str + 6, c, sizeof(char) * n));
+    printf("memset_str: %s\n", (char *) memset(str2 + 6, c, sizeof(char) * n));
+    arr3 = (int *) ft_memset(arr, c, sizeof(int) * n);
+    arr4 = (int *) memset(arr2, c, sizeof(int) * n);
     i = 0;
+	printf("ft_memset_arr: ");
     while (i < n)
     {
-        printf("ft_memset_arr: %d", arr[i]);
+        printf("%d, ", arr3[i]);
         i++;
     }
     printf("\n");
     i = 0;
+	printf("memset_arr: ");
     while (i < n)
     {
-        printf("memset_arr: %d", arr2[i]);
+        printf("%d, ", arr4[i]);
         i++;
     }
     printf("\n");
-}
+}*/

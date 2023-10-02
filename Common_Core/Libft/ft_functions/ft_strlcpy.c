@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include <stdio.h>
 
-unsigned int	ft_strlcpy(char *dest, char const *src, unsigned int size)
+unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 {
 	unsigned int	i;
 

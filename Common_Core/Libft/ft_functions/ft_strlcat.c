@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static unsigned int	cat(char *dest, char *src, int size, int j);
+#include <stdio.h>
+static unsigned int	cat(char *dest, char const *src, size_t size, unsigned int j);
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+unsigned int	ft_strlcat(char *dest, char const *src, size_t size)
 {
 	unsigned int	j;
 
@@ -34,7 +35,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	return (j);
 }
 
-static unsigned int	cat(char *dest, char *src, int size, int j)
+static unsigned int	cat(char *dest, char const *src, size_t size, unsigned int j)
 {
 	while (*src != '\0')
 	{
@@ -48,7 +49,7 @@ static unsigned int	cat(char *dest, char *src, int size, int j)
 	return (j);
 }
 
-/*#include <stdio.h>
+/*
 int	main(void)
 {
 	char	dest[20] = "Hello";
@@ -56,6 +57,6 @@ int	main(void)
 	int	n;
 
 	src = " world";
-	n = ft_strlcat(dest, src, 3);
+	n = ft_strlcat(dest, src, 8);
 	printf("%s\n%d\n", dest, n);
 }*/

@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-//#include <string.h>
-
 int	ft_strlen(char const *str)
 {
 	int	l;
@@ -26,7 +23,10 @@ int	ft_strlen(char const *str)
 	return (l);
 }
 
-/*int	main(void)
+/*
+#include <stdio.h>
+#include <string.h>
+int	main(void)
 {
 	char	*str;
 

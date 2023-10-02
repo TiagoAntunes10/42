@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+#include <stdio.h>
+
+int	ft_strncmp(char const *s1, char const *s2, size_t n)
 {
 	unsigned int	i;
 
@@ -26,7 +28,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	return (0);
 }
 
-/*#include <stdio.h>
+/*
 #include <string.h>
 int	main(void)
 {
