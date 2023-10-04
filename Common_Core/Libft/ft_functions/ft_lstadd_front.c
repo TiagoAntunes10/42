@@ -14,48 +14,44 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list	*current;
 
-	i = 0;
-	while ((**lst).next != NULL)
+	current = *lst;
+	if (current == NULL)
+		*lst = new;
+	else
 	{
-		*lst = (**lst).next;
-		i++;
+		new->next = current;
+		*lst = new;
 	}
-	while (i >= 0)
-	{
-		lst[i + 1] = lst[i];
-		i--;
-	}
-	lst[0] = new;
 }
 
+/*
 #include <stdio.h>
+#include <stdlib.h>
 
 int	main(void)
 {
 	t_list	**lst;
 	t_list	*lst1;
-	t_list	lst2;
+	t_list	*lst2;
+	t_list	*lst3;
 	t_list	*new;
-	t_list	new1;
-	int		i;
+	t_list	*current;
 
-	lst1 = &lst2;
-	lst = &lst1;
-	new = &new1;
-	(*lst[0]).content = "aaaaaa";
-	(*lst[0]).next = lst[1];
-	(*lst[1]).content = "bbbbbb";
-	(*lst[1]).next = lst[2];
-	(*lst[2]).content = "cccccc";
-	(*lst[2]).next = NULL;
-	(*new).content = "dddddd";
+	lst = malloc(sizeof(t_list **));
+	lst1 = ft_lstnew("aaaaaa");
+	ft_lstadd_front(lst, lst1);
+	lst2 = ft_lstnew("bbbbbb");
+	ft_lstadd_front(lst, lst2);
+	lst3 = ft_lstnew("ccccccc");
+	ft_lstadd_front(lst, lst3);
+	new = ft_lstnew("dddddd");
 	ft_lstadd_front(lst, new);
-	i = 0;
-	while (i < 4)
+	current = *lst;
+	while (current != NULL)
 	{
-		printf("%s\n", (char *) (*lst[i]).content);
-		i++;
+		printf("%s\n", (char *) current->content);
+		current = current->next;
 	}
-}
+}*/
