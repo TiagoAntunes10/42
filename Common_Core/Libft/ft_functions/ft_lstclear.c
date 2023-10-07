@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 21:08:10 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/06 21:08:11 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/06 21:07:39 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/06 21:07:41 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	del(void *content);
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	(*del)(lst->content);
-	free(lst);
+	while (*lst != NULL)
+	{
+		ft_lstdelone(*lst, del);
+		*lst = (*lst)->next;
+	}
+	lst = NULL;
 }
 
 /*
@@ -45,8 +51,14 @@ int	main(void)
 	new = ft_lstnew("dddddd");
 	ft_lstadd_back(lst, new);
 	current = *lst;
-	ft_lstdelone(ft_lstlast(*lst), del);
-	while (current->next != NULL)
+	while (current != NULL)
+	{
+		printf("%s\n", (char *) current->content);
+		current = current->next;
+	}
+	ft_lstclear(lst, del);
+	current = *lst;
+	while (current != NULL)
 	{
 		printf("%s\n", (char *) current->content);
 		current = current->next;

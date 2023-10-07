@@ -1,28 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 21:08:10 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/06 21:08:11 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/06 21:06:46 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/06 21:06:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+//void	del(void *content);
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 {
-	(*del)(lst->content);
-	free(lst);
+	t_list	**lst2;
+	t_list	*lst3;
+
+	lst2 = malloc(sizeof(t_list **));
+	while (lst != NULL)
+	{
+		lst3 = ft_lstnew((*f)(lst->content));
+		if (lst3 == NULL)
+		{
+			ft_lstdelone(lst3, del);
+			break ;
+		}
+		ft_lstadd_back(lst2, lst3);
+		lst = lst->next;
+	}
+	return (*lst2);
 }
 
 /*
+void	*f(void *content)
+{
+	char	*arr;
+	char	*arr2;
+	int		i;
+
+	arr = (char *) content;
+	arr2 = malloc(sizeof(arr));
+	i = 0;
+	while (arr[i] != '\0')
+	{
+		arr2[i] = arr[i] + 1;
+		i++;
+	}
+	return (arr2);
+}
+
 void	del(void *content)
 {
 	free(content);
 }
+
 
 #include <stdio.h>
 
@@ -45,8 +78,16 @@ int	main(void)
 	new = ft_lstnew("dddddd");
 	ft_lstadd_back(lst, new);
 	current = *lst;
-	ft_lstdelone(ft_lstlast(*lst), del);
-	while (current->next != NULL)
+	printf("Before:\n");
+	while (current != NULL)
+	{
+		printf("%s\n", (char *) current->content);
+		current = current->next;
+	}
+	printf("\nAfter:\n");
+	*lst = ft_lstmap(*lst, f, del);
+	current = *lst;
+	while (current != NULL)
 	{
 		printf("%s\n", (char *) current->content);
 		current = current->next;

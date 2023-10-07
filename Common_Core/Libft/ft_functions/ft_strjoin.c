@@ -18,7 +18,7 @@ static char	*ft_join(char const *s1, char const *s2, char *str);
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int			j;
-	char	*str;
+	char		*str;
 
 	j = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(j + 1);

@@ -12,18 +12,18 @@
 
 #include <stdio.h>
 
-void    ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-    unsigned int    i;
-    char            *cs;
+	unsigned int	i;
+	char			*cs;
 
-    i = 0;
-    cs = (char *) s;
-    while (i < n)
-    {
-        cs[i] = 0;
-        i++;
-    }
+	i = 0;
+	cs = (char *) s;
+	while (i < n)
+	{
+		cs[i] = 0;
+		i++;
+	}
 }
 
 /*

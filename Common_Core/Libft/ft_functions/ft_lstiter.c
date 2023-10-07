@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 21:08:10 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/06 21:08:11 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/06 21:07:51 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/06 21:07:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	(*del)(lst->content);
-	free(lst);
+	while (lst != NULL)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }
 
 /*
-void	del(void *content)
+void	f(void *content)
 {
-	free(content);
+	char	*arr;
+	int		i;
+
+	arr = (char *) content;
+	i = 0;
+	while (arr[i] != '\0')
+	{
+		arr[i] += 1;
+		i++;
+	}
 }
 
 #include <stdio.h>
@@ -45,8 +57,16 @@ int	main(void)
 	new = ft_lstnew("dddddd");
 	ft_lstadd_back(lst, new);
 	current = *lst;
-	ft_lstdelone(ft_lstlast(*lst), del);
-	while (current->next != NULL)
+	printf("Before:\n");
+	while (current != NULL)
+	{
+		printf("%s\n", (char *) current->content);
+		current = current->next;
+	}
+	printf("\nAfter:\n");
+	ft_lstiter(*lst, f);
+	current = *lst;
+	while (current != NULL)
 	{
 		printf("%s\n", (char *) current->content);
 		current = current->next;

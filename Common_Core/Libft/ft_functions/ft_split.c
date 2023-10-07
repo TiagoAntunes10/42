@@ -14,7 +14,7 @@
 #include "libft.h"
 
 static int		count_words(char const *str, char c);
-static int		ft_strlen(char const *str, char c);
+static int		ft_wordlen(char const *str, char c);
 
 char	**ft_split(char const *str, char c)
 {
@@ -30,7 +30,7 @@ char	**ft_split(char const *str, char c)
 	i = 0;
 	while (*str != '\0')
 	{
-		len = ft_strlen(str, c);
+		len = ft_wordlen(str, c);
 		if (len == 0)
 		{
 			str += 1;
@@ -63,7 +63,7 @@ static int	count_words(char const *str, char c)
 	return (count);
 }
 
-static int	ft_strlen(char const *str, char c)
+static int	ft_wordlen(char const *str, char c)
 {
 	int	l;
 

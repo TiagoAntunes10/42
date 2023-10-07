@@ -12,19 +12,19 @@
 
 #include <stdio.h>
 
-void    *ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-    unsigned int    i;
-    char            *cs;
+	unsigned int	i;
+	char			*cs;
 
-    cs = (char *) s;
-    i = 0;
-    while (i < n)
-    {
-        cs[i] = c;
-        i++;
-    }
-    return (cs);
+	cs = (char *) s;
+	i = 0;
+	while (i < n)
+	{
+		cs[i] = c;
+		i++;
+	}
+	return (cs);
 }
 
 /*
@@ -47,8 +47,10 @@ int main(void)
 	arr4 = &b;
     c = 0;
     n = 7;
-    printf("ft_memset_str: %s\n", (char *) ft_memset(str + 6, c, sizeof(char) * n));
-    printf("memset_str: %s\n", (char *) memset(str2 + 6, c, sizeof(char) * n));
+    printf("ft_memset_str: %s\n",
+		(char *) ft_memset(str + 6, c, sizeof(char) * n));
+    printf("memset_str: %s\n",
+		(char *) memset(str2 + 6, c, sizeof(char) * n));
     arr3 = (int *) ft_memset(arr, c, sizeof(int) * n);
     arr4 = (int *) memset(arr2, c, sizeof(int) * n);
     i = 0;

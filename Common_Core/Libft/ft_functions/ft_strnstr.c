@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 17:39:35 by tialbert          #+#    #+#             */
-/*   Updated: 2023/09/08 10:10:06 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/06 21:39:34 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/06 21:39:36 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-static int	find_str(char *big, char const *small, size_t len, unsigned int count);
+
+static int	find_str(char *big, char const *small, size_t len, size_t count);
 
 char	*ft_strnstr(char const *big, char const *small, size_t len)
 {
@@ -37,7 +38,7 @@ char	*ft_strnstr(char const *big, char const *small, size_t len)
 	return ("\0");
 }
 
-static int	find_str(char *big, char const *small, size_t len, unsigned int count)
+static int	find_str(char *big, char const *small, size_t len, size_t count)
 {
 	int	i;
 

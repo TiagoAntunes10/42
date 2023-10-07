@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
 static int	nblen(int long n);
 void		convert(int long n, char *str, int len);
 
-char    *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int long	nb;
 	int			l;
@@ -37,7 +38,7 @@ char    *ft_itoa(int n)
 		convert(nb, str, l - 1);
 		str[l] = '\0';
 	}
-	if (str = 0)
+	if (str == 0)
 		return (NULL);
 	return (str);
 }

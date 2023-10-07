@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-static unsigned int	cat(char *dest, char const *src, size_t size, unsigned int j);
+
+static size_t	cat(char *dest, char const *src, size_t size, unsigned int j);
 
 unsigned int	ft_strlcat(char *dest, char const *src, size_t size)
 {
@@ -35,7 +36,7 @@ unsigned int	ft_strlcat(char *dest, char const *src, size_t size)
 	return (j);
 }
 
-static unsigned int	cat(char *dest, char const *src, size_t size, unsigned int j)
+static size_t	cat(char *dest, char const *src, size_t size, unsigned int j)
 {
 	while (*src != '\0')
 	{

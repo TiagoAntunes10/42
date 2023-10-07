@@ -11,29 +11,31 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft.h"
 
-void    *ft_memmove(void *dest, void const *src, size_t n)
+void	*ft_memmove(void *dest, void const *src, size_t n)
 {
-    unsigned int    i;
-    char            temp[n];
-    char            *cdest;
-    char            *csrc;
+	unsigned int	i;
+	char			*temp;
+	char			*cdest;
+	char			*csrc;
 
-    cdest = (char *) dest;
-    csrc = (char *) src;
-    i = 0;
-    while (i < n)
-    {
-        temp[i] = csrc[i];
-        i++;
-    }
-    i = 0;
-    while (i < n)
-    {
-        cdest[i] = temp[i];
-        i++;
-    }
-    return (cdest);
+	cdest = (char *) dest;
+	csrc = (char *) src;
+	temp = ft_calloc(sizeof(char), n);
+	i = 0;
+	while (i < n)
+	{
+		temp[i] = csrc[i];
+		i++;
+	}
+	i = 0;
+	while (i < n)
+	{
+		cdest[i] = temp[i];
+		i++;
+	}
+	return (cdest);
 }
 
 /*
@@ -57,8 +59,10 @@ int main(void)
 	arr5 = &b;
     src = "fhbfdhdhfhbhoasj nhahb";
     n = 7;
-    printf("ft_memmove_str: %s\n", (char *) ft_memmove(dest, src, sizeof(char) * n));
-    printf("memmove_str: %s\n", (char *) memmove(dest2, src, sizeof(char) * n));
+    printf("ft_memmove_str: %s\n",
+		(char *) ft_memmove(dest, src, sizeof(char) * n));
+    printf("memmove_str: %s\n",
+		(char *) memmove(dest2, src, sizeof(char) * n));
     arr4 = (int *) ft_memmove(arr, arr2, sizeof(int) * n);
     arr5 = (int *) memmove(arr3, arr2, sizeof(int) * n);
     i = 0;

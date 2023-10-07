@@ -12,24 +12,23 @@
 
 #include <stdlib.h>
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char    *str;
-    size_t  i;
+	char	*str;
+	size_t	i;
 
-    i = 0;
-    str = malloc(len);
-    if (str == 0)
-        return (NULL);
-    while (i < len)
-    {
-        str[i] = s[start];
-        i++;
-        start++;
-    }
-    return (str);
+	i = 0;
+	str = malloc(len);
+	if (str == 0)
+		return (NULL);
+	while (i < len)
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	return (str);
 }
-
 
 /*#include <stdio.h>
 int main (void)

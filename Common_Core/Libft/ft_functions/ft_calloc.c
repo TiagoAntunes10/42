@@ -12,18 +12,18 @@
 
 #include <stdlib.h>
 
-void    *ft_calloc(size_t nmem, size_t size)
+void	*ft_calloc(size_t nmem, size_t size)
 {
-    void        *arr;
-    long int    n;
+	void		*arr;
+	long int	n;
 
-    if (nmem == 0 || size == 0)
-        return (NULL);
-    n = nmem * size;
-    if (n > 2147483647)
-        return (NULL);
-    arr = malloc (nmem * size);
-    return (arr);
+	if (nmem == 0 || size == 0)
+		return (NULL);
+	n = nmem * size;
+	if (n > 2147483647)
+		return (NULL);
+	arr = malloc (nmem * size);
+	return (arr);
 }
 
 /*

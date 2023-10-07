@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strchr(char const *s, int c)
+char	*ft_strchr(char const *s, int c)
 {
 	char	*cs;
 
 	cs = (char *) s;
-    while (*cs != '\0')
-    {
-        if (*cs == c)
-            return (cs);
-        else
-            cs++;
-    }
-    if (*cs == c)
-        return (cs);
-    else
-        return ("\0");
+	while (*cs != '\0')
+	{
+		if (*cs == c)
+			return (cs);
+		else
+			cs++;
+	}
+	if (*cs == c)
+		return (cs);
+	else
+		return ("\0");
 }
 
 /*
