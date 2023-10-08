@@ -1,0 +1,1 @@
+void	mouli_isalpha(void);
