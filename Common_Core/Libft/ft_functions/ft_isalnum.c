@@ -19,15 +19,3 @@ int	ft_isalnum(int c)
 	else
 		return (0);
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int	main(void)
-{
-	char	c;
-
-	c = '8';
-	printf("ft_isalnum: %d\n", ft_isalnum(c));
-	printf("isalnum: %d\n", isalnum(c));
-}*/

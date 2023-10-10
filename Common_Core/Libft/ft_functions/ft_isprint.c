@@ -17,15 +17,3 @@ int	ft_isprint(int c)
 	else
 		return (0);
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int	main(void)
-{
-	char	c;
-
-	c = 127;
-	printf("ft_isprint: %d\n", ft_isprint(c));
-	printf("isprint: %d\n", isprint(c));
-}*/

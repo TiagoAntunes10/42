@@ -20,7 +20,7 @@ BONUS_ADD = ${addprefix $(PRE), $(BONUS)}
 NAME = libft.a
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(SOURCES:.c=.o)
 
@@ -43,7 +43,7 @@ fclean: clean
 re: fclean all
 
 bonus: $(OBJ_BONUS)
-	ar qs $(NAME) $(OBJ_BONUS)
+	ar rs $(NAME) $(OBJ_BONUS)
 
 .c.o2:
 	$(CC) $(FLAGS) -I $(HEADER) -c $< -o $(<:.c=.o)

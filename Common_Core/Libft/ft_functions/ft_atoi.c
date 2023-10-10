@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	convert(char const *str);
+#include "libft.h"
+
+static int long	convert(char const *str);
 
 int	ft_atoi(char const *str)
 {
-	int	value;
+	int long	value;
 
+	while (*str <= ' ' && (*str != '\a' && *str != '\b'))
+		str++;
 	if (*str == '-')
 	{
 		str++;
@@ -27,12 +31,12 @@ int	ft_atoi(char const *str)
 	return (value);
 }
 
-static int	convert(char const *str)
+static int long	convert(char const *str)
 {
-	int	value;
+	int long	value;
 
 	value = 0;
-	while (*str != '\0' && *str >= '0' && *str <= '9')
+	while (*str != '\0' && ft_isdigit(*str) > 0)
 	{
 		value *= 10;
 		value += (*str - 48);
@@ -40,15 +44,3 @@ static int	convert(char const *str)
 	}
 	return (value);
 }
-
-/*
-#include <stdio.h>
-#include <stdlib.h>
-int main(void)
-{
-	char	*str;
-
-	str = "1203";
-	printf("ft_atoi: %d\n", ft_atoi(str));
-	printf("atoi: %d\n", atoi(str));
-}*/

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 static int	nblen(int long n);
-void		convert(int long n, char *str, int len);
+static void	convert(int long n, char *str, int len);
 
 char	*ft_itoa(int n)
 {
@@ -27,6 +27,8 @@ char	*ft_itoa(int n)
 		nb *= -1;
 		l = nblen(nb);
 		str = malloc(l + 2);
+		if (str == 0)
+			return (NULL);
 		str[0] = '-';
 		convert(nb, str, l);
 		str[l + 1] = '\0';
@@ -35,11 +37,11 @@ char	*ft_itoa(int n)
 	{
 		l = nblen(nb);
 		str = malloc(l + 1);
+		if (str == 0)
+			return (NULL);
 		convert(nb, str, l - 1);
 		str[l] = '\0';
 	}
-	if (str == 0)
-		return (NULL);
 	return (str);
 }
 
@@ -54,7 +56,7 @@ static int	nblen(int long n)
 	return (l);
 }
 
-void	convert(int long n, char *str, int len)
+static void	convert(int long n, char *str, int len)
 {
 	if (n / 10 == 0)
 	{
@@ -66,13 +68,21 @@ void	convert(int long n, char *str, int len)
 	return ;
 }
 
-/*
 #include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+#include "libft.h"
 
 int	main(void)
 {
-	int	n;
+	int					n;
+	char				*toa;
+	struct mallinfo2	info2;
 
-	n = -2147483648;
-	printf("%s\n", ft_itoa(n));
-}*/
+	n = 325;
+	toa = ft_itoa(n);
+	info2 = mallinfo2();
+	printf("ft_itoa: '-2147483648': %s\n", toa);
+	if (info2.smblks != 0)
+		printf("ft_itoa: Memory leaks -> %ld bytes!\n", info2.smblks);
+}

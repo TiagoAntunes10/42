@@ -17,15 +17,3 @@ int	ft_isascii(int c)
 	else
 		return (0);
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int	main(void)
-{
-	char	c;
-
-	c = 56;
-	printf("ft_isascii: %d\n", ft_isascii(c));
-	printf("isascii: %d\n", isascii(c));
-}*/
