@@ -11,4 +11,7 @@ int	main(void)
 	mouli_bzero();
 	mouli_calloc();
 	mouli_itoa();
+	mouli_memchr();
+	mouli_memcmp();
+	mouli_memcpy();
 }

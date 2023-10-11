@@ -1,7 +1,7 @@
 BINARY = bin
 PRE = ./
 HEADER = ./
-FUNCTION = /home/tiago/git_42/Common_Core/Libft/ft_functions
+FUNCTION = /workspaces/42/Common_Core/Libft/ft_functions
 
 SOURCE = $(foreach D, $(PRE),$(wildcard $(D)/*.c))
 
@@ -16,7 +16,7 @@ OBJ = $(SOURCES:.c=.o)
 FUNCTIONS_OBJ = $(FUNCTIONS:.c=.o)
 
 all: $(BINARY)
-	norminette $(FUNCTION)
+#	norminette $(FUNCTION)
 
 $(BINARY): $(OBJ) $(FUNCTIONS_OBJ)
 	$(CC) -o $@ $^

@@ -4,7 +4,7 @@
 
 void	mouli_bzero(void)
 {
-   char            str[] = "fhbfdh dhfhbhoasj nhahb";
+	char            str[] = "fhbfdh dhfhbhoasj nhahb";
     char            str2[] = "fhbfdh dhfhbhoasj nhahb";
     unsigned int    n;
     int             arr[7];

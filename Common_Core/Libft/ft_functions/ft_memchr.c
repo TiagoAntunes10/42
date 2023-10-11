@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memchr(void const *s, int c, size_t n)
 {
 	unsigned int		i;
-	char				*cs;
+	unsigned char		*cs;
 
-	cs = (char *) s;
+	cs = (unsigned char *) s;
 	i = 0;
 	while (i < n)
 	{
@@ -29,18 +29,5 @@ void	*ft_memchr(void const *s, int c, size_t n)
 		else
 			i++;
 	}
-	return ("\0");
+	return (NULL);
 }
-
-/*
-#include <string.h>
-int main(void)
-{
-    char    *s;
-    char    c;
-
-    s = "hfdb hnjnhdfb";
-    c = 'j';
-    printf("ft_memchr_str: %s\n", (char *) ft_memchr(s, c, 10));
-    printf("memchr_str: %s\n",  (char *) memchr(s, c, 10));
-}*/

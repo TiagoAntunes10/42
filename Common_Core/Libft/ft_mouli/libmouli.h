@@ -9,3 +9,6 @@ void	mouli_atoi(void);
 void	mouli_bzero(void);
 void	mouli_calloc(void);
 void	mouli_itoa(void);
+void	mouli_memchr(void);
+void	mouli_memcmp(void);
+void	mouli_memcpy(void);
