@@ -21,11 +21,3 @@ void	ft_putendl_fd(char *s, int fd)
 	}
 	write(fd, "\n", 1);
 }
-
-/*int	main(void)
-{
-	char	*str;
-
-	str = "abcd";
-	ft_putendl_fd(str, 1);
-}*/

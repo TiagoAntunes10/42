@@ -14,7 +14,7 @@
 
 static size_t	cat(char *dest, char const *src, size_t size, unsigned int j);
 
-unsigned int	ft_strlcat(char *dest, char const *src, size_t size)
+size_t	ft_strlcat(char *dest, char const *src, size_t size)
 {
 	unsigned int	j;
 
@@ -32,7 +32,7 @@ unsigned int	ft_strlcat(char *dest, char const *src, size_t size)
 			j++;
 		return (j + size);
 	}
-	j = cat (dest, src, size, j);
+	j = cat(dest, src, size, j);
 	return (j);
 }
 
@@ -49,15 +49,3 @@ static size_t	cat(char *dest, char const *src, size_t size, unsigned int j)
 	}
 	return (j);
 }
-
-/*
-int	main(void)
-{
-	char	dest[20] = "Hello";
-	char	*src;
-	int	n;
-
-	src = " world";
-	n = ft_strlcat(dest, src, 8);
-	printf("%s\n%d\n", dest, n);
-}*/

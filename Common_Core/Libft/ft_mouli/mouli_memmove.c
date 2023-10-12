@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-void	mouli_memcpy(void)
+void	mouli_memmove(void)
 {
     char            dest[100];
     char            dest2[100];
@@ -17,36 +17,36 @@ void	mouli_memcpy(void)
 
     src = "Hello there";
     n = 11;
-	ft_memcpy(dest, src, n);
-	memcpy(dest2, src, n);
+	ft_memmove(dest, src, n);
+	memmove(dest2, src, n);
 	if (memcmp(dest, dest2, n) != 0)
 	{
-		printf("ft_memcpy_str 'Hello there': %s\n", dest);
-		printf("memcpy_str 'Hello there': %s\n", dest2);
+		printf("ft_memmove_str 'Hello there': %s\n", dest);
+		printf("memmove_str 'Hello there': %s\n", dest2);
 		return ;
 	}
-	dest3 = (char *) ft_memcpy(dest + 7, dest, n);
-	dest4 = (char *) memcpy(dest2 + 7, dest2, n);
+	dest3 = (char *) ft_memmove(dest + 7, dest, n);
+	dest4 = (char *) memmove(dest2 + 7, dest2, n);
 	if (memcmp(dest3, dest4, 7) != 0)
 	{
-		printf("ft_memcpy_str_over 'Hello there': %s\n", dest3);
-		printf("memcpy_str_over 'Hello there': %s\n", dest4);
+		printf("ft_memmove_str_over 'Hello there': %s\n", dest3);
+		printf("memmove_str_over 'Hello there': %s\n", dest4);
 		return ;
 	}
     n = 5;
-    ft_memcpy(arr, arr2, n * sizeof(int));
-    memcpy(arr3, arr2, n * sizeof(int));
+    ft_memmove(arr, arr2, n * sizeof(int));
+    memmove(arr3, arr2, n * sizeof(int));
 	if (memcmp(arr, arr3, n) != 0)
 	{
 		i = 0;
-		printf("ft_memcpy_arr '88 5 3 6 5': ");
+		printf("ft_memmove_arr '88 5 3 6 5': ");
 		while (i < n)
 		{
 			printf("%d ", arr[i]);
 			i++;
 		}
 		i = 0;
-		printf("\nmemcpy_arr '88 5 3 6 5': ");
+		printf("\nmemmove_arr '88 5 3 6 5': ");
 		while (i < n)
 		{
 			printf("%d ", arr3[i]);
@@ -55,5 +55,5 @@ void	mouli_memcpy(void)
 		printf("\n");
 		return ;
 	}
-	printf("ft_memcpy: OK!\n");
+	printf("ft_memmove: OK!\n");
 }

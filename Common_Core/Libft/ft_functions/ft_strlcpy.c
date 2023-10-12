@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
+size_t	ft_strlcpy(char *dest, char const *src, size_t size)
 {
 	unsigned int	i;
 
@@ -27,17 +27,6 @@ unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 		src += 1;
 		i++;
 	}
-	*dest = '\0';
+	*dest = 0;
 	return ((i - 1));
 }
-
-/*int	main(void)
-{
-	char	*src;
-	char	dest[20];
-	int	i;
-
-	src = "hello ahsdhv";
-	i = ft_strlcpy(dest, src, 4);
-	printf ("%s, %d\n", dest, i);
-}*/

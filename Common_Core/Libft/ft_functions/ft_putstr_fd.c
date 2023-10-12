@@ -20,11 +20,3 @@ void	ft_putstr_fd(char *s, int fd)
 		s = s + 1;
 	}
 }
-
-/*int	main(void)
-{
-	char	*str;
-
-	str = "abcd";
-	ft_putstr_fd(str, 1);
-}*/

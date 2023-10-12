@@ -47,11 +47,3 @@ static void	write_nbr(long int nb, int fd)
 	write(fd, &mod, 1);
 	return ;
 }
-
-/*int main(void)
-{
-	int	nb;
-
-	nb = -2147483648;
-	ft_putnbr_fd(nb, 1);
-}*/

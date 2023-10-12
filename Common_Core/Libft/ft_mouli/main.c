@@ -14,4 +14,23 @@ int	main(void)
 	mouli_memchr();
 	mouli_memcmp();
 	mouli_memcpy();
+	mouli_memmove();
+	mouli_memset();
+	mouli_putchar_fd();
+	mouli_putendl_fd();
+	mouli_putstr_fd();
+	mouli_putnbr_fd();
+	mouli_split();
+	mouli_strchr();
+	mouli_strdup();
+	mouli_striteri();
+	mouli_strjoin();
+	mouli_strlcat();
+	mouli_strlcpy();
+	mouli_strlen();
+	mouli_strmapi();
+	mouli_strncmp();
+	mouli_strnstr();
+	mouli_strrchr();
+	mouli_strtrim();
 }

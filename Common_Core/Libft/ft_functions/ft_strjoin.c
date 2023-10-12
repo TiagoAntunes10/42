@@ -46,16 +46,3 @@ static char	*ft_join(char const *s1, char const *s2, char *str)
 	}
 	return (str);
 }
-
-/*
-#include <stdio.h>
-
-int main(int argc, char **argv)
-{
-	char	*str;
-
-	if (argc != 3)
-		return (0);
-	str = ft_strjoin(argv[1], argv[2]);
-	printf("%s\n", str);
-}*/

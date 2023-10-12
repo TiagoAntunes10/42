@@ -31,20 +31,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (str);
 }
-
-/*
-char	f(unsigned int n, char s)
-{
-	(void) n;
-	return (s + 32);
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char const	*s;
-
-	s = "SHBFHFB";
-	printf("%s\n", ft_strmapi(s, f));
-}*/

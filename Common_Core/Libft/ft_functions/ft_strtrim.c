@@ -23,7 +23,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	l = ft_strlen(s1);
 	l = ft_strlen_2(s1, set, l - 1);
-	str = malloc(l + 1);
 	while (set_cmp(*s1, set) != 0)
 		s1++;
 	str = ft_substr(s1, 0, l);
@@ -57,16 +56,3 @@ static int	set_cmp(char s, char const *set)
 	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	char	*s1;
-	char	*set;
-
-	s1 = " ... .. . sdhj.d.s .hj.dhd. .. ..";
-	set = ". ";
-	printf("%s\n", ft_strtrim(s1, set));
-}*/

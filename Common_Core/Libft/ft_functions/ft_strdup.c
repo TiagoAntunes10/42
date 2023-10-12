@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strdup(char const *src)
@@ -19,19 +18,9 @@ char	*ft_strdup(char const *src)
 	char				*str;
 
 	l = ft_strlen(src);
-	str = malloc (l);
+	str = malloc (l + 1);
+	if (str == 0)
+		return (NULL);
 	ft_strlcpy(str, src, l + 1);
 	return (str);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main(void)
-{
-	char	*src;
-
-	src = "Boas dfjb fhbb";
-	printf("ft_strdup: %s\n", ft_strdup(src));
-	printf("strdup: %s\n", strdup(src));
-}*/

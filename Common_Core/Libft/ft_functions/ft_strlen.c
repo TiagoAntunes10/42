@@ -9,8 +9,9 @@
 /*   Updated: 2023/08/28 12:32:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	ft_strlen(char const *str)
+size_t	ft_strlen(char const *str)
 {
 	int	l;
 
@@ -22,15 +23,3 @@ int	ft_strlen(char const *str)
 	}
 	return (l);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int	main(void)
-{
-	char	*str;
-
-	str = "abcd";
-	printf("%d\n", ft_strlen(str));
-	printf("%ld\n", strlen(str));
-}*/

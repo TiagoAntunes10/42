@@ -1,7 +1,7 @@
 BINARY = bin
 PRE = ./
 HEADER = ./
-FUNCTION = /workspaces/42/Common_Core/Libft/ft_functions
+FUNCTION = /home/tiago/git_42/Common_Core/Libft/ft_functions
 
 SOURCE = $(foreach D, $(PRE),$(wildcard $(D)/*.c))
 
@@ -9,17 +9,19 @@ SOURCES = ${addprefix $(PRE), $(SOURCE)}
 
 FUNCTIONS = $(foreach D, $(FUNCTION),$(wildcard $(D)/*.c))
 
+LIB = $(FUNCTION)/libft.a
+
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(SOURCES:.c=.o)
 FUNCTIONS_OBJ = $(FUNCTIONS:.c=.o)
 
 all: $(BINARY)
-#	norminette $(FUNCTION)
+	norminette $(FUNCTION)
 
 $(BINARY): $(OBJ) $(FUNCTIONS_OBJ)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $(OBJ) $(LIB)
 
 .c.o:
 	$(MAKE) -C $(FUNCTION)
@@ -28,6 +30,7 @@ $(BINARY): $(OBJ) $(FUNCTIONS_OBJ)
 
 run: 
 	./$(BINARY)
+	valgrind ./$(BINARY)
 
 clean: 
 	rm -f $(OBJ)

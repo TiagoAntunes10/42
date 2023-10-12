@@ -67,5 +67,7 @@ void	mouli_calloc(void)
 		}
 		i++;
 	}
+	free(arr);
+	free(arr2);
 	printf("ft_calloc: OK!\n");
 }

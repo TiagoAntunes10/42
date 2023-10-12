@@ -21,13 +21,11 @@ char	**ft_split(char const *str, char c)
 	int		count;
 	char	**words;
 	int		len;
-	int		i;
 
 	count = count_words(str, c);
-	words = malloc((count + 1) * sizeof(char *));
+	words = ft_calloc(count + 1, sizeof(char *));
 	if (words == 0)
 		return (NULL);
-	i = 0;
 	while (*str != '\0')
 	{
 		len = ft_wordlen(str, c);
@@ -36,11 +34,13 @@ char	**ft_split(char const *str, char c)
 			str += 1;
 			continue ;
 		}
-		words[i] = malloc(len + 1);
-		ft_strlcpy(words[i], str, len + 1);
+		*words = malloc(len + 1);
+		ft_strlcpy(*words, str, len + 1);
 		str += len;
-		i++;
+		words++;
 	}
+	words -= count;
+	words[count] = malloc(0);
 	free(words[count]);
 	return (words);
 }
@@ -77,22 +77,3 @@ static int	ft_wordlen(char const *str, char c)
 	}
 	return (l);
 }
-
-/*
-#include <stdio.h>
-
-int	main(int argc, char **argv)
-{
-	char	**words;
-	int		i;
-
-	if (argc != 3)
-		return (0);
-	words = ft_split(argv[1], argv[2][0]);
-	i = 0;
-	while (words[i][0] != '\0')
-	{
-		printf("%s\n", words[i]);
-		i++;
-	}
-}*/

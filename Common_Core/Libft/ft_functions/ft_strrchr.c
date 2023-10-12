@@ -28,20 +28,5 @@ char	*ft_strrchr(char const *s, int c)
 	if (*cs == c)
 		return (cs);
 	else
-		return ("\0");
+		return (NULL);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-    char    *s;
-    char    c;
-
-    s = "hfdb hnjnhdfb";
-    c = 'n';
-    printf("ft_strrchr: %s\n", ft_strrchr(s, c));
-    printf("strrchr: %s\n", strrchr(s, c));
-}*/

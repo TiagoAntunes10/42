@@ -21,18 +21,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
-
-/*#include <stdio.h>
-void	f(unsigned int n, char *s)
-{
-	(void) n;
-	printf("%c", *s);
-}
-
-int main(void)
-{
-    char    *s;
-
-    s = "SDFJNFN";
-    ft_striteri(s, f);
-}*/

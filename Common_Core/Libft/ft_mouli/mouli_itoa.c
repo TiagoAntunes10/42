@@ -17,6 +17,7 @@ void	mouli_itoa(void)
 		printf("itoa: '-2147483648': %s\n", str);
 	}
 	n = 2147483647;
+	free(toa);
 	str = "2147483647";
 	toa = ft_itoa(n);
 	if (strcmp(str, toa) != 0)
@@ -25,6 +26,7 @@ void	mouli_itoa(void)
 		printf("itoa: '2147483647': %s\n", str);
 	}
 	n = 0;
+	free(toa);
 	str = "0";
 	toa = ft_itoa(n);
 	if (strcmp(str, toa) != 0)

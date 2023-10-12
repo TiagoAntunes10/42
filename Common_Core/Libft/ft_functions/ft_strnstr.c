@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 static int	find_str(char *big, char const *small, size_t len, size_t count);
 
@@ -35,7 +35,7 @@ char	*ft_strnstr(char const *big, char const *small, size_t len)
 			s++;
 		j++;
 	}
-	return ("\0");
+	return (NULL);
 }
 
 static int	find_str(char *big, char const *small, size_t len, size_t count)
@@ -52,18 +52,3 @@ static int	find_str(char *big, char const *small, size_t len, size_t count)
 	}
 	return (i);
 }
-
-/*
-#include <string.h>
-
-int	main(void)
-{
-	char	*big;
-	char	*small;
-	unsigned int	i;
-
-	i = 7;
-	big = "teteste";
-	small = "teste";
-	printf("ft_strnstr: %s\n", ft_strnstr(big, small, i));
-}*/
