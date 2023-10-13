@@ -1,7 +1,7 @@
 BINARY = bin
 PRE = ./
 HEADER = ./
-FUNCTION = /home/tiago/git_42/Common_Core/Libft/ft_functions
+FUNCTION = /nfs/homes/tialbert/Desktop/git_42/Common_Core/Libft/ft_functions
 
 SOURCE = $(foreach D, $(PRE),$(wildcard $(D)/*.c))
 

@@ -31,3 +31,7 @@ void	mouli_strncmp(void);
 void	mouli_strnstr(void);
 void	mouli_strrchr(void);
 void	mouli_strtrim(void);
+void	mouli_substr(void);
+void	mouli_tolower(void);
+void	mouli_toupper(void);
+void	mouli_lstnew(void);

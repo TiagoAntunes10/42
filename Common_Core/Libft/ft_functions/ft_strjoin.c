@@ -22,6 +22,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	j = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(j + 1);
+	if (str == 0)
+		return (NULL);
 	str = ft_join(s1, s2, str);
 	str[j] = '\0';
 	return (str);

@@ -14,14 +14,23 @@
 
 void	*ft_calloc(size_t nmem, size_t size)
 {
-	void		*arr;
-	long int	n;
+	char			*arr;
+	long int		n;
+	unsigned int	i;
 
 	if (nmem == 0 || size == 0)
 		return (NULL);
 	n = nmem * size;
 	if (n > 2147483647)
 		return (NULL);
-	arr = malloc (nmem * size);
+	arr = (char *) malloc (nmem * size);
+	if (arr == 0)
+		return (NULL);
+	i = 0;
+	while (i < nmem)
+	{
+		arr[i] = 0;
+		i++;
+	}
 	return (arr);
 }

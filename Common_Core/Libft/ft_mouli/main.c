@@ -1,4 +1,5 @@
 #include "libmouli.h"
+#include "libft.h"
 
 int	main(void)
 {
@@ -33,4 +34,9 @@ int	main(void)
 	mouli_strnstr();
 	mouli_strrchr();
 	mouli_strtrim();
+	mouli_substr();
+	mouli_tolower();
+	mouli_toupper();
+	mouli_lstnew();
+	ft_putstr_fd("------------------------------------------------------\n", 1);
 }
