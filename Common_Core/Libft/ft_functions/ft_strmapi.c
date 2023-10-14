@@ -21,7 +21,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	i = 0;
 	l = ft_strlen(s);
-	str = malloc(l);
+	str = malloc(l + 1);
 	if (str == 0)
 		return (NULL);
 	while (s[i] != '\0')
@@ -29,5 +29,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		str[i] = (*f)(i, s[i]);
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }

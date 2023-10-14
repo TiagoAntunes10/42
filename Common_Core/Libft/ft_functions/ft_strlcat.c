@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 static size_t	cat(char *dest, char const *src, size_t size, unsigned int j);
 
@@ -19,19 +19,13 @@ size_t	ft_strlcat(char *dest, char const *src, size_t size)
 	unsigned int	j;
 
 	j = 0;
-	while (dest[j] != '\0')
+	while (*dest != '\0')
 	{
-		if (j == size && size > 0)
-			dest[j] = '\0';
 		j++;
+		dest++;
 	}
-	if (j > size && dest[j] == '\0')
-	{
-		j = 0;
-		while (src[j] != '\0' && src[j + 1] != '\0')
-			j++;
-		return (j + size);
-	}
+	if (j >= size)
+		return (ft_strlen(src) + size);
 	j = cat(dest, src, size, j);
 	return (j);
 }
@@ -41,11 +35,13 @@ static size_t	cat(char *dest, char const *src, size_t size, unsigned int j)
 	while (*src != '\0')
 	{
 		if (j < size - 1)
-			dest[j] = *src;
-		else if (j == size - 1)
-			dest[j] = '\0';
-		src += 1;
+		{
+			*dest = *src;
+			dest++;
+		}
+		src++;
 		j++;
 	}
+	*dest = '\0';
 	return (j);
 }

@@ -19,12 +19,12 @@ char	*ft_strchr(char const *s, int c)
 	cs = (char *) s;
 	while (*cs != '\0')
 	{
-		if (*cs == c)
+		if (*cs == (unsigned char) c)
 			return (cs);
 		else
 			cs++;
 	}
-	if (*cs == c)
+	if (*cs == (unsigned char) c)
 		return (cs);
 	else
 		return (NULL);

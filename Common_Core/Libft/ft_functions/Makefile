@@ -43,7 +43,7 @@ fclean: clean
 re: fclean all
 
 bonus: $(OBJ_BONUS)
-	ar rs $(NAME) $(OBJ_BONUS)
+	ar r $(NAME) $(OBJ_BONUS)
 
 .c.o2:
 	$(CC) $(FLAGS) -I $(HEADER) -c $< -o $(<:.c=.o)

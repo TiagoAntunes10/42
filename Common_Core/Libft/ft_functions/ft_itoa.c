@@ -31,7 +31,6 @@ char	*ft_itoa(int n)
 			return (NULL);
 		str[0] = '-';
 		convert(nb, str, l);
-		str[l + 1] = '\0';
 	}
 	else
 	{
@@ -40,7 +39,6 @@ char	*ft_itoa(int n)
 		if (str == 0)
 			return (NULL);
 		convert(nb, str, (l - 1));
-		str[l] = '\0';
 	}
 	return (str);
 }
@@ -60,11 +58,13 @@ static void	convert(int long n, char *str, int l)
 {
 	if (n / 10 == 0)
 	{
-	str[l] = (n % 10) + 48;
+		str[l] = (n % 10) + 48;
+		str[l + 1] = '\0';
 		return ;
 	}
 	convert((n / 10), str, l - 1);
 	str[l] = (n % 10) + 48;
+	str[l + 1] = '\0';
 	return ;
 }
 

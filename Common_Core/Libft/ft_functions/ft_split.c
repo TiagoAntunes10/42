@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static int		count_words(char const *str, char c);
@@ -20,28 +19,26 @@ char	**ft_split(char const *str, char c)
 {
 	int		count;
 	char	**words;
+	char	**words_temp;
 	int		len;
 
 	count = count_words(str, c);
-	words = ft_calloc(count + 1, sizeof(char *));
+	words = (char **) malloc(sizeof(char *) * (count + 1));
 	if (words == 0)
 		return (NULL);
-	while (*str != '\0')
+	words_temp = words;
+	while (*str != '\0' && *(str + 1) != '\0')
 	{
-		len = ft_wordlen(str, c);
-		if (len == 0)
-		{
+		while (*str == c)
 			str += 1;
-			continue ;
-		}
-		*words = malloc(len + 1);
-		ft_strlcpy(*words, str, len + 1);
+		if (*str == '\0')
+			break ;
+		len = ft_wordlen(str, c);
+		*words_temp = ft_substr(str, 0, len);
 		str += len;
-		words++;
+		words_temp++;
 	}
-	words -= count;
-	words[count] = malloc(0);
-	free(words[count]);
+	*words_temp = NULL;
 	return (words);
 }
 
@@ -54,11 +51,12 @@ static int	count_words(char const *str, char c)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == c && str[i + 1] != c)
+		while (str[i] == c)
+			i++;
+		if (str[i] != '\0')
 			count++;
-		else if (str[i] != c && str[i + 1] == '\0')
-			count++;
-		i++;
+		while (str[i] != c && str[i] != '\0')
+			i++;
 	}
 	return (count);
 }

@@ -18,13 +18,18 @@ int	ft_atoi(char const *str)
 {
 	int long	value;
 
-	while (*str <= ' ' && (*str != '\a' && *str != '\b'))
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
 	{
 		str++;
 		value = convert(str);
 		value = value * (-1);
+	}
+	else if (*str == '+')
+	{
+		str++;
+		value = convert(str);
 	}
 	else
 		value = convert(str);

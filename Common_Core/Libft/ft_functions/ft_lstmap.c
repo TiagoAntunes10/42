@@ -15,22 +15,24 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 {
-	t_list	**lst2;
+	t_list	*lst2;
 	t_list	*lst3;
 
-	lst2 = malloc(sizeof(t_list **));
+	if (lst == NULL)
+		return (NULL);
+	lst2 = NULL;
 	while (lst != NULL)
 	{
 		lst3 = ft_lstnew((*f)(lst->content));
 		if (lst3 == NULL)
 		{
-			ft_lstdelone(lst3, del);
-			break ;
+			ft_lstclear(&lst2, del);
+			return (NULL);
 		}
-		ft_lstadd_back(lst2, lst3);
+		ft_lstadd_back(&lst2, lst3);
 		lst = lst->next;
 	}
-	return (*lst2);
+	return (lst2);
 }
 
 /*

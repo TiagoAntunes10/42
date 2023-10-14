@@ -26,7 +26,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (set_cmp(*s1, set) != 0)
 		s1++;
 	str = ft_substr(s1, 0, l);
-	str[l] = '\0';
+	if (str == 0)
+		return (NULL);
 	return (str);
 }
 

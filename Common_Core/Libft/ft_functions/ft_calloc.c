@@ -18,16 +18,16 @@ void	*ft_calloc(size_t nmem, size_t size)
 	long int		n;
 	unsigned int	i;
 
-	if (nmem == 0 || size == 0)
-		return (NULL);
 	n = nmem * size;
 	if (n > 2147483647)
 		return (NULL);
 	arr = (char *) malloc (nmem * size);
 	if (arr == 0)
 		return (NULL);
+	if (nmem == 0 || size == 0)
+		return (arr);
 	i = 0;
-	while (i < nmem)
+	while (i < (nmem * size))
 	{
 		arr[i] = 0;
 		i++;
