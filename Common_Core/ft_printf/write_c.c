@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   write_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 14:25:43 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/17 14:25:47 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/17 14:26:24 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/17 14:26:26 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
+#include "libft.h"
+#include "libftprintf.h"
 
-int	ft_printf(const char *str, ... );
-int	count_args(const char *str);
-int	write_spe(const char *str, va_list valst, int count);
-int	write_c(va_list valst, int count);
-int	write_s(va_list valst, int count);
-int	write_i(va_list valst, int count);
-int	nb_len(int long nb);
-int	write_d(va_list valst, int count);
+int	write_c(va_list valst, int count)
+{
+	ft_putchar_fd(va_arg(valst, int), 1);
+	return (count++);
+}

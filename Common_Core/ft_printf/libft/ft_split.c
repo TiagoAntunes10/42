@@ -10,38 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static int		count_words(char const *str, char c);
 static int		ft_wordlen(char const *str, char c);
+static char		**free_words(char **words, char **words_temp);
 
 char	**ft_split(char const *str, char c)
 {
 	int		count;
 	char	**words;
+	char	**words_temp;
 	int		len;
-	int		i;
 
 	count = count_words(str, c);
-	words = malloc((count + 1) * sizeof(char *));
+	words = (char **) malloc(sizeof(char *) * (count + 1));
 	if (words == 0)
 		return (NULL);
-	i = 0;
-	while (*str != '\0')
+	words_temp = words;
+	while (*str != '\0' && *(str + 1) != '\0')
 	{
-		len = ft_wordlen(str, c);
-		if (len == 0)
-		{
+		while (*str == c)
 			str += 1;
-			continue ;
-		}
-		words[i] = malloc(len + 1);
-		ft_strlcpy(words[i], str, len + 1);
+		if (*str == '\0')
+			break ;
+		len = ft_wordlen(str, c);
+		*words_temp = ft_substr(str, 0, len);
+		if (*words_temp == 0)
+			return (free_words(words, words_temp));
 		str += len;
-		i++;
+		words_temp++;
 	}
-	free(words[count]);
+	*words_temp = NULL;
 	return (words);
 }
 
@@ -54,11 +54,12 @@ static int	count_words(char const *str, char c)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == c && str[i + 1] != c)
+		while (str[i] == c)
+			i++;
+		if (str[i] != '\0')
 			count++;
-		else if (str[i] != c && str[i + 1] == '\0')
-			count++;
-		i++;
+		while (str[i] != c && str[i] != '\0')
+			i++;
 	}
 	return (count);
 }
@@ -78,21 +79,13 @@ static int	ft_wordlen(char const *str, char c)
 	return (l);
 }
 
-/*
-#include <stdio.h>
-
-int	main(int argc, char **argv)
+static char	**free_words(char **words, char **words_temp)
 {
-	char	**words;
-	int		i;
-
-	if (argc != 3)
-		return (0);
-	words = ft_split(argv[1], argv[2][0]);
-	i = 0;
-	while (words[i][0] != '\0')
+	while (words <= words_temp)
 	{
-		printf("%s\n", words[i]);
-		i++;
+		free(*words_temp);
+		words_temp--;
 	}
-}*/
+	free(words);
+	return (NULL);
+}
