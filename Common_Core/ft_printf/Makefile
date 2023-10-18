@@ -18,12 +18,14 @@ OBJ = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIB)
+$(NAME): $(LIB) $(OBJ)
 	ar rcs $@ $(OBJ)
 
-.c.o:
+$(LIB):
 	$(MAKE) -C $(FUNCTION)
-	$(CC) $(FLAGS) -I $(HEADER) -I $(FUNCTION) -c $< -o $(<:.c=.o) $(LIB)
+
+.c.o:
+	$(CC) $(FLAGS) -I $(HEADER) -I $(FUNCTION) -c $< -o $(<:.c=.o)
 
 clean: 
 	rm -f $(OBJ)

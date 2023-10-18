@@ -27,12 +27,12 @@ int	ft_printf(const char *str, ... )
 			write(1, "%", 1);
 			str++;
 		}
-		else if (*(str++) == '%')
-			count = write_spe(str, valst, count);
-		if (count == -1)
-			return (count);
+		else if (*str == '%')
+			count = write_spe(++str, valst, count);
 		else
 			write(1, str, 1);
+		if (count == -1)
+			return (count);
 		count++;	
 		str++;
 	}

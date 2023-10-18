@@ -18,6 +18,6 @@ int	write_d(va_list valst, int count)
 	double	nb;
 
 	nb = va_arg(valst, double);
-	//write_double(nb, 6);
+	write_double(nb, 6, nb_len(nb));
 	return (count + nb_len(nb) + 7);
 }

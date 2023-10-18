@@ -21,3 +21,5 @@ int	write_s(va_list valst, int count);
 int	write_i(va_list valst, int count);
 int	nb_len(int long nb);
 int	write_d(va_list valst, int count);
+int	write_double(double nb, int dec, int size);
+int	ft_power(int base, int exp);
