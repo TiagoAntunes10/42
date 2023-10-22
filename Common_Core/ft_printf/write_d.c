@@ -11,13 +11,15 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int	write_d(va_list valst, int count)
+int	write_d(va_list valst, int count, char *format)
 {
-	double	nb;
+	int	nb;
 
-	nb = va_arg(valst, double);
-	write_double(nb, 6, nb_len(nb));
-	return (count + nb_len(nb) + 7);
+	nb = va_arg(valst, int);
+	if (nb < 0)
+		count++;
+	ft_putnbr_fd(nb, 1);
+	return (count + nb_len(nb));
 }

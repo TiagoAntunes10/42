@@ -10,4 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "ft_printf.h"
 
+int	write_u(va_list valst, int count, char *format)
+{
+	unsigned int	nb;
+
+	nb = va_arg(valst, unsigned int);
+	ft_putnbr_fd(nb, 1);
+	return (count + nb_len(nb));
+}

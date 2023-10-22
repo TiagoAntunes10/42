@@ -11,10 +11,24 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	write_c(va_list valst, int count)
+int	write_c(va_list valst, int count, char *format)
 {
-	ft_putchar_fd(va_arg(valst, int), 1);
-	return (count++);
+	unsigned int	size;
+
+	if (*format == '-')
+	{
+		size = ft_atoi(++format);
+		ft_putchar_fd(va_arg(valst, int), 1);
+		write_char(size - 1, ' ');
+		return (count + size);
+	}
+	else if (format == 0)
+	{
+		ft_putchar_fd(va_arg(valst, int), 1);
+		return (count++);
+	}
+	return (-1);
 }

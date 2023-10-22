@@ -31,7 +31,6 @@ char	*ft_itoa(int n)
 			return (NULL);
 		str[0] = '-';
 		convert(nb, str, l);
-		str[l + 1] = '\0';
 	}
 	else
 	{
@@ -40,7 +39,6 @@ char	*ft_itoa(int n)
 		if (str == 0)
 			return (NULL);
 		convert(nb, str, (l - 1));
-		str[l] = '\0';
 	}
 	return (str);
 }
@@ -60,30 +58,12 @@ static void	convert(int long n, char *str, int l)
 {
 	if (n / 10 == 0)
 	{
-	str[l] = (n % 10) + 48;
+		str[l] = (n % 10) + 48;
+		str[l + 1] = '\0';
 		return ;
 	}
 	convert((n / 10), str, l - 1);
 	str[l] = (n % 10) + 48;
+	str[l + 1] = '\0';
 	return ;
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-#include "libft.h"
-#include <malloc.h>
-
-int	main(void)
-{
-	int				n;
-	char			*toa;
-	struct mallinfo	info2;
-
-	n = -2147483648;
-	toa = ft_itoa(n);
-	printf("ft_itoa '-2147483648': %s\n", toa);
-	info2 = mallinfo();
-	if (info2.keepcost != 0)
-		printf("ft_itoa: Memory leaks -> %d bytes!\n", info2.keepcost);
-}*/

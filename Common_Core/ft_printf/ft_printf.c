@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int	ft_printf(const char *str, ... )
+int	ft_printf(const char *str, ...)
 {
 	va_list	valst;
 	int		count;
@@ -33,7 +33,7 @@ int	ft_printf(const char *str, ... )
 			write(1, str, 1);
 		if (count == -1)
 			return (count);
-		count++;	
+		count++;
 		str++;
 	}
 	va_end(valst);

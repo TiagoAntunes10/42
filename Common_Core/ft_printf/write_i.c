@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int	write_i(va_list valst, int count)
+int	write_i(va_list valst, int count, char *format)
 {
 	int	nb;
 

@@ -11,13 +11,29 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	write_s(va_list valst, int count)
+int	write_s(va_list valst, int count, char *format)
 {
-	char	*str;
+	char			*str;
+	unsigned int	size;
 
 	str = va_arg(valst, char *);
-	ft_putstr_fd(str, 1);
-	return (count + ft_strlen(str));
+	if (*format == '-')
+	{
+		size = ft_atoi(++format);
+		return (count + write_left_str(str, size));
+	}
+	else if (*format == '.')
+	{
+		size = ft_atoi(++format);
+		return (count + write_precision_str(str, size));
+	}
+	else if (format == 0)
+	{
+		ft_putstr_fd(str, 1);
+		return (count + ft_strlen(str));
+	}
+	return (-1);
 }

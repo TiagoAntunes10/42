@@ -10,4 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "ft_printf.h"
 
+int	write_x_lower(va_list valst, int count, char *format)
+{
+	int	nb;
+
+	nb = va_arg(valst, int);
+	count += ft_putnbr_base(nb, "0123456789abcdef");
+	return (count);
+}
