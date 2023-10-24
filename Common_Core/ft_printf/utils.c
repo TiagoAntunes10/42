@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
 
-static int	write_base(long int nb, char *base, int div);
+static int	write_base(unsigned int nb, char *base, int div);
 
 int	nb_len(int long nb)
 {
@@ -33,24 +32,18 @@ int	nb_len(int long nb)
 	return (l);
 }
 
-int	ft_putnbr_base(int nb, char *base)
+int	ft_putnbr_base(unsigned int nb, char *base)
 {
 	long int	nbr;
 	int			count;
 
 	nbr = nb;
 	count = 0;
-	if (nbr < 0)
-	{
-		ft_putchar_fd('-', 1);
-		nbr *= -1;
-		count++;
-	}
 	count += write_base(nbr, base, 16);
 	return (count);
 }
 
-static int	write_base(long int nb, char *base, int div)
+static int	write_base(unsigned int nb, char *base, int div)
 {
 	int		count;
 
@@ -72,10 +65,24 @@ int	write_ptr(unsigned long long ptr, char *base, int div)
 	count = 1;
 	if ((ptr / div) == 0)
 	{
+		ft_putstr_fd("0x", 1);
 		ft_putchar_fd(base[ptr % div], 1);
-		return (1);
+		return (3);
 	}
 	count += write_ptr((ptr / div), base, div);
 	ft_putchar_fd(base[ptr % div], 1);
 	return (count);
+}
+
+unsigned int	base_len(unsigned int nb)
+{
+	unsigned int i;
+
+	i = 0;
+	while (nb / 16 != 0)
+	{
+		i++;
+		nb /= 16;
+	}
+	return (i);
 }

@@ -20,12 +20,13 @@ int	write_c(va_list valst, int count, char *format)
 
 	if (*format == '-')
 	{
-		size = ft_atoi(++format);
+		size = ft_atoi(format + 1);
+		free(format);
 		ft_putchar_fd(va_arg(valst, int), 1);
 		write_char(size - 1, ' ');
 		return (count + size);
 	}
-	else if (format == 0)
+	else if (*format == 0)
 	{
 		ft_putchar_fd(va_arg(valst, int), 1);
 		return (count++);

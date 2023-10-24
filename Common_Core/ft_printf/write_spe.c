@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft.h"
 #include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	write_spe(const char *str, va_list valst, int count)
 {
@@ -38,6 +38,6 @@ int	write_spe(const char *str, va_list valst, int count)
 	else
 		if (*str == '-' || *str == '0' || *str == '.' || *str == '#' 
 			|| *str == ' ' || *str == '+')
-			return (write_extra(str++, valst, count));
+			return (write_bonus(str++, valst, count));
 	return (-1);
 }

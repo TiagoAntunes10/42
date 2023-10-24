@@ -13,6 +13,8 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+static int	str_adv(const char *str);
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	valst;
@@ -28,7 +30,10 @@ int	ft_printf(const char *str, ...)
 			str++;
 		}
 		else if (*str == '%')
+		{
 			count = write_spe(++str, valst, count);
+			str += str_adv(str);
+		}
 		else
 			write(1, str, 1);
 		if (count == -1)
@@ -38,4 +43,15 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(valst);
 	return (count);
+}
+
+
+static int	str_adv(const char *str)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (ft_isalpha(str[i]) == 0)
+		i++;
+	return (i);
 }

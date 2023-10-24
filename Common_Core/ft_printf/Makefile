@@ -9,7 +9,6 @@ SOURCE = ft_printf.c utils.c write_c.c write_d.c write_i.c\
 BONUS = write_bonus.c utils_bonus.c
 
 SOURCES = ${addprefix $(PRE), $(SOURCE)}
-
 BONUS_SOURCES = ${addprefix $(PRE), $(BONUS)}
 
 NAME = libftprintf.a
@@ -19,7 +18,7 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 
 OBJ = $(SOURCES:.c=.o)
-OBJ_BONUS = $(BONUS_SOURCES: .c:.o)
+OBJ_BONUS = $(BONUS_SOURCES:.c=.o)
 
 all: $(NAME)
 
@@ -33,15 +32,15 @@ $(LIB):
 .c.o:
 	$(CC) $(FLAGS) -I $(HEADER) -I $(FUNCTION) -c $< -o $(<:.c=.o)
 
-bonus: $(NAME) $(OBJ_BONUS)
-	cp $(LIB) $@
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
+bonus: $(LIB) $(OBJ) $(OBJ_BONUS)
+	cp $(LIB) $(NAME)
+	ar rcs $(NAME) $(OBJ_BONUS) $(OBJ)
 
 .c.o2:
 	$(CC) $(FLAGS) -I $(HEADER) -I $(FUNCTION) -c $< -o $(<:.c=.o)
 	
 clean: 
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 	$(MAKE) clean -C $(FUNCTION)
         
 fclean: clean

@@ -34,7 +34,7 @@ static char	*format_str(const char *str)
 	unsigned int	i;
 
 	i = 0;
-	while (ft_alpha(str[i]) == 0)
+	while (ft_isalpha(str[i]) == 0)
 		i++;
 	return (ft_substr(str, 0, i + 1));
 }
