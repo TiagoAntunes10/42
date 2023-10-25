@@ -78,5 +78,10 @@ int	write_nb_bonus(int long nb, int count, char *format)
 		free(format);
 		return (count + write_zero_nb(nb, size, count));
 	}
+	else if (*format == 'i' || *format == 'd')
+	{
+		free(format);
+		return (count + write_left_nb(nb, size, count));
+	}
 	return (-1);
 }
