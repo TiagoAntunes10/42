@@ -2,6 +2,8 @@
     "files.associations": {
 		"stdio.h": "c",
 		"ctype.h": "c",
-		"libftprintf.h": "c"
+		"libftprintf.h": "c",
+		"ft_printf.h": "c",
+		"algorithm": "c"
 	}
 }

@@ -26,7 +26,7 @@ int	nb_len(int long nb)
 		nb *= -1;
 	}
 	if (nb / 10 == 0)
-		return (1);
+		return (l + 1);
 	l += 1;
 	l += nb_len(nb / 10);
 	return (l);
@@ -76,9 +76,9 @@ int	write_ptr(unsigned long long ptr, char *base, int div)
 
 unsigned int	base_len(unsigned int nb)
 {
-	unsigned int i;
+	unsigned int	i;
 
-	i = 0;
+	i = 1;
 	while (nb / 16 != 0)
 	{
 		i++;
