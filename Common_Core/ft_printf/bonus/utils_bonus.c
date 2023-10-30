@@ -55,3 +55,17 @@ long int	check_precision(char *format)
 	}
 	return (-1);
 }
+
+int	nb_len_positive(int long nb)
+{
+	int	l;
+
+	l = 0;
+	if (nb < 0)
+		nb *= -1;
+	if (nb / 10 == 0)
+		return (l + 1);
+	l += 1;
+	l += nb_len(nb / 10);
+	return (l);
+}

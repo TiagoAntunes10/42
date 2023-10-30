@@ -13,6 +13,8 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+static int	write_left_spaces(int c, char *format);
+
 int	write_c(va_list valst, int count, char *format)
 {
 	unsigned int	size;
@@ -29,10 +31,31 @@ int	write_c(va_list valst, int count, char *format)
 		}
 		return (count++);
 	}
+	else if (ft_isdigit(*format) > 0)
+		return (count + write_left_spaces(va_arg(valst, int), format));
 	else if (*format == 0)
 	{
 		ft_putchar_fd(va_arg(valst, int), 1);
 		return (count++);
 	}
 	return (count);
+}
+
+static int	write_left_spaces(int c, char *format)
+{
+	unsigned int	size;
+
+	size = ft_atoi(format);
+	free(format);
+	if (size > 1)
+	{
+		write_char(size - 1, ' ');
+		ft_putchar_fd(c, 1);
+		return (size);
+	}
+	else
+	{
+		ft_putchar_fd(c, 1);
+		return (1);
+	}
 }

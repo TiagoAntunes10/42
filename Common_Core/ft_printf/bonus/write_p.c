@@ -13,6 +13,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+static int	write_left_spaces(unsigned long long ptr, char *format);
 static int	write_space(unsigned int size, unsigned int count2);
 static int	write_left_ptr(unsigned long long ptr, char *format);
 
@@ -28,38 +29,59 @@ int	write_p(va_list valst, int count, char *format)
 		ft_putstr_fd("(nil)", 1);
 		return (count + 5);
 	}
-	else if (*format == '-' || ft_isdigit(*format) > 0)
-	{
+	else if (*format == '-')
 		return (count + write_left_ptr(ptr, format));
-	}
+	else if (ft_isdigit(*format) > 0)
+		return (count + write_left_spaces(ptr, format));
 	else if (*format == 0)
 	{
-		count += write_ptr(ptr, "0123456789abcdef", 16);
+		count += write_ptr(ptr, "0163456789abcdef", 16);
 		return (count);
 	}
 	return (count);
 }
 
+int	len_ptr(unsigned long long ptr)
+{
+	int		count;
+
+	count = 1;
+	if ((ptr / 16) == 0)
+		return (3);
+	count += len_ptr(ptr / 16);
+	return (count);
+}
+
+static int	write_left_spaces(unsigned long long ptr, char *format)
+{
+	unsigned int	len;
+	unsigned int	size;
+
+	size = ft_atoi(format);
+	free(format);
+	len = len_ptr(ptr);
+	if (size <= (unsigned int) len)
+	{
+		write_ptr(ptr, "0163456789abcdef", 16);
+		return (len);
+	}
+	else
+	{
+		write_char(size - len, ' ');
+		write_ptr(ptr, "0163456789abcdef", 16);
+		return (size);
+	}
+}
 
 static int	write_left_ptr(unsigned long long ptr, char *format)
 {
 	unsigned int	size;
 	unsigned int	count2;
 
-	count2 = write_ptr(ptr, "0123456789abcdef", 16);
-	if (*format == '-')
-	{
-		size = ft_atoi(format + 1);
-		free(format);
-		return (write_space(size, count2));
-	}
-	else if (ft_isdigit(*format) > 0)
-	{
-		size = ft_atoi(format);
-		free(format);
-		return (write_space(size, count2));
-	}
-	return (0);
+	count2 = write_ptr(ptr, "0163456789abcdef", 16);
+	size = ft_atoi(format + 1);
+	free(format);
+	return (write_space(size, count2));
 }
 
 static int	write_space(unsigned int size, unsigned int count2)

@@ -13,29 +13,110 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+static int	write_base_bonus_X(unsigned long int nb, int count, char *format,
+					long int size_precision);
+static int	write_base_extra_bonus_X(unsigned long int nb, int count, char *format,
+						long int size_precision);
+
 int	write_x_upper(va_list valst, int count, char *format)
 {
 	unsigned int	nb;
+	long int		size_precision;
 
 	nb = va_arg(valst, unsigned int);
-	if (*format == '-' || *format == '.' || *format == '0')
-		return (count + write_base_bonus(nb, 0, format, "0123456789ABCDEF"));
+	size_precision = check_precision(format);
+	if (size_precision < base_len(nb) && size_precision > 0)
+		size_precision = base_len(nb);
+	if (*format == '-' || *format == '.' || ft_isdigit(*format) > 0)
+		return (count + write_base_bonus_X(nb, 0, format, size_precision));
 	else if (*format == '#')
 	{
 		if (nb == 0)
-			return (count + write_base_extra_bonus(nb, 0,
-				++format, "0123456789ABCDEF"));
+			return (count + write_base_extra_bonus_X(nb, 0,
+				++format, size_precision));
 		else
 		{
 			ft_putstr_fd("0X", 1);
-			return (count + write_base_extra_bonus(nb, 2, ++format,
-					"0123456789ABCDEF"));
+			return (count + write_base_extra_bonus_X(nb, 2, ++format, 
+				size_precision));
 		}
 	}
 	else if (*format == 0)
-	{
-		count += ft_putnbr_base(nb, "0123456789ABCDEF");
-		return (count);
-	}
+		return (count + ft_putnbr_base(nb, "0123456789ABCDEF"));
 	return (count);
+}
+
+static int	flag_condition(int long nb, int count, char *format,
+						long int size_precision)
+{
+	unsigned int	size;
+
+	size = ft_atoi(format + 1);
+	if (*format == '-')
+	{
+		free(--format);
+		return (write_left_base_X(nb, size, count, size_precision));
+	}
+	else if (*format == '0')
+	{
+		free(--format);
+		return (write_zero_base_X(nb, size, count, size_precision));
+	}
+	return (-1);
+}
+
+static int	write_base_bonus_X(unsigned long int nb, int count, char *format,
+					long int size_precision)
+{
+	unsigned int	size;
+
+	if (ft_isdigit(*format) > 0 && *format != '0')
+	{
+		size = ft_atoi(format);
+		free(format);
+		return (write_space_base_X(nb, size, count, size_precision));
+	}
+	size = ft_atoi(format + 1);
+	if (*format == '-')
+	{
+		free(format);
+		return (write_left_base_X(nb, size, count, size_precision));
+	}
+	else if (*format == '.')
+	{
+		free(format);
+		return (write_precision_base_X(nb, size, count));
+	}
+	else if (*format == '0')
+	{
+		free(format);
+		return (write_zero_base_X(nb, size, count, size_precision));
+	}
+	return (-1);
+}
+
+static int	write_base_extra_bonus_X(unsigned long int nb, int count, char *format,
+						long int size_precision)
+{
+	unsigned int	size;
+
+	if (*format == '-' || *format == '0')
+		return(flag_condition(nb, count, format, size_precision));
+	else if (*format == '.')
+	{
+		free(--format);
+		return (write_precision_base_X(nb, size_precision, count));
+	}
+	else if (ft_isdigit(*format) > 0)
+	{
+		size = ft_atoi(format);
+		free(--format);
+		return (write_space_base_X(nb, size, count, size_precision));
+	}
+	else if (*format == 'x' || *format == 'X')
+	{
+		free(--format);
+		return (write_left_base_X(nb, 0, count, size_precision));
+	}
+	return (-1);
 }

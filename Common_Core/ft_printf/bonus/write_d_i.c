@@ -25,10 +25,9 @@ int	write_d_i(va_list valst, int count, char *format)
 
 	nb = va_arg(valst, int);
 	size_precision = check_precision(format);
-	if (size_precision < nb_len(nb * (-1)) && size_precision > 0)
-		size_precision = nb_len(nb * (-1));
-	if (*format == '-' || *format == '.' || *format == '0'
-		|| ft_isdigit(*format) > 0)
+	if (size_precision < nb_len_positive(nb) && size_precision > 0)
+		size_precision = nb_len_positive(nb);
+	if (*format == '-' || *format == '.' || ft_isdigit(*format) > 0)
 		return (count + write_non_plus_bonus(nb, 0, format, size_precision));
 	else if (*format == '+' || *format == ' ')
 	{

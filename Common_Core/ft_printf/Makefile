@@ -10,7 +10,7 @@ SOURCE = ft_printf.c utils.c write_c.c write_d_i.c\
 BONUS = ft_printf.c utils.c write_c.c write_d_i.c\
 		write_p.c write_s.c write_spe.c write_u.c write_x_lower.c\
 		write_x_upper.c write_bonus.c utils_bonus.c write_d_i_u_bonus.c\
-		write_x_X_bonus.c write_u_bonus.c
+		write_x_bonus.c write_X_bonus.c write_u_bonus.c
 
 SOURCES = ${addprefix $(PRE), $(SOURCE)}
 BONUS_SOURCES = ${addprefix $(BONUS_DIR), $(BONUS)}

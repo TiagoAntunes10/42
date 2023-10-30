@@ -35,9 +35,10 @@ int	write_left_space(int long nb, unsigned int size, int count,
 	else
 	{
 		if (nb < 0)
-			count++;
-		write_char(size - (size_precision + count), ' ');
-		write_precision_nb(nb, size_precision, --count);
+			write_char(size - (size_precision + count + 1), ' ');
+		else
+			write_char(size - (size_precision + count), ' ');
+		write_precision_nb(nb, size_precision, count);
 		return (size);
 	}
 }
@@ -76,6 +77,8 @@ int	write_precision_nb(int long nb, unsigned int size, int count)
 	{
 		ft_putchar_fd('-', 1);
 		nb *= -1;
+		size++;
+		count++;
 	}
 	len = nb_len(nb);
 	if (size <= (unsigned int)(len + count))

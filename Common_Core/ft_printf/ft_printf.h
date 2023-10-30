@@ -28,13 +28,8 @@ int				write_ptr(unsigned long long ptr, char *base, int div);
 unsigned int	base_len(unsigned int nb);
 int				write_bonus(const char *str, va_list valst, int count);
 void			write_char(unsigned int size, char c);
-int				write_base_bonus(unsigned long int nb, int count, char *format,
-					char *base);
-int				write_base_extra_bonus(unsigned long int nb, int count,
-					char *format,
-					char *base);
 int				write_unsigned_bonus(unsigned long int nb, int count,
-					char *format);
+					char *format, long int size_precision);
 void			write_nbr(unsigned long int nb, int fd);
 int				write_left_nb(int long nb, unsigned int size, int count,
 					long int size_precision);
@@ -44,3 +39,20 @@ int				write_zero_nb(int long nb, unsigned int size, int count,
 int				write_left_space(int long nb, unsigned int size, int count,
 					long int size_precision);
 long int		check_precision(char *format);
+int				nb_len_positive(int long nb);
+int				write_space_base_x(int long nb, unsigned int size, int count,
+					long int size_precision);
+int				write_left_base_x(unsigned long int nb, unsigned int size,
+					int count, long int size_precision);
+int				write_precision_base_x(unsigned long int nb, unsigned int size,
+					int count);
+int				write_zero_base_x(unsigned long int nb, unsigned int size,
+					int count, long int size_precision);
+int				write_space_base_X(int long nb, unsigned int size, int count,
+					long int size_precision);
+int				write_left_base_X(unsigned long int nb, unsigned int size,
+					int count, long int size_precision);
+int				write_precision_base_X(unsigned long int nb, unsigned int size,
+					int count);
+int				write_zero_base_X(unsigned long int nb, unsigned int size,
+					int count, long int size_precision);

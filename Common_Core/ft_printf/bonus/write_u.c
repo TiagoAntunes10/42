@@ -16,10 +16,14 @@
 int	write_u(va_list valst, int count, char *format)
 {
 	unsigned int	nb;
+	long int	size_precision;
 
 	nb = va_arg(valst, unsigned long int);
-	if (*format == '-' || *format == '.' || *format == '0')
-		return (count + write_unsigned_bonus(nb, 0, format));
+	size_precision = check_precision(format);
+	if (size_precision < nb_len_positive(nb) && size_precision > 0)
+		size_precision = nb_len_positive(nb);
+	if (*format == '-' || *format == '.' || ft_isdigit(*format) > 0)
+		return (count + write_unsigned_bonus(nb, 0, format, size_precision));
 	else if (*format == 0)
 	{
 		write_nbr(nb, 1);
