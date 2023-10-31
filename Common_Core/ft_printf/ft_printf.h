@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 16:47:26 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/26 16:47:28 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/31 11:49:57 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/31 11:49:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int				write_precision_base_x(unsigned long int nb, unsigned int size,
 					int count);
 int				write_zero_base_x(unsigned long int nb, unsigned int size,
 					int count, long int size_precision);
-int				write_space_base_X(int long nb, unsigned int size, int count,
-					long int size_precision);
-int				write_left_base_X(unsigned long int nb, unsigned int size,
+int				write_space_base_x_upper(int long nb, unsigned int size,
 					int count, long int size_precision);
-int				write_precision_base_X(unsigned long int nb, unsigned int size,
-					int count);
-int				write_zero_base_X(unsigned long int nb, unsigned int size,
+int				write_left_base_x_upper(unsigned long int nb, unsigned int size,
 					int count, long int size_precision);
+int				write_precision_base_x_upper(unsigned long int nb,
+					unsigned int size, int count);
+int				write_zero_base_x_upper(unsigned long int nb, unsigned int size,
+					int count, long int size_precision);
+int				write_nil_left(unsigned int size);
+int				skip_minus(char *format);

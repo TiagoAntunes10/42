@@ -14,10 +14,10 @@
 #include "ft_printf.h"
 
 static int	write_precision_unsigned(unsigned long int nb, unsigned int size,
-								int count);
-								
+				int count);
+
 static int	write_space_unsigned(unsigned int long nb, unsigned int size,
-								int count, long int size_precision)
+				int count, long int size_precision)
 {
 	if (size <= size_precision)
 		return (write_precision_unsigned(nb, size_precision, count));
@@ -47,7 +47,7 @@ static int	write_left_unsigned(unsigned long int nb, unsigned int size,
 							int count, long int size_precision)
 {
 	if (size <= size_precision)
-		return (write_precision_nb(nb, size_precision, count));
+		return (write_precision_unsigned(nb, size_precision, count));
 	else if (size_precision == -1)
 	{
 		write_nbr(nb, 1);
@@ -61,7 +61,7 @@ static int	write_left_unsigned(unsigned long int nb, unsigned int size,
 	}
 	else
 	{
-		count = write_precision_nb(nb, size_precision, count);
+		count = write_precision_unsigned(nb, size_precision, count);
 		write_char(size - count, ' ');
 		return (size);
 	}
@@ -89,7 +89,7 @@ static int	write_zero_unsigned(unsigned long int nb, unsigned int size,
 								int count, long int size_precision)
 {
 	if (size <= size_precision)
-		return (write_precision_nb(nb, size_precision, count));
+		return (write_precision_unsigned(nb, size_precision, count));
 	else if (size_precision == -1)
 	{
 		if (size <= (unsigned int)(nb_len(nb) + count))
@@ -117,23 +117,22 @@ int	write_unsigned_bonus(unsigned long int nb, int count, char *format,
 	{
 		size = ft_atoi(format);
 		free(format);
+		if (size_precision == 0 && nb != 0)
+			return (write_space_unsigned(nb, (size - nb_len(nb)),
+					count, size_precision));
 		return (write_space_unsigned(nb, size, count, size_precision));
 	}
-	size = ft_atoi(format + 1);
 	if (*format == '-')
 	{
-		free(format);
-		return (write_left_unsigned(nb, size, count, size_precision));
+		size = ft_atoi(format + skip_minus(format));
+		count += write_left_unsigned(nb, size, count, size_precision);
 	}
-	else if (*format == '.')
-	{
-		free(format);
-		return (write_precision_unsigned(nb, size, count));
-	}
+	else
+		size = ft_atoi(format + 1);
+	if (*format == '.')
+		count += write_precision_unsigned(nb, size, count);
 	else if (*format == '0')
-	{
-		free(format);
-		return (write_zero_unsigned(nb, size, count, size_precision));
-	}
-	return (-1);
+		count += write_zero_unsigned(nb, size, count, size_precision);
+	free(format);
+	return (count);
 }

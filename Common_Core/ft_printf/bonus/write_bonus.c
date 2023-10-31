@@ -50,3 +50,14 @@ static char	*format_str(const char *str)
 		i++;
 	return (ft_substr(str, 0, i + 1));
 }
+
+int	skip_minus(char *format)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isdigit(format[i]) == 0 && format[i] != '.'
+		&& ft_isalpha(format[i]) == 0)
+		i++;
+	return (i);
+}

@@ -69,3 +69,10 @@ int	nb_len_positive(int long nb)
 	l += nb_len(nb / 10);
 	return (l);
 }
+
+int	write_nil_left(unsigned int size)
+{
+	ft_putstr_fd("(nil)", 1);
+	write_char((size - 5), ' ');
+	return (size);
+}

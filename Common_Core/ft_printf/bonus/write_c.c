@@ -21,7 +21,10 @@ int	write_c(va_list valst, int count, char *format)
 
 	if (*format == '-' || *format == '.')
 	{
-		size = ft_atoi(format + 1);
+		if (*format == '-')
+			size = ft_atoi(format + skip_minus(format));
+		else
+			size = ft_atoi(format + 1);
 		free(format);
 		ft_putchar_fd(va_arg(valst, int), 1);
 		if (size > 0)

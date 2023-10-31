@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_X_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 20:59:59 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/30 21:00:01 by tialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 
-int	write_space_base_X(int long nb, unsigned int size, int count,
+int	write_space_base_x_upper(int long nb, unsigned int size, int count,
 					long int size_precision)
 {
 	if (size <= size_precision)
-		return (write_precision_base_X(nb, size_precision, count));
+		return (write_precision_base_x_upper(nb, size_precision, count));
 	else if (size_precision == -1)
 	{
 		if (size <= (unsigned int)(base_len(nb) + count))
@@ -26,16 +38,16 @@ int	write_space_base_X(int long nb, unsigned int size, int count,
 			write_char(size - (size_precision + count + 1), ' ');
 		else
 			write_char(size - (size_precision + count), ' ');
-		write_precision_base_X(nb, size_precision, count);
+		write_precision_base_x_upper(nb, size_precision, count);
 		return (size);
 	}
 }
 
-int	write_left_base_X(unsigned long int nb, unsigned int size,
+int	write_left_base_x_upper(unsigned long int nb, unsigned int size,
 						int count, long int size_precision)
 {
 	if (size <= size_precision)
-		return (write_precision_base_X(nb, size_precision, count));
+		return (write_precision_base_x_upper(nb, size_precision, count));
 	else if (size_precision == -1)
 	{
 		ft_putnbr_base(nb, "0123456789ABCDEF");
@@ -49,13 +61,13 @@ int	write_left_base_X(unsigned long int nb, unsigned int size,
 	}
 	else
 	{
-		count = write_precision_base_X(nb, size_precision, count);
+		count = write_precision_base_x_upper(nb, size_precision, count);
 		write_char(size - count, ' ');
 		return (size);
 	}
 }
 
-int	write_precision_base_X(unsigned long int nb, unsigned int size,
+int	write_precision_base_x_upper(unsigned long int nb, unsigned int size,
 							int count)
 {
 	if (size == 0 && nb == 0)
@@ -73,11 +85,11 @@ int	write_precision_base_X(unsigned long int nb, unsigned int size,
 	}
 }
 
-int	write_zero_base_X(unsigned long int nb, unsigned int size,
+int	write_zero_base_x_upper(unsigned long int nb, unsigned int size,
 						int count, long int size_precision)
 {
 	if (size <= size_precision)
-		return (write_precision_base_X(nb, size_precision, count));
+		return (write_precision_base_x_upper(nb, size_precision, count));
 	else if (size_precision == -1)
 	{
 		if (size <= (base_len(nb) + count))
@@ -93,5 +105,5 @@ int	write_zero_base_X(unsigned long int nb, unsigned int size,
 		}
 	}
 	else
-		return (write_space_base_X(nb, size, count, size_precision));
+		return (write_space_base_x_upper(nb, size, count, size_precision));
 }

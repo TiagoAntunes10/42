@@ -14,8 +14,8 @@
 #include "ft_printf.h"
 
 static int	write_left_spaces(unsigned long long ptr, char *format);
-static int	write_space(unsigned int size, unsigned int count2);
 static int	write_left_ptr(unsigned long long ptr, char *format);
+static int	write_nil(char *format);
 
 int	write_p(va_list valst, int count, char *format)
 {
@@ -23,19 +23,14 @@ int	write_p(va_list valst, int count, char *format)
 
 	ptr = va_arg(valst, unsigned long long);
 	if (ptr == 0)
-	{
-		if (*format != 0)
-			free(format);
-		ft_putstr_fd("(nil)", 1);
-		return (count + 5);
-	}
+		return (count + write_nil(format));
 	else if (*format == '-')
 		return (count + write_left_ptr(ptr, format));
 	else if (ft_isdigit(*format) > 0)
 		return (count + write_left_spaces(ptr, format));
 	else if (*format == 0)
 	{
-		count += write_ptr(ptr, "0163456789abcdef", 16);
+		count += write_ptr(ptr, "0123456789abcdef", 16);
 		return (count);
 	}
 	return (count);
@@ -62,13 +57,13 @@ static int	write_left_spaces(unsigned long long ptr, char *format)
 	len = len_ptr(ptr);
 	if (size <= (unsigned int) len)
 	{
-		write_ptr(ptr, "0163456789abcdef", 16);
+		write_ptr(ptr, "0123456789abcdef", 16);
 		return (len);
 	}
 	else
 	{
 		write_char(size - len, ' ');
-		write_ptr(ptr, "0163456789abcdef", 16);
+		write_ptr(ptr, "0123456789abcdef", 16);
 		return (size);
 	}
 }
@@ -78,14 +73,9 @@ static int	write_left_ptr(unsigned long long ptr, char *format)
 	unsigned int	size;
 	unsigned int	count2;
 
-	count2 = write_ptr(ptr, "0163456789abcdef", 16);
-	size = ft_atoi(format + 1);
+	count2 = write_ptr(ptr, "0123456789abcdef", 16);
+	size = ft_atoi(format + skip_minus(format));
 	free(format);
-	return (write_space(size, count2));
-}
-
-static int	write_space(unsigned int size, unsigned int count2)
-{
 	if ((count2) >= size)
 		return (count2);
 	else
@@ -93,4 +83,30 @@ static int	write_space(unsigned int size, unsigned int count2)
 		write_char((size - count2), ' ');
 		return (size);
 	}
+}
+
+static int	write_nil(char *format)
+{
+	unsigned int	size;
+
+	if (*format == '-')
+	{
+		size = ft_atoi(format + 1);
+		free(format);
+		if (size > 5)
+			return (write_nil_left(size));
+	}
+	else if (ft_isdigit(*format) > 0)
+	{
+		size = ft_atoi(format);
+		free(format);
+		if (size > 5)
+		{
+			write_char((size - 5), ' ');
+			ft_putstr_fd("(nil)", 1);
+			return (size);
+		}
+	}
+	ft_putstr_fd("(nil)", 1);
+	return (5);
 }

@@ -45,6 +45,12 @@ static int	write_left_spaces(char *str, unsigned int size)
 	unsigned int	len;
 
 	len = ft_strlen(str);
+	if (*str == '\0')
+	{
+		write_char(size, ' ');
+		free(str);
+		return (size);
+	}
 	if (size <= (unsigned int) len)
 	{
 		ft_putstr_fd(str, 1);
@@ -84,7 +90,7 @@ static char	*write_precision_str(char *str, char *format)
 	if (ft_strncmp(str, "(null)", 6) == 0 && size >= 6)
 		return (ft_substr(str, 0, 6));
 	else if (ft_strncmp(str, "(null)", 6) == 0 && size > 0)
-		return (malloc(0));
+		return (malloc(1));
 	if (size == -1 || size > (unsigned int) ft_strlen(str))
 		return (ft_substr(str, 0, ft_strlen(str)));
 	else if (size <= (unsigned int) ft_strlen(str))
@@ -98,7 +104,10 @@ static int	flag_condition(char *str, char *format)
 
 	if (*format == '-' || *format == ' ')
 	{
-		size = ft_atoi(format + 1);
+		if (*format == '-')
+			size = ft_atoi(format + skip_minus(format));
+		else
+			size = ft_atoi(format + 1);
 		free(format);
 		return (write_left_str(str, size));
 	}
