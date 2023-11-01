@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	get_line(char *str, int fd)
+int	write_line(char *str, int fd)
 {
 	int	check;
 	int	i;
@@ -21,12 +21,27 @@ int	get_line(char *str, int fd)
 	check = read(fd, str, 1);
 	if (check == -1 || check == 0)
 		return (-1);
-	while (*str != '\n' || *str != '\0')
+	while (*str != '\n' && *str != '\0')
 	{
 		check = read(fd, ++str, 1);
 		i++;
 		if (check == -1)
 			return (-1);
 	}
-	return (str - i);
+	return (i);
+}
+
+char	*line_len(char *str)
+{
+	while (*str != '\n' && *str != '\0')
+		str++;
+	return (str);
+}
+
+char	*write_line(char *str, unsigned int size)
+{
+	char	*line;
+
+	line = malloc(size);
+	
 }

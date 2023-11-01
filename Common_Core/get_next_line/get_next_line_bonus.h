@@ -15,4 +15,3 @@
 
 char	*get_next_line(int fd);
 int		write_line(char *str, int fd);
-char	*line_len(char *str);

@@ -12,17 +12,18 @@
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
+	char	*buffer;
 	char	*line;
 	int		check;
 
-	line = malloc(100);
-	check = get_line(line, fd);
+	check = write_line(buffer, fd);
 	if (check == -1)
 	{
-		free(line);
+		free(buffer);
 		return (NULL);
 	}
-	return (line);
+	line = line_len(buffer);
+	line = write_line(buffer, line - buffer);
 }

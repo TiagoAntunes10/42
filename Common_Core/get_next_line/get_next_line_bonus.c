@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 13:55:26 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/31 13:55:28 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/31 13:55:10 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/31 13:55:13 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 
-char	*get_next_line(int fd);
-int		write_line(char *str, int fd);
-char	*line_len(char *str);
+char	*get_next_line(int fd)
+{
+	char	*line;
+	int		check;
+
+	line = malloc(100);
+	if (line == 0)
+		return (NULL);
+	check = write_line(line, fd);
+	if (check == -1)
+	{
+		free(line);
+		return (NULL);
+	}
+	return (line);
+}
