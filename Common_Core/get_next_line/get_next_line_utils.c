@@ -15,15 +15,18 @@
 int	write_line(char *str, int fd)
 {
 	int	check;
-	
+
 	check = read(fd, str, BUFFER_SIZE);
 	if (check == -1 || check == 0)
 		return (-1);
 	return (check);
 }
 
-char	*line_len(char *str)
+unsigned int	line_len(char *str)
 {
+	unsigned int	size;
+
+	size = 0;
 	while (*str != '\n' && *str != '\0')
 		str++;
 	if (*str == '\n')
