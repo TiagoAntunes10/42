@@ -12,18 +12,47 @@
 
 #include "get_next_line.h"
 
+static char	*alloc_prob(char *str);
+static char	*alloc_prob2(char *str, char *str2);
+
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-	char	*line;
-	int		check;
+	static char	*buffer;
+	char		*line;
+	char		*temp;
+	int			check;
 
-	check = write_line(buffer, fd);
-	if (check == -1)
+	if (buffer == 0)
 	{
-		free(buffer);
-		return (NULL);
+		buffer = malloc(BUFFER_SIZE);
+		if (buffer == 0)
+			return (alloc_prob(buffer));
+		check = write_line(buffer, fd);
+		if (check == -1)
+			return (alloc_prob(buffer));
 	}
-	line = line_len(buffer);
-	line = write_line(buffer, line - buffer);
+	check = 1;
+	while (check > 0)
+	{
+		temp = buffer;
+		buffer = line_len(buffer);
+		line = write_line(temp, buffer - temp);
+		if (line == 0)
+			return (alloc_prob2(buffer, line));
+		if (*buffer == '\0')
+			check = write_line(buffer, fd);
+	}
+}
+
+static char	*alloc_prob(char *str)
+{
+	free(str);
+	return (NULL);
+}
+
+static char	*alloc_prob2(char *str, char *str2)
+{
+	free(str);
+	free(str2);
+	return (NULL);
 }

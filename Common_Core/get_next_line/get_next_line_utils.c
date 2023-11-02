@@ -15,33 +15,36 @@
 int	write_line(char *str, int fd)
 {
 	int	check;
-	int	i;
-
-	i = 0;
-	check = read(fd, str, 1);
+	
+	check = read(fd, str, BUFFER_SIZE);
 	if (check == -1 || check == 0)
 		return (-1);
-	while (*str != '\n' && *str != '\0')
-	{
-		check = read(fd, ++str, 1);
-		i++;
-		if (check == -1)
-			return (-1);
-	}
-	return (i);
+	return (check);
 }
 
 char	*line_len(char *str)
 {
 	while (*str != '\n' && *str != '\0')
 		str++;
+	if (*str == '\n')
+		str++;
 	return (str);
 }
 
 char	*write_line(char *str, unsigned int size)
 {
-	char	*line;
+	char			*line;
+	unsigned int	i;
 
-	line = malloc(size);
-	
+	line = malloc(size + 1);
+	if (line == 0)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		line[i] = str[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
 }

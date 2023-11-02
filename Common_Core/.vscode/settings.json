@@ -4,6 +4,7 @@
 		"ctype.h": "c",
 		"libftprintf.h": "c",
 		"ft_printf.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"get_next_line.h": "c"
 	}
 }

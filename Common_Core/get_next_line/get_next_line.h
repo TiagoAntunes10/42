@@ -13,6 +13,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char	*get_next_line(int fd);
-int		write_line(char *str, int fd);
-char	*line_len(char *str);
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
+
+char			*get_next_line(int fd);
+int				write_line(char *str, int fd);
+unsigned int	line_len(char *str);
