@@ -10,13 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+# include <unistd.h>
+# include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 char			*get_next_line(int fd);
-int				write_line(char *str, int fd);
+int				get_line(char *str, int fd);
+char			*write_line(char *str, char *str2, unsigned int size);
 unsigned int	line_len(char *str);
+int				cpy_str(char *str, char *str2);
+
+#endif

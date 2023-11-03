@@ -14,6 +14,7 @@
 
 static char	*alloc_prob(char *str);
 static char	*alloc_prob2(char *str, char *str2);
+static void	ft_bzero(void *s, size_t n);
 
 char	*get_next_line(int fd)
 {
@@ -27,21 +28,38 @@ char	*get_next_line(int fd)
 		buffer = malloc(BUFFER_SIZE);
 		if (buffer == 0)
 			return (alloc_prob(buffer));
-		check = write_line(buffer, fd);
-		if (check == -1)
+		check = get_line(buffer, fd);
+		if (check == -1 || check == 0)
 			return (alloc_prob(buffer));
 	}
 	check = 1;
+	line = malloc(1);
+	if (line == 0)
+			return (alloc_prob2(buffer, line));
+	ft_bzero(line, 1);
 	while (check > 0)
 	{
-		temp = buffer;
-		buffer = line_len(buffer);
-		line = write_line(temp, buffer - temp);
+		temp = malloc(line_len(line));
+		ft_bzero(temp, 1);
+		if (temp == 0)
+			return (alloc_prob2(buffer, line));
+		check = cpy_str(line, temp);
+		if (check > 0)
+		{
+			alloc_prob(temp);
+			return (line);
+		}
+		free(line);
+		line = write_line(buffer, temp, line_len(buffer) + line_len(temp));
 		if (line == 0)
 			return (alloc_prob2(buffer, line));
+		buffer += line_len(buffer);
 		if (*buffer == '\0')
-			check = write_line(buffer, fd);
+			check = get_line(buffer, fd);
+		if (check == -1)
+			return (line);
 	}
+	return (line);
 }
 
 static char	*alloc_prob(char *str)
@@ -55,4 +73,18 @@ static char	*alloc_prob2(char *str, char *str2)
 	free(str);
 	free(str2);
 	return (NULL);
+}
+
+static void	ft_bzero(void *s, size_t n)
+{
+	unsigned int	i;
+	char			*cs;
+
+	i = 0;
+	cs = (char *) s;
+	while (i < n)
+	{
+		cs[i] = 0;
+		i++;
+	}
 }
