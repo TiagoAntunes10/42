@@ -40,7 +40,6 @@ char	*get_next_line(int fd)
 	while (check > 0)
 	{
 		temp = malloc(line_len(line));
-		ft_bzero(temp, 1);
 		if (temp == 0)
 			return (alloc_prob2(buffer, line));
 		check = cpy_str(line, temp);
@@ -53,11 +52,15 @@ char	*get_next_line(int fd)
 		line = write_line(buffer, temp, line_len(buffer) + line_len(temp));
 		if (line == 0)
 			return (alloc_prob2(buffer, line));
-		buffer += line_len(buffer);
-		if (*buffer == '\0')
+		if (*(buffer + line_len(buffer)) == '\0')
 			check = get_line(buffer, fd);
+		else
+			buffer += line_len(buffer);
 		if (check == -1)
+		{
+			alloc_prob(buffer);
 			return (line);
+		}
 	}
 	return (line);
 }
