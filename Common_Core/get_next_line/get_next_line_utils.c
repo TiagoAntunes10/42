@@ -15,10 +15,18 @@
 int	get_line(char *str, int fd)
 {
 	int	check;
+	int i;
 
-	check = read(fd, str, BUFFER_SIZE);
-	if (check == -1 || check == 0)
-		return (-1);
+	i = 0;
+	while (i < BUFFER_SIZE && *str != '\n')
+	{
+		check = read(fd, str, 1);
+		if (check == -1 || check == 0)
+			break ;
+		i++;
+		str++;
+	}
+	*str = 0;
 	return (check);
 }
 
@@ -56,7 +64,6 @@ char	*write_line(char *str, char *str2, unsigned int size)
 		i++;
 		j++;
 	}
-	free(str2);
 	line[i] = '\0';
 	return (line);
 }
@@ -72,6 +79,26 @@ int	cpy_str(char *str, char *str2)
 		i++;
 	}
 	if (str[i] == '\n')
-		return (i);
-	return (0);
+	{
+		str2[i] = str[i];
+		i++;
+	}
+	str2[i] = '\0';
+	return (i);
+}
+
+char	*str_start(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str != '\0')
+	{
+		i++;
+		str++;
+	}
+	if (i >= 0 && *(str - 1) != '\0')
+		return (str - BUFFER_SIZE);
+	else
+		return (str);
 }

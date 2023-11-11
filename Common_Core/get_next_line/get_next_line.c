@@ -23,15 +23,12 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			check;
 
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (buffer == 0)
-	{
-		buffer = malloc(BUFFER_SIZE);
-		if (buffer == 0)
-			return (alloc_prob(buffer));
-		check = get_line(buffer, fd);
-		if (check == -1 || check == 0)
-			return (alloc_prob(buffer));
-	}
+		return (alloc_prob(buffer));
+	check = get_line(buffer, fd);
+	if (check == -1 || check == 0)
+		return (alloc_prob(buffer));
 	check = 1;
 	line = malloc(1);
 	if (line == 0)
@@ -43,19 +40,15 @@ char	*get_next_line(int fd)
 		if (temp == 0)
 			return (alloc_prob2(buffer, line));
 		check = cpy_str(line, temp);
-		if (check > 0)
-		{
-			alloc_prob(temp);
-			return (line);
-		}
 		free(line);
 		line = write_line(buffer, temp, line_len(buffer) + line_len(temp));
+		free(temp);
 		if (line == 0)
 			return (alloc_prob2(buffer, line));
+		if (*(line + line_len(line)) == '\n')
+			return (line);
 		if (*(buffer + line_len(buffer)) == '\0')
 			check = get_line(buffer, fd);
-		else
-			buffer += line_len(buffer);
 		if (check == -1)
 		{
 			alloc_prob(buffer);
@@ -67,12 +60,15 @@ char	*get_next_line(int fd)
 
 static char	*alloc_prob(char *str)
 {
+	if (sizeof(str) == BUFFER_SIZE)
+		str = str_start(str);
 	free(str);
 	return (NULL);
 }
 
 static char	*alloc_prob2(char *str, char *str2)
 {
+	str = str_start(str);
 	free(str);
 	free(str2);
 	return (NULL);
