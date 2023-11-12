@@ -5,6 +5,10 @@
 		"libftprintf.h": "c",
 		"ft_printf.h": "c",
 		"algorithm": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c"
 	}
 }

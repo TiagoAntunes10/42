@@ -42,13 +42,13 @@ unsigned int	line_len(char *str)
 	return (size);
 }
 
-char	*write_line(char *str, char *str2, unsigned int size)
+char	*write_line(char *str, char *str2)
 {
 	char			*line;
 	unsigned int	i;
 	unsigned int	j;
 
-	line = malloc(size + 1);
+	line = malloc(line_len(str) + line_len(str2) + 1);
 	if (line == 0)
 		return (NULL);
 	i = 0;
@@ -58,7 +58,7 @@ char	*write_line(char *str, char *str2, unsigned int size)
 		i++;
 	}
 	j = 0;
-	while (i < size)
+	while (i < (line_len(str) + line_len(str2)))
 	{
 		line[i] = str[j];
 		i++;

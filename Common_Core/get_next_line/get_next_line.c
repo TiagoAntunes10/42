@@ -23,9 +23,13 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			check;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (buffer == 0)
-		return (alloc_prob(buffer));
+	if (buffer == NULL)
+	{
+		buffer = malloc(BUFFER_SIZE + 1);
+		ft_bzero(buffer, BUFFER_SIZE + 1);
+		if (buffer == 0)
+			return (alloc_prob(buffer));
+	}
 	check = get_line(buffer, fd);
 	if (check == -1 || check == 0)
 		return (alloc_prob(buffer));
@@ -36,16 +40,16 @@ char	*get_next_line(int fd)
 	ft_bzero(line, 1);
 	while (check > 0)
 	{
-		temp = malloc(line_len(line));
+		temp = malloc(line_len(line) + 1);
 		if (temp == 0)
 			return (alloc_prob2(buffer, line));
 		check = cpy_str(line, temp);
 		free(line);
-		line = write_line(buffer, temp, line_len(buffer) + line_len(temp));
+		line = write_line(buffer, temp);
 		free(temp);
 		if (line == 0)
 			return (alloc_prob2(buffer, line));
-		if (*(line + line_len(line)) == '\n')
+		if (*(line + line_len(line) - 1) == '\n')
 			return (line);
 		if (*(buffer + line_len(buffer)) == '\0')
 			check = get_line(buffer, fd);
