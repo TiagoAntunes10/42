@@ -25,6 +25,6 @@ int				get_line(char *str, int fd);
 char			*write_line(char *str, char *str2);
 unsigned int	line_len(char *str);
 int				cpy_str(char *str, char *str2);
-char			*str_start(char *str);
+void			ft_bzero(void *s, size_t n);
 
 #endif
