@@ -12,19 +12,19 @@
 
 #include "get_next_line.h"
 
-int	get_line(char *str, int fd)
+int	read_line(char *str, int fd)
 {
 	int	check;
-	int i;
+	int	i;
 
 	check = read(fd, str, 1);
 	if (check == -1 || check == 0)
 	{
-		ft_bzero(str, BUFFER_SIZE);
+		ft_bzero(str, 1);
 		return (check);
 	}
 	i = 1;
-	while (i < BUFFER_SIZE && *str != '\n')
+	while (i < (BUFFER_SIZE) && *str != '\n')
 	{
 		str++;
 		check = read(fd, str, 1);
