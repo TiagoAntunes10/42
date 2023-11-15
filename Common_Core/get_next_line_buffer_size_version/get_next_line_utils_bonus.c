@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	read_file(char *buffer, char **char_lake, int fd)
 {
@@ -27,11 +27,11 @@ int	read_file(char *buffer, char **char_lake, int fd)
 			*char_lake = NULL;
 			return (check);
 		}
-		buffer[BUFFER_SIZE] = 0;
+		if (check == 0)
+			return (check);
 		temp = ft_strjoin(*char_lake, buffer);
 		free(*char_lake);
 		*char_lake = temp;
-		free(temp);
 	}
 	return (check);
 }
@@ -59,11 +59,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (str == 0)
 		return (NULL);
-	while (*s1 != '\0')
+	if (s1 != NULL)
 	{
-		str[j] = *s1;
-		s1++;
-		j++;
+		while (*s1 != '\0')
+		{
+			str[j] = *s1;
+			s1++;
+			j++;
+		}
 	}
 	while (*s2 != '\0')
 	{
@@ -79,6 +82,8 @@ size_t	ft_strlen(char const *str)
 {
 	int	l;
 
+	if (str == NULL)
+		return (0);
 	l = 0;
 	while (*str != '\0')
 	{
@@ -93,6 +98,8 @@ char	*ft_strchr(char const *s, int c)
 	char	*cs;
 
 	cs = (char *) s;
+	if (cs == NULL)
+		return (NULL);
 	while (*cs != '\0')
 	{
 		if (*cs == (unsigned char) c)

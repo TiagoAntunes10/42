@@ -44,9 +44,11 @@ static char	*write_line(char **char_lake)
 	int		i;
 	int		len;
 
+	if (*char_lake == NULL)
+		return (NULL);
 	temp = ft_strchr(*char_lake, '\n');
-	len = ft_strlen(*char_lake) - ft_strlen(temp) + 2;
-	line = malloc(len);
+	len = ft_strlen(*char_lake) - ft_strlen(temp) + 1;
+	line = malloc(len + 1);
 	if (line == NULL)
 		return (NULL);
 	i = 0;
@@ -69,8 +71,10 @@ static void	forward_lake(char **char_lake)
 	{
 		free(*char_lake);
 		*char_lake = NULL;
+		return ;
 	}
 	i = 0;
+	temp++;
 	while (temp[i] != '\0')
 	{
 		(*char_lake)[i] = temp[i];
