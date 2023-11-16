@@ -20,9 +20,9 @@ int	read_file(char *buffer, char **char_lake, int fd)
 	check = 1;
 	while (ft_strchr(*char_lake, '\n') == NULL && check > 0)
 	{
+		ft_bzero(buffer, BUFFER_SIZE + 1);
 		check = read(fd, buffer, BUFFER_SIZE);
-		if (check == -1 || buffer == NULL
-			|| (check == 0 && **char_lake == '\0'))
+		if (check == -1 || buffer == NULL)
 		{
 			free(*char_lake);
 			*char_lake = NULL;

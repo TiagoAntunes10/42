@@ -12,8 +12,8 @@
 
 #include "get_next_line_bonus.h"
 
-static char	*write_line(char **char_lake);
-static void	forward_lake(char **char_lake);
+char	*write_line(char **char_lake);
+void	forward_lake(char **char_lake);
 
 char	*get_next_line(int fd)
 {
@@ -27,17 +27,16 @@ char	*get_next_line(int fd)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (buffer == NULL)
 		return (NULL);
-	ft_bzero(buffer, BUFFER_SIZE + 1);
 	check = read_file(buffer, &(char_lake[fd]), fd);
 	free(buffer);
-	if (check == -1 || check == 0)
+	if (check == -1 || (check == 0 && char_lake[fd] == NULL))
 		return (NULL);
 	line = write_line(&(char_lake[fd]));
 	forward_lake(&(char_lake[fd]));
 	return (line);
 }
 
-static char	*write_line(char **char_lake)
+char	*write_line(char **char_lake)
 {
 	char	*line;
 	char	*temp;
@@ -61,7 +60,7 @@ static char	*write_line(char **char_lake)
 	return (line);
 }
 
-static void	forward_lake(char **char_lake)
+void	forward_lake(char **char_lake)
 {
 	char	*temp;
 	int		i;
@@ -81,4 +80,9 @@ static void	forward_lake(char **char_lake)
 		i++;
 	}
 	(*char_lake)[i] = 0;
+	if (**char_lake == '\0')
+	{
+		free(*char_lake);
+		*char_lake = NULL;
+	}
 }
