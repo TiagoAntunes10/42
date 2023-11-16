@@ -12,8 +12,8 @@
 
 #include "get_next_line.h"
 
-static char	*write_line(char **char_lake);
-static void	forward_lake(char **char_lake);
+char	*write_line(char **char_lake);
+void	forward_lake(char **char_lake);
 
 char	*get_next_line(int fd)
 {
@@ -30,14 +30,14 @@ char	*get_next_line(int fd)
 	ft_bzero(buffer, BUFFER_SIZE + 1);
 	check = read_file(buffer, &char_lake, fd);
 	free(buffer);
-	if (check == -1)
-		return(NULL);
+	if (check == -1 || check == 0)
+		return (NULL);
 	line = write_line(&char_lake);
 	forward_lake(&char_lake);
 	return (line);
 }
 
-static char	*write_line(char **char_lake)
+char	*write_line(char **char_lake)
 {
 	char	*line;
 	char	*temp;
@@ -61,7 +61,7 @@ static char	*write_line(char **char_lake)
 	return (line);
 }
 
-static void	forward_lake(char **char_lake)
+void	forward_lake(char **char_lake)
 {
 	char	*temp;
 	int		i;

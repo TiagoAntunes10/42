@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 13:55:10 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/31 13:55:13 by tialbert         ###   ########.fr       */
+/*   Created: 2023/11/15 21:06:10 by tialbert          #+#    #+#             */
+/*   Updated: 2023/11/15 21:06:11 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*get_next_line(int fd)
 	ft_bzero(buffer, BUFFER_SIZE + 1);
 	check = read_file(buffer, &(char_lake[fd]), fd);
 	free(buffer);
-	if (check == -1)
-		return(NULL);
+	if (check == -1 || check == 0)
+		return (NULL);
 	line = write_line(&(char_lake[fd]));
 	forward_lake(&(char_lake[fd]));
 	return (line);

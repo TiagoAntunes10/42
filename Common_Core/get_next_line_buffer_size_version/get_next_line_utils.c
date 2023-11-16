@@ -21,7 +21,8 @@ int	read_file(char *buffer, char **char_lake, int fd)
 	while (ft_strchr(*char_lake, '\n') == NULL && check > 0)
 	{
 		check = read(fd, buffer, BUFFER_SIZE);
-		if (check == -1 || buffer == NULL)
+		if (check == -1 || buffer == NULL
+			|| (check == 0 && **char_lake == '\0'))
 		{
 			free(*char_lake);
 			*char_lake = NULL;
