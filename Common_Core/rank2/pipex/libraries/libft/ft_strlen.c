@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:13:35 by tialbert         ###   ########.fr       */
+/*   Created: 2023/08/27 16:47:40 by tialbert          #+#    #+#             */
+/*   Updated: 2023/08/28 12:32:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define _GNU_SOURCE
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include "./libraries/ft_printf.h"
+int	ft_strlen(char const *str)
+{
+	int	l;
 
+	l = 0;
+	while (*str != '\0')
+	{
+		++l;
+		++str;
+	}
+	return (l);
+}
+
+/*
+#include <stdio.h>
+#include <string.h>
+int	main(void)
+{
+	char	*str;
+
+	str = "abcd";
+	printf("%d\n", ft_strlen(str));
+	printf("%ld\n", strlen(str));
+}*/

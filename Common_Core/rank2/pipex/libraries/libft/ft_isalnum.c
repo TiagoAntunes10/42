@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:13:35 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/03 11:33:22 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/03 11:33:25 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define _GNU_SOURCE
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include "./libraries/ft_printf.h"
+#include "libft.h"
 
+int	ft_isalnum(int c)
+{
+	if (ft_isalpha(c) != 0 || ft_isdigit(c) != 0)
+		return (8);
+	else
+		return (0);
+}

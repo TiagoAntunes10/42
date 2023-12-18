@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:13:35 by tialbert         ###   ########.fr       */
+/*   Created: 2023/09/29 15:18:39 by tialbert          #+#    #+#             */
+/*   Updated: 2023/09/29 15:18:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define _GNU_SOURCE
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include "./libraries/ft_printf.h"
 
+void	ft_putendl_fd(char *s, int fd)
+{
+	while (*s != '\0')
+	{
+		write(fd, s, 1);
+		s = s + 1;
+	}
+	write(fd, "\n", 1);
+}
+
+/*int	main(void)
+{
+	char	*str;
+
+	str = "abcd";
+	ft_putendl_fd(str, 1);
+}*/
