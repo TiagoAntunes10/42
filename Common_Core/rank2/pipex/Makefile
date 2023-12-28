@@ -2,7 +2,7 @@ PRE = ./
 HEADER = ./
 FUNCTION = ./libraries
 
-SOURCE = main.c 
+SOURCE = main.c utils.c
 
 SOURCES = ${addprefix $(PRE), $(SOURCE)}
 
