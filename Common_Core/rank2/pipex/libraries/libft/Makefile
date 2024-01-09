@@ -23,7 +23,7 @@ SOURCES_GNL = ${addprefix $(GNL), $(SOURCE_GNL)}
 NAME = libft.a
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(SOURCES:.c=.o) 
 

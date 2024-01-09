@@ -6,28 +6,30 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:43:06 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 09:44:05 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:51:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef LIBFT_H
+# define LIBFT_H
 
-#ifndef BUFFER_SIZE
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
-#endif
+# endif
 
-#ifndef MAX_FILES
+# ifndef MAX_FILES
 #  define MAX_FILES 65536
-#endif
+# endif
 
-char	*get_next_line(int fd);
-int		read_file(char *buffer, char **char_lake, int fd);
-void	gnl_bzero(void *s, size_t n);
-char	*gnl_strjoin(char const *s1, char const *s2);
-size_t	gnl_strlen(char const *str);
-char	*gnl_strchr(char const *s, int c);
-
+char			*get_next_line(int fd);
+int				read_file(char *buffer, char **char_lake, int fd);
+void			gnl_bzero(void *s, size_t n);
+char			*gnl_strjoin(char const *s1, char const *s2);
+size_t			gnl_strlen(char const *str);
+char			*gnl_strchr(char const *s, int c);
 int				ft_atoi(char const *str);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmem, size_t size);
@@ -79,3 +81,4 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f) (void *),
 					void (*del) (void *));
+#endif
