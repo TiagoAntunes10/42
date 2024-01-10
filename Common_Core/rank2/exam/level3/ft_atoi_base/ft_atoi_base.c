@@ -60,7 +60,7 @@ int	main(void)
 {
 	char *str;
 
-	str = "-12340";
+	str = "12FDB4";
 	printf("Original base: %s\n", str);
-	printf("Base 10: %d\n", ft_atoi_base(str, 5));
+	printf("Base 10: %d\n", ft_atoi_base(str, 16));
 }
