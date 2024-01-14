@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 09:53:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/07 22:21:58 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:09:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*write_path(char *cmd, char *path)
 	char	*check;
 
 	check = ft_substr(cmd, 0, 9);
-	if (ft_strncmp(check, path, 9) != 0)
+	if (ft_strncmp(check, path, 9) != 0 && access(cmd, F_OK | X_OK) == -1)
 	{
 		path_cmd = malloc(ft_strlen(cmd) + ft_strlen(path) + 1);
 		if (path_cmd == NULL)
@@ -28,7 +28,7 @@ char	*write_path(char *cmd, char *path)
 		ft_strlcat(path_cmd, cmd, ft_strlen(path) + ft_strlen(cmd) + 2);
 	}
 	else
-		path_cmd = cmd;
+		path_cmd = ft_substr(cmd, 0, ft_strlen(cmd));
 	free(check);
 	return (path_cmd);
 }
@@ -51,17 +51,10 @@ void	handle_errors(void)
 	exit(1);
 }
 
-int	free_array(char **array, char *path)
+void	free_array(char **array, char *path)
 {
 	int		i;
-	char	*cmd;
-	int		code;
 
-	code = 1;
-	cmd = ft_substr(array[0], 9, 4);
-	if (ft_strncmp(cmd, "exit", 4) == 0)
-		code = ft_atoi(array[1]);
-	free(cmd);
 	i = 0;
 	while (array[i] != NULL)
 	{
@@ -70,7 +63,6 @@ int	free_array(char **array, char *path)
 	}
 	free(array);
 	free(path);
-	return (code);
 }
 
 // int	write_file(char **argv, int argc)

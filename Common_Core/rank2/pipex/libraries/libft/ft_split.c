@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:39:02 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/03 11:39:03 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/14 21:31:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_split(char const *str, char c)
 	words_temp = words;
 	while (*str != '\0' && *(str + 1) != '\0')
 	{
-		while (*str == c)
+		while (*str == c || *str == '"' || *str == '\'')
 			str += 1;
 		if (*str == '\0')
 			break ;
@@ -54,16 +54,18 @@ static int	count_words(char const *str, char c)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] == c)
+		while (str[i] == c || str[i] == '"' || str[i] == '\'')
 			i++;
 		if (str[i] != '\0')
 			count++;
-		while (str[i] != c && str[i] != '\0')
+		while (str[i] != c && str[i] != '"' && str[i] != '\0'
+			&& str[i] != '\'')
 			i++;
 	}
 	return (count);
 }
 
+// TODO: consider text inside quotes and double quotes a single word
 static int	ft_wordlen(char const *str, char c)
 {
 	int	l;
@@ -71,7 +73,17 @@ static int	ft_wordlen(char const *str, char c)
 	l = 0;
 	while (*str != '\0')
 	{
-		if (*str == c)
+		if (*str == '"' || *str == '\'')
+		{
+			str++;
+			while (*str != '"' && *str != '\'')
+			{
+				l++;
+				str++;
+			}
+			break ;
+		}
+		if (*str == c || *str == '"' || *str == '\'')
 			break ;
 		l++;
 		str++;

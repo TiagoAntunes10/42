@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:02:10 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/07 22:35:36 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:05:02 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		exit (1);
 	}
 	check_outfile(argv, --argc);
-	if (access(argv[1], F_OK) == -1)
+	if (access(argv[1], F_OK | R_OK) == -1)
 	{
 		fd = open(argv[argc], O_WRONLY | O_CREAT, 0777);
 		if (fd == -1)
@@ -60,25 +60,27 @@ static void	parent_func(int *fd, char **argv, int argc)
 {
 	char	*path;
 	char	**cmd;
+	int		status;
 
 	close(fd[1]);
 	fd[1] = open(argv[argc], O_WRONLY | O_CREAT, 0777);
 	if (fd[1] == -1)
 		handle_errors();
-	wait(NULL);
+	waitpid(-1, &status, WNOHANG);
 	if (dup2(fd[1], 1) == -1 || dup2(fd[0], 0) == -1)
 		handle_errors();
 	cmd = ft_split(argv[argc - 1], ' ');
-	path = write_path(cmd[0], "/usr/bin/");
 	if (cmd == NULL)
 		exit(1);
-	if (execve(path, cmd, NULL) == -1)
+	path = write_path(cmd[0], "/usr/bin/");
+	if (execve(path, cmd, environ) == -1)
 	{
 		if (errno == ENOENT)
 			perror("command not found");
 		else
 			perror(strerror(errno));
-		exit(free_array(cmd, path));
+		free_array(cmd, path);
+		exit(127);
 	}
 }
 
@@ -96,15 +98,16 @@ static void	child_func(int *fd, char **argv)
 	close(fd[1]);
 	close(fd[0]);
 	cmd = ft_split(argv[2], ' ');
-	path = write_path(cmd[0], "/usr/bin/");
 	if (cmd == NULL)
 		exit(1);
-	if (execve(path, cmd, NULL) == -1)
+	path = write_path(cmd[0], "/usr/bin/");
+	if (execve(path, cmd, environ) == -1)
 	{
 		if (errno == ENOENT)
 			perror("command not found");
 		else
 			perror(strerror(errno));
-		exit(free_array(cmd, path));
+		free_array(cmd, path);
+		exit(1);
 	}
 }
