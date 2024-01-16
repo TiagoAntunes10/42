@@ -1,38 +1,47 @@
 #include <stdlib.h>
 #include "ft_list.h"
 
-void	remove_lst(t_list *lst);
+void	remove_lst(t_list **lst);
+int		cmp(void *a, void *b);
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void *))
 {
 	t_list	*lst;
+	t_list	*lst_before;
 	int		i;
 	
 	i = 0;
-	while ((*begin_list) != NULL)
+	lst_before = (*begin_list);
+	lst = lst_before->next;
+	while (lst != NULL)
 	{
-		lst = (*begin_list)->next;
-		if ((*cmp)((*begin_list)->data, data_ref) == 0 && i == 0)
+		if ((*cmp)(lst_before->data, data_ref) == 0 && i == 0)
 		{
-			free((*begin_list)->data);
-			free((*begin_list));
-			begin_list = &lst;
+			free(lst_before->data);
+			(*begin_list) = (*begin_list)->next;
+			free(lst_before);
+			lst_before = (*begin_list);
+			lst = lst_before->next;
 			continue ;
 		}
 		if ((*cmp)(lst->data, data_ref) == 0)
-			remove_lst(*begin_list);
-		(*begin_list) = (*begin_list)->next;
+			remove_lst(&lst_before);
+		lst_before = lst_before->next;
+		if (lst_before != NULL)
+			lst = lst_before->next;
+		else
+			lst = NULL;
 		i++;
 	}
 }
 
-void	remove_lst(t_list *lst)
+void	remove_lst(t_list **lst)
 {
 	t_list	*lst_next;
 
-	lst_next = lst->next;
+	lst_next = (*lst)->next;
 	free(lst_next->data);
-	lst->next = lst_next->next;
+	(*lst)->next = lst_next->next;
 	free(lst_next);
 }
 
@@ -79,12 +88,12 @@ int	main(void)
 	ele4 = malloc(sizeof(t_list));
 	ele5 = malloc(sizeof(t_list));
 	ele6 = malloc(sizeof(t_list));
-	i1 = malloc(sizeof(int));
-	i2 = malloc(sizeof(int));
-	i3 = malloc(sizeof(int));
-	i4 = malloc(sizeof(int));
-	i5 = malloc(sizeof(int));
-	i6 = malloc(sizeof(int));
+	i1 = malloc(sizeof(int *));
+	i2 = malloc(sizeof(int *));
+	i3 = malloc(sizeof(int *));
+	i4 = malloc(sizeof(int *));
+	i5 = malloc(sizeof(int *));
+	i6 = malloc(sizeof(int *));
 	*i1 = 6;
 	*i2 = 6;
 	*i3 = 3;
@@ -104,7 +113,7 @@ int	main(void)
 	ele6->data = i6;
 	ele6->next = NULL;
 	begin_lst = &ele1;
-	ref = 6;
+	ref = 7;
 	ft_list_remove_if(begin_lst, &ref, cmp);
 	while ((*begin_lst) != NULL)
 	{
