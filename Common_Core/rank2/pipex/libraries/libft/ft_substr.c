@@ -6,11 +6,29 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:52:36 by tialbert          #+#    #+#             */
-/*   Updated: 2023/09/29 08:52:49 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/21 11:40:23 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+// static int	check_slash(char const *s, size_t len)
+// {
+// 	int		count;
+// 	size_t	i;
+
+// 	count = 0;
+// 	i = 0;
+// 	while (i < len)
+// 	{
+// 		if (*(s - 1) == '\\' && *s == '\\'
+// 			&& (*(s + 1) == '\'' || *(s + 1) == '"'))
+// 			count++;
+// 		s++;
+// 		i++;
+// 	}
+// 	return (count);
+// }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

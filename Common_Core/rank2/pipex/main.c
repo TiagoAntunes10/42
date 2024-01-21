@@ -6,19 +6,20 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:02:10 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/14 18:05:02 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:55:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	fork_func(char **argv, int argc);
-static void	parent_func(int *fd, char **argv, int argc);
-static void	child_func(int *fd, char **argv);
+static int	fork_func(char **argv, int argc, char **cmd_path);
+static void	parent_func(int *fd, char **argv, int argc, char **cmd_path);
+static void	child_func(int *fd, char **argv, char **cmd_path);
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **environ)
 {
-	int	fd;
+	int		fd;
+	char	**cmd_path;
 
 	errno = 0;
 	if (argc < 5)
@@ -36,10 +37,11 @@ int	main(int argc, char **argv)
 		perror(strerror(errno));
 		exit(0);
 	}
-	return (fork_func(argv, argc));
+	cmd_path = get_path(environ);
+	return (fork_func(argv, argc, cmd_path));
 }
 
-static int	fork_func(char **argv, int argc)
+static int	fork_func(char **argv, int argc, char **cmd_path)
 {
 	int	fd[2];
 	int	id;
@@ -50,13 +52,13 @@ static int	fork_func(char **argv, int argc)
 	if (id == -1)
 		handle_errors();
 	else if (id == 0)
-		child_func(fd, argv);
+		child_func(fd, argv, cmd_path);
 	else
-		parent_func(fd, argv, argc);
+		parent_func(fd, argv, argc, cmd_path);
 	return (0);
 }
 
-static void	parent_func(int *fd, char **argv, int argc)
+static void	parent_func(int *fd, char **argv, int argc, char **cmd_path)
 {
 	char	*path;
 	char	**cmd;
@@ -69,10 +71,11 @@ static void	parent_func(int *fd, char **argv, int argc)
 	waitpid(-1, &status, WNOHANG);
 	if (dup2(fd[1], 1) == -1 || dup2(fd[0], 0) == -1)
 		handle_errors();
-	cmd = ft_split(argv[argc - 1], ' ');
+	cmd = split_check(argv[argc - 1]);
 	if (cmd == NULL)
 		exit(1);
-	path = write_path(cmd[0], "/usr/bin/");
+	path = write_path(cmd[0], cmd_path);
+	free_array(cmd_path, NULL);
 	if (execve(path, cmd, environ) == -1)
 	{
 		if (errno == ENOENT)
@@ -84,7 +87,8 @@ static void	parent_func(int *fd, char **argv, int argc)
 	}
 }
 
-static void	child_func(int *fd, char **argv)
+// TODO: Find problem with invalid free
+static void	child_func(int *fd, char **argv, char **cmd_path)
 {
 	char	*path;
 	char	**cmd;
@@ -97,10 +101,10 @@ static void	child_func(int *fd, char **argv)
 		handle_errors();
 	close(fd[1]);
 	close(fd[0]);
-	cmd = ft_split(argv[2], ' ');
+	cmd = split_check(argv[2]);
 	if (cmd == NULL)
 		exit(1);
-	path = write_path(cmd[0], "/usr/bin/");
+	path = write_path(cmd[0], cmd_path);
 	if (execve(path, cmd, environ) == -1)
 	{
 		if (errno == ENOENT)

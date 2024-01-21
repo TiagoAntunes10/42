@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:39:02 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/14 21:31:40 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:56:51 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,44 @@ char	**ft_split(char const *str, char c)
 	return (words);
 }
 
+int	check_quote(const char *str)
+{
+	if (*(str - 1) == '\\' && *str == '\\'
+		&& (*(str + 1) == '\'' || *(str + 1) == '\"'))
+		return (1);
+	return (0);
+}
+
 static int	count_words(char const *str, char c)
 {
-	int	i;
 	int	count;
 
-	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (*str != '\0')
 	{
-		while (str[i] == c || str[i] == '"' || str[i] == '\'')
-			i++;
-		if (str[i] != '\0')
+		while (*str == c)
+			str++;
+		if (*str != '\0')
 			count++;
-		while (str[i] != c && str[i] != '"' && str[i] != '\0'
-			&& str[i] != '\'')
-			i++;
+		if (*str == '\"' || *str == '\'')
+		{
+			while (*str != 0)
+			{
+				str++;
+				if (check_quote(str) == 1)
+				{
+					str += 2;
+					break ;
+				}
+			}
+		}
+		while (*str != c && *str != '\0')
+			str++;
 	}
 	return (count);
 }
 
-// TODO: consider text inside quotes and double quotes a single word
+// TODO: Find error in wordlen function
 static int	ft_wordlen(char const *str, char c)
 {
 	int	l;
@@ -73,17 +90,21 @@ static int	ft_wordlen(char const *str, char c)
 	l = 0;
 	while (*str != '\0')
 	{
-		if (*str == '"' || *str == '\'')
+		if (*(str - 1) == '\"' || *(str - 1) == '\'')
 		{
-			str++;
-			while (*str != '"' && *str != '\'')
+			while (*str != 0)
 			{
 				l++;
+				if (check_quote(str) == 1)
+				{
+					str += 2;
+					break ;
+				}
 				str++;
 			}
-			break ;
+			l--;
 		}
-		if (*str == c || *str == '"' || *str == '\'')
+		if (*str == c || *str == 0)
 			break ;
 		l++;
 		str++;

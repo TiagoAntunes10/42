@@ -6,30 +6,45 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 09:53:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/14 18:09:40 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:58:21 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*write_path(char *cmd, char *path)
+void	handle_errors(void)
+{
+	perror(strerror(errno));
+	exit(1);
+}
+
+// TODO: Find a solution to add the '/' at the end of the *path string
+char	*write_path(char *cmd, char **path)
 {
 	char	*path_cmd;
-	char	*check;
 
-	check = ft_substr(cmd, 0, 9);
-	if (ft_strncmp(check, path, 9) != 0 && access(cmd, F_OK | X_OK) == -1)
+	if (access(cmd, F_OK) == -1)
 	{
-		path_cmd = malloc(ft_strlen(cmd) + ft_strlen(path) + 1);
-		if (path_cmd == NULL)
-			return (NULL);
-		ft_bzero(path_cmd, ft_strlen(cmd) + ft_strlen(path) + 1);
-		ft_strlcat(path_cmd, path, ft_strlen(path) + 1);
-		ft_strlcat(path_cmd, cmd, ft_strlen(path) + ft_strlen(cmd) + 2);
+		while (*path != NULL)
+		{
+			path_cmd = malloc(ft_strlen(cmd) + ft_strlen(*path) + 1);
+			if (path_cmd == NULL)
+				return (NULL);
+			ft_bzero(path_cmd, ft_strlen(cmd) + ft_strlen(*path) + 1);
+			ft_strlcat(path_cmd, *path, ft_strlen(*path) + 1);
+			ft_strlcat(path_cmd, cmd, ft_strlen(*path) + ft_strlen(cmd) + 2);
+			if (access(path_cmd, F_OK | X_OK) != -1)
+				return (path_cmd);
+			free(path_cmd);
+			path++;
+		}
 	}
 	else
+	{
+		if (access(cmd, X_OK) == -1)
+			handle_errors();
 		path_cmd = ft_substr(cmd, 0, ft_strlen(cmd));
-	free(check);
+	}
 	return (path_cmd);
 }
 
@@ -45,12 +60,6 @@ void	check_outfile(char **argv, int argc)
 	}
 }
 
-void	handle_errors(void)
-{
-	perror(strerror(errno));
-	exit(1);
-}
-
 void	free_array(char **array, char *path)
 {
 	int		i;
@@ -62,7 +71,24 @@ void	free_array(char **array, char *path)
 		i++;
 	}
 	free(array);
-	free(path);
+	if (path != NULL)
+		free(path);
+}
+
+char	**split_check(char *cmd)
+{
+	char	**pars;
+
+	if (access(cmd, F_OK) == -1)
+		pars = ft_split(cmd, ' ');
+	else
+	{
+		if (access(cmd, X_OK) == -1)
+			handle_errors();
+		pars = malloc(sizeof(char *));
+		*pars = ft_substr(cmd, 0, ft_strlen(cmd));
+	}
+	return (pars);
 }
 
 // int	write_file(char **argv, int argc)
