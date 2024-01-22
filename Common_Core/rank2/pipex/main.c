@@ -16,6 +16,7 @@ static int	fork_func(char **argv, int argc, char **cmd_path);
 static void	parent_func(int *fd, char **argv, int argc, char **cmd_path);
 static void	child_func(int *fd, char **argv, char **cmd_path);
 
+// TODO: Make argc, argv and environ global variables
 int	main(int argc, char **argv, char **environ)
 {
 	int		fd;
