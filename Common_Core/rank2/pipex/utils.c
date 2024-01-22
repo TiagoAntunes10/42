@@ -19,6 +19,7 @@ void	handle_errors(void)
 }
 
 // TODO: Find a solution to add the '/' at the end of the *path string
+// It's probably solved
 char	*write_path(char *cmd, char **path)
 {
 	char	*path_cmd;
@@ -27,11 +28,12 @@ char	*write_path(char *cmd, char **path)
 	{
 		while (*path != NULL)
 		{
-			path_cmd = malloc(ft_strlen(cmd) + ft_strlen(*path) + 1);
+			path_cmd = malloc(ft_strlen(cmd) + ft_strlen(*path) + 2);
 			if (path_cmd == NULL)
 				return (NULL);
-			ft_bzero(path_cmd, ft_strlen(cmd) + ft_strlen(*path) + 1);
+			ft_bzero(path_cmd, ft_strlen(cmd) + ft_strlen(*path) + 2);
 			ft_strlcat(path_cmd, *path, ft_strlen(*path) + 1);
+			ft_strlcat(path_cmd, "/", ft_strlen(*path) + 1);
 			ft_strlcat(path_cmd, cmd, ft_strlen(*path) + ft_strlen(cmd) + 2);
 			if (access(path_cmd, F_OK | X_OK) != -1)
 				return (path_cmd);
