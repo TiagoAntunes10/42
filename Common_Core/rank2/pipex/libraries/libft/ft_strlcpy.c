@@ -6,7 +6,7 @@
 /*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:02:15 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/20 22:15:40 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:11:43 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 	i = 1;
 	while (*src != '\0')
 	{
-		if (*(src - 1) == '\\' && *src == '\\'
-			&& (*(src + 1) == '\'' || *(src + 1) == '"'))
-			src += 2;
+		if (*(src + 1) != 0 && i > 1)
+		{
+			if (*(src - 1) == '\\' && *src == '\\'
+				&& (*(src + 1) == '\'' || *(src + 1) == '"'))
+				src += 2;
+		}
 		if (i < size)
 		{
 			*dest = *src;

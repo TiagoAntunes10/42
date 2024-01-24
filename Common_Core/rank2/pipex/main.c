@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:02:10 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/21 21:55:50 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/22 22:19:22 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	fork_func(char **argv, int argc, char **cmd_path);
 static void	parent_func(int *fd, char **argv, int argc, char **cmd_path);
 static void	child_func(int *fd, char **argv, char **cmd_path);
 
-// TODO: Make argc, argv and environ global variables
-int	main(int argc, char **argv, char **environ)
+int	main(int argc, char **argv)
 {
 	int		fd;
 	char	**cmd_path;
@@ -88,7 +87,6 @@ static void	parent_func(int *fd, char **argv, int argc, char **cmd_path)
 	}
 }
 
-// TODO: Find problem with invalid free
 static void	child_func(int *fd, char **argv, char **cmd_path)
 {
 	char	*path;

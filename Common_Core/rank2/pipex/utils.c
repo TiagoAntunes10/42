@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 09:53:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/21 21:58:21 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:04:45 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	handle_errors(void)
 	exit(1);
 }
 
-// TODO: Find a solution to add the '/' at the end of the *path string
-// It's probably solved
 char	*write_path(char *cmd, char **path)
 {
 	char	*path_cmd;
@@ -33,13 +31,14 @@ char	*write_path(char *cmd, char **path)
 				return (NULL);
 			ft_bzero(path_cmd, ft_strlen(cmd) + ft_strlen(*path) + 2);
 			ft_strlcat(path_cmd, *path, ft_strlen(*path) + 1);
-			ft_strlcat(path_cmd, "/", ft_strlen(*path) + 1);
+			ft_strlcat(path_cmd, "/", ft_strlen(*path) + 2);
 			ft_strlcat(path_cmd, cmd, ft_strlen(*path) + ft_strlen(cmd) + 2);
 			if (access(path_cmd, F_OK | X_OK) != -1)
 				return (path_cmd);
 			free(path_cmd);
 			path++;
 		}
+		return (ft_substr(cmd, 0, ft_strlen(cmd)));
 	}
 	else
 	{
@@ -87,8 +86,9 @@ char	**split_check(char *cmd)
 	{
 		if (access(cmd, X_OK) == -1)
 			handle_errors();
-		pars = malloc(sizeof(char *));
+		pars = malloc(sizeof(char *) * 2);
 		*pars = ft_substr(cmd, 0, ft_strlen(cmd));
+		*(pars + 1) = NULL;
 	}
 	return (pars);
 }

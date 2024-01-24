@@ -6,14 +6,14 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:39:02 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/21 21:56:51 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:15:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static int		count_words(char const *str, char c);
-static int		ft_wordlen(char const *str, char c);
+static int	ft_wordlen(char const *str, char c, int len);
 static char		**free_words(char **words, char **words_temp);
 
 char	**ft_split(char const *str, char c)
@@ -34,7 +34,7 @@ char	**ft_split(char const *str, char c)
 			str += 1;
 		if (*str == '\0')
 			break ;
-		len = ft_wordlen(str, c);
+		len = ft_wordlen(str, c, len);
 		*words_temp = ft_substr(str, 0, len);
 		if (*words_temp == 0)
 			return (free_words(words, words_temp));
@@ -45,12 +45,24 @@ char	**ft_split(char const *str, char c)
 	return (words);
 }
 
-int	check_quote(const char *str)
+static int	inside_quotes(const char *str)
 {
-	if (*(str - 1) == '\\' && *str == '\\'
-		&& (*(str + 1) == '\'' || *(str + 1) == '\"'))
-		return (1);
-	return (0);
+	int	l;
+
+	l = 0;
+	while (*str != 0)
+	{
+		if (*(str - 1) == '\\' && *str == '\\'
+			&& (*(str + 1) == '\'' || *(str + 1) == '\"'))
+		{
+			str += 2;
+			break ;
+		}
+		l++;
+		str++;
+	}
+	l--;
+	return (l);
 }
 
 static int	count_words(char const *str, char c)
@@ -65,44 +77,28 @@ static int	count_words(char const *str, char c)
 		if (*str != '\0')
 			count++;
 		if (*str == '\"' || *str == '\'')
-		{
-			while (*str != 0)
-			{
-				str++;
-				if (check_quote(str) == 1)
-				{
-					str += 2;
-					break ;
-				}
-			}
-		}
+			str += inside_quotes(str);
 		while (*str != c && *str != '\0')
 			str++;
 	}
 	return (count);
 }
 
-// TODO: Find error in wordlen function
-static int	ft_wordlen(char const *str, char c)
+static int	ft_wordlen(char const *str, char c, int len)
 {
 	int	l;
+	int	steps;
 
 	l = 0;
+	steps = 0;
 	while (*str != '\0')
 	{
-		if (*(str - 1) == '\"' || *(str - 1) == '\'')
+		if (len > 0)
 		{
-			while (*str != 0)
-			{
-				l++;
-				if (check_quote(str) == 1)
-				{
-					str += 2;
-					break ;
-				}
-				str++;
-			}
-			l--;
+			if (*(str - 1) == '\"' || *(str - 1) == '\'')
+				steps = inside_quotes(str);
+			l += steps;
+			str += steps + 1;
 		}
 		if (*str == c || *str == 0)
 			break ;

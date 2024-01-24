@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/21 18:08:01 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:30:57 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include "./libraries/ft_printf.h"
+
+extern char	**environ;
 
 char	*write_path(char *cmd, char **path);
 void	free_array(char **array, char *path);
