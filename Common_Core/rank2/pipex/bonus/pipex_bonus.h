@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:47:23 by tialbert         ###   ########.fr       */
+/*   Created: 2024/01/25 15:37:55 by tialbert          #+#    #+#             */
+/*   Updated: 2024/01/27 22:48:34 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
-#include "./libft/ft_printf.h"
+#include "../libft/ft_printf.h"
 
 extern char	**environ;
 
+void	handle_fd(int *fd);
+void	cmd_not_found(void);
+void	multi(char **argv, int argc);
+void	mid_func(int *fd, char **argv, int argc, char **cmd_path);
+int		mid_fork(char **argv, int argc, char **cmd_path);
+void	limiter(char **argv, int argc);
 char	*write_path(char *cmd, char **path);
 void	free_array(char **array, char *path);
 void	handle_errors(void);
-void	cmd_not_found(void);
 void	check_outfile(char **argv, int argc);
 char	**split_check(char *cmd);
 char	**get_path(char **environ);

@@ -6,14 +6,15 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:39:02 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/23 21:15:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:31:29 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// aujsdgkgd
 #include "libft.h"
 
 static int		count_words(char const *str, char c);
-static int	ft_wordlen(char const *str, char c, int len);
+static int		ft_wordlen(char const *str, char c);
 static char		**free_words(char **words, char **words_temp);
 
 char	**ft_split(char const *str, char c)
@@ -30,11 +31,11 @@ char	**ft_split(char const *str, char c)
 	words_temp = words;
 	while (*str != '\0' && *(str + 1) != '\0')
 	{
-		while (*str == c || *str == '"' || *str == '\'')
+		while (*str == c)
 			str += 1;
 		if (*str == '\0')
 			break ;
-		len = ft_wordlen(str, c, len);
+		len = ft_wordlen(str, c);
 		*words_temp = ft_substr(str, 0, len);
 		if (*words_temp == 0)
 			return (free_words(words, words_temp));
@@ -55,13 +56,12 @@ static int	inside_quotes(const char *str)
 		if (*(str - 1) == '\\' && *str == '\\'
 			&& (*(str + 1) == '\'' || *(str + 1) == '\"'))
 		{
-			str += 2;
+			l += 2;
 			break ;
 		}
 		l++;
 		str++;
 	}
-	l--;
 	return (l);
 }
 
@@ -84,7 +84,7 @@ static int	count_words(char const *str, char c)
 	return (count);
 }
 
-static int	ft_wordlen(char const *str, char c, int len)
+static int	ft_wordlen(char const *str, char c)
 {
 	int	l;
 	int	steps;
@@ -93,12 +93,11 @@ static int	ft_wordlen(char const *str, char c, int len)
 	steps = 0;
 	while (*str != '\0')
 	{
-		if (len > 0)
+		if (*str == '\"' || *str == '\'')
 		{
-			if (*(str - 1) == '\"' || *(str - 1) == '\'')
-				steps = inside_quotes(str);
+			steps = inside_quotes(str);
 			l += steps;
-			str += steps + 1;
+			str += steps;
 		}
 		if (*str == c || *str == 0)
 			break ;

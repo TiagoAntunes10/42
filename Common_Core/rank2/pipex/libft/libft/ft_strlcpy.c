@@ -6,11 +6,19 @@
 /*   By: tialbert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:02:15 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/23 12:11:43 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:18:44 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+
+static int	check_slash(const char *c)
+{
+	if (*(c - 1) == '\\' && *c == '\\'
+		&& (*(c + 1) == '\'' || *(c + 1) == '"'))
+		return (1);
+	return (0);
+}
 
 unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 {
@@ -19,11 +27,13 @@ unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 	i = 1;
 	while (*src != '\0')
 	{
-		if (*(src + 1) != 0 && i > 1)
+		if (*src == '\\' && i > 1)
 		{
-			if (*(src - 1) == '\\' && *src == '\\'
-				&& (*(src + 1) == '\'' || *(src + 1) == '"'))
+			if (check_slash(src) == 1)
+			{
 				src += 2;
+				size -= 2;
+			}
 		}
 		if (i < size)
 		{
@@ -32,6 +42,8 @@ unsigned int	ft_strlcpy(char *dest, char const *src, size_t size)
 		}
 		src += 1;
 		i++;
+		if ((*src == '\'' || *src == '"') && i == size - 1)
+			src++;
 	}
 	*dest = '\0';
 	return ((i - 1));

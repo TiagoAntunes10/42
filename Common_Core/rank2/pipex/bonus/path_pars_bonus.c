@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_stack.c                                    :+:      :+:    :+:   */
+/*   path_pars_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 23:44:57 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 23:45:03 by tialbert         ###   ########.fr       */
+/*   Created: 2024/01/23 12:13:22 by tialbert          #+#    #+#             */
+/*   Updated: 2024/01/25 15:37:16 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "pipex_bonus.h"
 
-// TODO: Functions that move values wihtin a stack
-// Every function should write its name when it's called
+char	**get_path(char **environ)
+{
+	char	**path;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	while (environ[i] != NULL)
+	{
+		if (ft_strncmp(environ[i], "PATH", 4) == 0)
+		{
+			temp = ft_substr(environ[i], 5, ft_strlen(environ[i] + 5));
+			path = ft_split(temp, ':');
+			free(temp);
+			break ;
+		}
+		i++;
+	}
+	return (path);
+}

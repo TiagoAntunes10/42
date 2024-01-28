@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 09:53:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:51:14 by tialbert         ###   ########.fr       */
+/*   Created: 2024/01/25 15:38:05 by tialbert          #+#    #+#             */
+/*   Updated: 2024/01/27 22:23:38 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	handle_errors(void)
 {
@@ -74,10 +74,22 @@ void	free_array(char **array, char *path)
 		free(path);
 }
 
-void	cmd_not_found(void)
+int	mid_fork(char **argv, int argc, char **cmd_path)
 {
-	perror("command not found");
-	errno = EKEYEXPIRED;
+	int	id;
+	int	status;
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		handle_errors();
+	id = fork();
+	if (id == -1)
+		handle_errors();
+	else if (id == 0)
+		mid_func(fd, argv, argc, cmd_path);
+	close(fd[1]);
+	waitpid(-1, &status, WNOHANG);
+	return (fd[0]);
 }
 
 // int	write_file(char **argv, int argc)

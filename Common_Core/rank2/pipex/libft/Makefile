@@ -21,12 +21,10 @@ OBJ_BONUS = $(BONUS_SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJ)
+$(NAME): $(OBJ)
+	$(MAKE) -C $(FUNCTION)
 	cp $(LIB) $@
 	ar rcs $@ $(OBJ)
-
-$(LIB):
-	$(MAKE) -C $(FUNCTION)
 
 .c.o:
 	$(CC) $(FLAGS) -I $(HEADER) -I $(FUNCTION) -c $< -o $(<:.c=.o)
