@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/03 11:35:41 by tialbert          #+#    #+#             */
+/*   Updated: 2024/01/28 16:52:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+t_list	*ft_lstnew(int data)
 {
-	t_list	*lst_tmp;
+	t_list	*lst;
 
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	lst = malloc(sizeof(t_list *));
+	lst->data = data;
+	lst->next = NULL;
+	return (lst);
 }
+
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	struct s_list	lst;
+	t_list			*lst1;
+	int		*str;
+
+	str = "ashdb";
+	lst1 = &lst;
+	lst1 = ft_lstnew(str);
+	printf("%s\n", (int		 *) (*lst1).data);
+}*/

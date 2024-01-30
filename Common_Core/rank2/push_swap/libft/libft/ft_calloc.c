@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/03 11:32:36 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/03 11:32:37 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+void	*ft_calloc(size_t nmem, size_t size)
 {
-	t_list	*lst_tmp;
+	void		*arr;
+	long int	n;
 
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	if (nmem == 0 || size == 0)
+		return (NULL);
+	n = nmem * size;
+	if (n > 2147483647)
+		return (NULL);
+	arr = malloc (nmem * size);
+	return (arr);
 }

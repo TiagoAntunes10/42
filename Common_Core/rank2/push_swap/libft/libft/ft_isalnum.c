@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/03 11:33:22 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/03 11:33:25 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+int	ft_isalnum(int c)
 {
-	t_list	*lst_tmp;
-
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	if (ft_isalpha(c) != 0 || ft_isdigit(c) != 0)
+		return (8);
+	else
+		return (0);
 }

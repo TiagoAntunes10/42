@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2023/10/03 11:42:15 by tialbert          #+#    #+#             */
+/*   Updated: 2023/10/03 11:42:16 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+int	ft_tolower(int c)
 {
-	t_list	*lst_tmp;
-
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
 }
+
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void)
+{
+    char    c;
+
+    c = 'G';
+    printf("ft_tolower: %c\n", ft_tolower(c));
+    printf("toulower: %c\n", tolower(c));
+}*/

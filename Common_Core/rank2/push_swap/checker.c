@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2024/01/30 21:25:37 by tialbert          #+#    #+#             */
+/*   Updated: 2024/01/30 21:33:10 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+int	checker(t_list **stc, char c)
 {
-	t_list	*lst_tmp;
+	t_list	*stc_next;
 
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	stc_next = (*stc)->next;
+	if (c == 'a')
+	{
+		while (stc_next != NULL)
+		{
+			if (stc_next->data < (*stc)->data)
+				return (0);
+			stc_next = (*stc)->next;
+		}
+	}
+	else
+	{
+		while (stc_next != NULL)
+		{
+			if (stc_next->data > (*stc)->data)
+				return (0);
+			stc_next = (*stc)->next;
+		}
+	}
+	return (1);
 }

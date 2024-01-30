@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveset_cross.c                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 18:07:42 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 16:01:59 by tialbert         ###   ########.fr       */
+/*   Created: 2023/09/30 21:56:13 by tialbert          #+#    #+#             */
+/*   Updated: 2023/09/30 21:56:18 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	push(t_list **lst_rec, t_list **lst_giv, char stack)
+void	*ft_memchr(void const *s, int c, size_t n)
 {
-	t_list	*lst_tmp;
+	unsigned int		i;
+	unsigned char		*cs;
 
-	lst_tmp = (*lst_giv)->next;
-	ft_lstadd_front(lst_rec, (*lst_giv));
-	*lst_giv = lst_tmp;
-	ft_printf("p%c\n", stack);
+	cs = (unsigned char *) s;
+	i = 0;
+	while (i < n)
+	{
+		if (cs[i] == c)
+		{
+			cs += i;
+			return (cs);
+		}
+		else
+			i++;
+	}
+	return (NULL);
 }
