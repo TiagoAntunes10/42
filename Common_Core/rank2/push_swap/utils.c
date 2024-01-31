@@ -75,20 +75,19 @@ void	order_stc(t_list **stc_a, t_list **stc_b, int size)
 			swap(stc_b, 'b');
 		rotate_ss(stc_a, stc_b);
 	}
-	while (i < size / 4)
+	while (i < size / 4 && checker(stc_a, 'a') == 0 && checker(stc_b, 'b') == 0)
 		rev_rotate_ss(stc_a, stc_b);
 }
 
-// TODO: Sort checker
 // TODO: Implement new sorting algorithm drawn in the tablet
 void	rev_division(t_list **stc_a, t_list **stc_b, int size)
 {
 	t_list	*stc_a_next;
 	t_list	*stc_b_next;
 	
+	push(stc_a, stc_b, 'a');
 	while ((*stc_b) != NULL)
 	{
-		push(stc_a, stc_b, 'a');
 		stc_a_next = (*stc_a)->next;
 		if (stc_a_next->data < (*stc_a)->data)
 		{
@@ -96,5 +95,6 @@ void	rev_division(t_list **stc_a, t_list **stc_b, int size)
 			if ((*stc_a)->data < (*stc_b)->data)
 				push(stc_b, stc_a, 'b');
 		}
+		push(stc_a, stc_b, 'a');
 	}
 }

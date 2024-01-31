@@ -52,6 +52,8 @@ void	sort_stc(t_list **stc_a, int size)
 {
 	t_list	**stc_b;
 
+	if (checker(stc_a, 'a') == 1)
+		ft_printf("\n");
 	(*stc_b) = NULL;
 	division(stc_a, stc_b, size);
 	order_stc(stc_a, stc_b, size);
