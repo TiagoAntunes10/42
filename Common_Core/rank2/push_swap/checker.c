@@ -37,3 +37,18 @@ int	checker(t_list **stc, char c)
 	}
 	return (1);
 }
+
+void	check_top(t_list **stc, char c)
+{
+	int		top;
+	t_list	*stc_next;
+
+	top = (*stc)->data;
+	while (stc_next != NULL)
+	{
+		if (c == 'a')
+		{
+
+		}
+	} 
+}

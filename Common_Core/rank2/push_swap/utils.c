@@ -53,12 +53,19 @@ void	division(t_list **stc_a, t_list **stc_b, int size)
 	}
 }
 
+// TODO: Create sort_both, sort_a and sort_b functions
 void	order_stc(t_list **stc_a, t_list **stc_b, int size)
 {
 	int		i;
 	t_list	*stc_a_next;
 	t_list	*stc_b_next;
 
+	if (checker(stc_a, 'a') == 0 && checker(stc_b, 'b') == 0)
+		sort_both(stc_a, stc_b);
+	else if (checker(stc_a, 'a') == 0)
+		sort_a(stc_a);
+	else if (checker(stc_b, 'b') == 0)
+		sort_b(stc_b);
 	i = 0;
 	while (i < size / 4)
 	{
