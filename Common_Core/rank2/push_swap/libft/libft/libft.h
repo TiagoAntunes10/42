@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:43:06 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/29 21:42:20 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:06:15 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				ft_toupper(int c);
 typedef struct s_list
 {
 	int				data;
+	int				price;
 	struct s_list	*next;
 }					t_list;
 
