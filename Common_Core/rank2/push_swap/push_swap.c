@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 21:27:08 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:29:35 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_list	**create_lst(int argc, char **argv);
 void	sort_stc(t_list **stc_a, int size);
 
+// TODO: Add case with only one argument, using split to get all the arguments
 int	main(int argc, char **argv)
 {
 	t_list	**stc_a;
@@ -53,7 +54,15 @@ void	sort_stc(t_list **stc_a, int size)
 	t_list	**stc_b;
 
 	if (checker(stc_a, 'a') == 1)
+	{
 		ft_printf("\n");
+		return ;
+	}
+	if (size <= 3)
+	{
+		sort_small(stc_a);
+		return ;
+	}
 	(*stc_b) = NULL;
 	division(stc_a, stc_b, size);
 	order_stc(stc_a, stc_b, size);

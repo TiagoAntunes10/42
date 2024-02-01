@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:25:54 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:04:23 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:45:54 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	print_str(const char *str, va_list valst)
 			str += str_adv(str);
 		}
 		else
-			write(1, str, 1);
+			write(2, str, 1);
 		count++;
 		str++;
 	}

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:02:10 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:51:03 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:54:24 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,27 @@ int	main(int argc, char **argv)
 		multi(argv, argc);
 }
 
-void	handle_fd(int *fd)
+void	handle_fd(int *fd, int mode, char **cmd_path)
 {
-	if (dup2(fd[1], 1) == -1 || dup2(fd[0], 0) == -1)
-		handle_errors();
-	close(fd[0]);
-	close(fd[1]);
+	if (mode == 0)
+	{
+		if (dup2(fd[1], 1) == -1 || dup2(fd[0], 0) == -1)
+		{
+			close(fd[0]);
+			close(fd[1]);
+			handle_errors(cmd_path, 0);
+		}
+	}
+	else
+	{
+		close(fd[0]);
+		close(fd[1]);
+		handle_errors(cmd_path, 0);
+	}
 }
 
-void	cmd_not_found(void)
+void	cmd_not_found(char *cmd)
 {
-	perror("command not found");
+	ft_printf("command not found: %s\n", cmd);
 	errno = EKEYEXPIRED;
 }

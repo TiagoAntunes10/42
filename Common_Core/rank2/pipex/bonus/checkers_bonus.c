@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:35:03 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 16:59:28 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:14:11 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_outfile(char **argv, int argc)
 	}
 }
 
-char	**split_check(char *cmd)
+char	**split_check(char *cmd, char **arr)
 {
 	char	**pars;
 
@@ -33,7 +33,7 @@ char	**split_check(char *cmd)
 	else
 	{
 		if (access(cmd, X_OK) == -1)
-			handle_errors();
+			handle_errors(arr, 0);
 		pars = malloc(sizeof(char *) * 2);
 		*pars = ft_substr(cmd, 0, ft_strlen(cmd));
 		*(pars + 1) = NULL;

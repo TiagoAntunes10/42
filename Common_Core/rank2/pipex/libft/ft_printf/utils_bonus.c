@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:47:49 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:05:01 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:46:17 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	write_char(unsigned int size, char c)
 	i = 0;
 	while (i < size)
 	{
-		ft_putchar_fd(c, 1);
+		ft_putchar_fd(c, 2);
 		i++;
 	}
 }

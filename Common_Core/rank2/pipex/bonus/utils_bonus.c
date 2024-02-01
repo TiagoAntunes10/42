@@ -6,14 +6,20 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:38:05 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:23:38 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:12:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	handle_errors(void)
+void	handle_errors(char **arr, int fd)
 {
+	if (arr != NULL)
+		free_array(arr, NULL);
+	if (fd > 0)
+		close(fd);
+	if (errno == 0)
+		exit(12);
 	perror(strerror(errno));
 	exit(errno);
 }
@@ -53,7 +59,7 @@ char	*write_path(char *cmd, char **path)
 	else
 	{
 		if (access(cmd, X_OK) == -1)
-			handle_errors();
+			handle_errors(path, 0);
 		path_cmd = ft_substr(cmd, 0, ft_strlen(cmd));
 	}
 	return (path_cmd);
@@ -81,10 +87,10 @@ int	mid_fork(char **argv, int argc, char **cmd_path)
 	int	fd[2];
 
 	if (pipe(fd) == -1)
-		handle_errors();
+		handle_errors(cmd_path, 0);
 	id = fork();
 	if (id == -1)
-		handle_errors();
+		handle_fd(fd, 1, cmd_path);
 	else if (id == 0)
 		mid_func(fd, argv, argc, cmd_path);
 	close(fd[1]);

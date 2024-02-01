@@ -6,14 +6,20 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 09:53:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:51:14 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:53:44 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	handle_errors(void)
+void	handle_errors(char **arr, int fd)
 {
+	if (arr != NULL)
+		free_array(arr, NULL);
+	if (fd > 0)
+		close(fd);
+	if (errno == 0)
+		exit(12);
 	perror(strerror(errno));
 	exit(errno);
 }
@@ -53,7 +59,7 @@ char	*write_path(char *cmd, char **path)
 	else
 	{
 		if (access(cmd, X_OK) == -1)
-			handle_errors();
+			handle_errors(path, 0);
 		path_cmd = ft_substr(cmd, 0, ft_strlen(cmd));
 	}
 	return (path_cmd);
@@ -74,9 +80,9 @@ void	free_array(char **array, char *path)
 		free(path);
 }
 
-void	cmd_not_found(void)
+void	cmd_not_found(char *cmd)
 {
-	perror("command not found");
+	ft_printf("command not found: %s\n", cmd);
 	errno = EKEYEXPIRED;
 }
 

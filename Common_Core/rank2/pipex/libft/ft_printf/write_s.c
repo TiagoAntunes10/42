@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:26:45 by tialbert          #+#    #+#             */
-/*   Updated: 2023/12/18 10:10:07 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:45:41 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	write_s(va_list valst, int count, char *format)
 		if (*format != 0)
 			free(format);
 		len = ft_strlen(str);
-		ft_putstr_fd(str, 1);
+		ft_putstr_fd(str, 2);
 		free(str);
 		return (count + len);
 	}
@@ -52,14 +52,14 @@ static int	write_left_spaces(char *str, unsigned int size)
 	}
 	if (size <= (unsigned int) len)
 	{
-		ft_putstr_fd(str, 1);
+		ft_putstr_fd(str, 2);
 		free(str);
 		return (len);
 	}
 	else
 	{
 		write_char(size - len, ' ');
-		ft_putstr_fd(str, 1);
+		ft_putstr_fd(str, 2);
 		free(str);
 		return (size);
 	}
@@ -70,7 +70,7 @@ static int	write_left_str(char *str, unsigned int size)
 	unsigned int	len;
 
 	len = ft_strlen(str);
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd(str, 2);
 	free(str);
 	if (size <= (unsigned int) len)
 		return (len);

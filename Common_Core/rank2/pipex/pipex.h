@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:01:46 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/27 22:47:23 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:48:24 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ extern char	**environ;
 
 char	*write_path(char *cmd, char **path);
 void	free_array(char **array, char *path);
-void	handle_errors(void);
-void	cmd_not_found(void);
+void	handle_errors(char **arr, int fd);
+void	cmd_not_found(char *cmd);
 void	check_outfile(char **argv, int argc);
-char	**split_check(char *cmd);
+char	**split_check(char *cmd, char **arr);
 char	**get_path(char **environ);
 // int		write_file(char **argv, int argc);
 // int		write_one_cmd(char **argv, int argc);

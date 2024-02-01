@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:00:51 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 21:34:09 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:10:42 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,4 @@ void	division(t_list **stc_a, t_list **stc_b, int size);
 void	order_stc(t_list **stc_a, t_list **stc_b, int size);
 void	rev_division(t_list **stc_a, t_list **stc_b, int size);
 int		checker(t_list **stc, char c);
+void	sort_small(t_list **stc);
