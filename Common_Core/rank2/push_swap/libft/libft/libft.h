@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:43:06 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/01 12:06:15 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:53:18 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_list
 {
 	int				data;
 	int				price;
+	int				position;
+	int				fut_pos;
 	struct s_list	*next;
 }					t_list;
 
@@ -80,5 +82,5 @@ void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstdelone(t_list *lst);
 void			ft_lstclear(t_list **lst);
 void			ft_lstiter(t_list *lst, void (*f)(int));
-t_list			*ft_lstmap(t_list *lst, int (*f) (int), void (*del) (int));
+t_list			*ft_lstmap(t_list *lst, int (*f) (int));
 #endif

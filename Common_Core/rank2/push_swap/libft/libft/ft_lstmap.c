@@ -6,14 +6,14 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:06:46 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/28 17:19:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:52:46 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 //void	del(void *content);
 
-t_list	*ft_lstmap(t_list *lst, int (*f) (int), void (*del) (int))
+t_list	*ft_lstmap(t_list *lst, int (*f) (int))
 {
 	t_list	**lst2;
 	t_list	*lst3;
@@ -24,7 +24,7 @@ t_list	*ft_lstmap(t_list *lst, int (*f) (int), void (*del) (int))
 		lst3 = ft_lstnew((*f)(lst->data));
 		if (lst3 == NULL)
 		{
-			ft_lstdelone(lst3, del);
+			ft_lstdelone(lst3);
 			break ;
 		}
 		ft_lstadd_back(lst2, lst3);

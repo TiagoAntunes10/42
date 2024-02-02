@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:36:15 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/30 22:00:08 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:44:57 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_error(t_list **lst_a, t_list **lst_b)
 {
-	ft_printf("Error\n");
-	if ((*lst_b) != NULL)
+	write(2, "Error\n", 6);
+	if (lst_b != NULL)
 		ft_lstclear(lst_b);
 	ft_lstclear(lst_a);
 	exit(1);
@@ -27,7 +27,10 @@ int	ft_nb_len(int nb)
 
 	l = 1;
 	if (nb < 0)
+	{
 		nb *= -1;
+		l++;
+	}
 	while (nb / 10 > 0)
 	{
 		l++;
@@ -36,72 +39,64 @@ int	ft_nb_len(int nb)
 	return (l);
 }
 
-void	division(t_list **stc_a, t_list **stc_b, int size)
+void	start_stc(t_list **stc_a, t_list **stc_b)
 {
-	t_list	*stc_a_next;
 	int		i;
 
 	i = 0;
-	while (i < size / 2)
+	while (i < 2 && ft_lstsize(*stc_a) > 3)
 	{
-		stc_a_next = (*stc_a)->next;
-		if (stc_a_next->data < (*stc_a)->data)
-			swap(stc_a, 'a');
-		else if (stc_a_next->data == (*stc_a)->data)
-			print_error(stc_a, stc_b);
 		push(stc_b, stc_a, 'b');
+		i++;
 	}
 }
 
-// TODO: Create sort_both, sort_a and sort_b functions
-void	order_stc(t_list **stc_a, t_list **stc_b, int size)
+int	find_min(t_list **stc)
 {
-	int		i;
-	t_list	*stc_a_next;
-	t_list	*stc_b_next;
+	int		pos;
+	int		min;
+	t_list	*lst;
 
-	if (checker(stc_a, 'a') == 0 && checker(stc_b, 'b') == 0)
-		sort_both(stc_a, stc_b);
-	else if (checker(stc_a, 'a') == 0)
-		sort_a(stc_a);
-	else if (checker(stc_b, 'b') == 0)
-		sort_b(stc_b);
-	i = 0;
-	while (i < size / 4)
+	lst = *stc;
+	min = lst->price;
+	pos = lst->position;
+	while (lst != NULL)
 	{
-		stc_a_next = (*stc_a)->next;
-		stc_b_next = (*stc_b)->next;
-		if (stc_b_next->data > (*stc_b)->data &&
-			stc_a_next->data < (*stc_a)->data)
-			swap_ss(stc_a, stc_b);
-		else if (stc_a_next->data < (*stc_a)->data)
-			swap(stc_a, 'a');
-		else if (stc_a_next->data == (*stc_a)->data)
-			print_error(stc_a, stc_b);
-		if (stc_b_next->data > (*stc_b)->data)
-			swap(stc_b, 'b');
-		rotate_ss(stc_a, stc_b);
-	}
-	while (i < size / 4 && checker(stc_a, 'a') == 0 && checker(stc_b, 'b') == 0)
-		rev_rotate_ss(stc_a, stc_b);
-}
-
-// TODO: Implement new sorting algorithm drawn in the tablet
-void	rev_division(t_list **stc_a, t_list **stc_b, int size)
-{
-	t_list	*stc_a_next;
-	t_list	*stc_b_next;
-	
-	push(stc_a, stc_b, 'a');
-	while ((*stc_b) != NULL)
-	{
-		stc_a_next = (*stc_a)->next;
-		if (stc_a_next->data < (*stc_a)->data)
+		if (lst->price < min)
 		{
-			swap(stc_a, 'a');
-			if ((*stc_a)->data < (*stc_b)->data)
-				push(stc_b, stc_a, 'b');
+			min = lst->price;
+			pos = lst->position;
 		}
-		push(stc_a, stc_b, 'a');
+		lst = lst->next;
 	}
+	return (pos);
 }
+
+int	get_fut(t_list **stc, int pos)
+{
+	t_list	*lst;
+	int		i;
+
+	lst = *stc;
+	i = 0;
+	while (i < pos)
+		lst = lst->next;
+	return (lst->fut_pos);
+}
+
+// void	division(t_list **stc_a, t_list **stc_b, int size)
+// {
+// 	t_list	*stc_a_next;
+// 	int		i;
+
+// 	i = 0;
+// 	while (i < size / 2)
+// 	{
+// 		stc_a_next = (*stc_a)->next;
+// 		if (stc_a_next->data < (*stc_a)->data)
+// 			swap(stc_a, 'a');
+// 		else if (stc_a_next->data == (*stc_a)->data)
+// 			print_error(stc_a, stc_b);
+// 		push(stc_b, stc_a, 'b');
+// 	}
+// }

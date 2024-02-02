@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:25:31 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/28 18:43:53 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:48:30 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	swap_ss(t_list **lst_a, t_list **lst_b)
 {
-	int			tmp;
+	int		tmp;
 	t_list	*lst_next_a;
 	t_list	*lst_next_b;
 
-	lst_next_a = (*lst_a)->next; 
+	lst_next_a = (*lst_a)->next;
 	tmp = (*lst_a)->data;
 	(*lst_a)->data = lst_next_a->data;
 	lst_next_a->data = tmp;
-	lst_next_b = (*lst_b)->next; 
+	lst_next_b = (*lst_b)->next;
 	tmp = (*lst_b)->data;
 	(*lst_b)->data = lst_next_b->data;
 	lst_next_b->data = tmp;

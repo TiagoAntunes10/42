@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 23:44:57 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/28 18:45:43 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:46:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	swap(t_list **lst, char stack)
 {
-	int			tmp;
+	int		tmp;
 	t_list	*lst_next;
 
-	lst_next = (*lst)->next; 
+	lst_next = (*lst)->next;
 	tmp = (*lst)->data;
 	(*lst)->data = lst_next->data;
 	lst_next->data = tmp;

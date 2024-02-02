@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:47:37 by tialbert          #+#    #+#             */
-/*   Updated: 2023/10/03 11:47:38 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:52:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 
 	current = *lst;
 	if (current == NULL)
+	{
 		*lst = new;
+		(*lst)->next = NULL;
+	}
 	else
 	{
 		new->next = current;
