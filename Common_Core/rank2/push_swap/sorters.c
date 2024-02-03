@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:58:38 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 22:30:42 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/03 06:33:44 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	sort_small(t_list **stc)
 	top = (*stc)->data;
 	mid = (*stc)->next->data;
 	bot = (*stc)->next->next->data;
-	if (top > mid && mid < bot)
+	if (top > mid && top > bot && mid < bot)
 		rotate(stc, 'a');
+	else if (top > mid && top < bot && mid < bot)
+		swap(stc, 'a');
 	else if (top > mid && top < bot && mid > bot)
 	{
 		rotate(stc, 'a');
