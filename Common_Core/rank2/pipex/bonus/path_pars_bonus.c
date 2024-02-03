@@ -19,6 +19,7 @@ char	**get_path(char **environ)
 	int		i;
 
 	i = 0;
+	path = NULL;
 	while (environ[i] != NULL)
 	{
 		if (ft_strncmp(environ[i], "PATH", 4) == 0)
