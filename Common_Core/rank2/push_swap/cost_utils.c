@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 11:26:53 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/04 11:42:17 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:32:08 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	find_max(t_list *stc)
 	return (max_pos);
 }
 
+// TODO: Add price_sep to this function
 void	max_and_min(t_list *lst, t_list **stc_b, int size)
 {
 	lst->fut_pos = find_max(*stc_b);
