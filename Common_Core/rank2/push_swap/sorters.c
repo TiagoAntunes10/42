@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:58:38 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/03 06:33:44 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:29:58 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sort_small(t_list **stc)
 		rotate(stc, 'a');
 	else if (top > mid && top < bot && mid < bot)
 		swap(stc, 'a');
-	else if (top > mid && top < bot && mid > bot)
+	else if (top > mid && top > bot && mid > bot)
 	{
 		rotate(stc, 'a');
 		swap(stc, 'a');
@@ -39,9 +39,8 @@ void	sort_small(t_list **stc)
 	}
 }
 
-void	push_stc(t_list **stc_a, t_list **stc_b, int cost, int pos)
+void	push_stc(t_list **stc_a, t_list **stc_b, int pos)
 {
-	int	i;
 	int	fut;
 	int	size_a;
 	int	size_b;
@@ -49,54 +48,13 @@ void	push_stc(t_list **stc_a, t_list **stc_b, int cost, int pos)
 	fut = get_fut(stc_a, pos);
 	size_a = ft_lstsize(*stc_a);
 	size_b = ft_lstsize(*stc_b);
-	i = 0;
-	while (i <= cost)
-	{
-		if (pos == 0 && fut > 0)
-		{
-			if (fut + i > size_b / 2)
-			{
-				while (fut + i < size_b--)
-					rev_rotate(stc_b, 'b');
-			}
-			else if (fut - i <= size_b / 2)
-			{
-				while (fut-- > 0)
-					rotate(stc_b, 'b');
-			}
-		}
-		else if (pos > 0 && fut == 0)
-		{
-			if (pos + i > size_a / 2)
-			{
-				while (pos + i < size_a--)
-					rev_rotate(stc_a, 'a');
-			}
-			else if (pos - i <= size_a / 2)
-			{
-				while (pos-- > 0)
-					rotate(stc_a, 'a');
-			}
-		}
-		else if (pos + i > size_a / 2 && fut + i > size_b / 2)
-			rev_rotate_ss(stc_a, stc_b);
-		else if (pos + i > size_a / 2 || fut + i > size_b / 2)
-		{
-			while (pos + i < size_a--)
-				rev_rotate(stc_a, 'a');
-			while (fut + i < size_b--)
-				rev_rotate(stc_b, 'b');
-		}
-		else if (pos - i <= (size_a / 2) && fut - i <= (size_b / 2))
-			rotate_ss(stc_a, stc_b);
-		else if (pos - i <= (size_a / 2) || fut - i <= (size_b / 2))
-		{
-			while (pos-- > 0)
-				rotate(stc_a, 'a');
-			while (fut-- > 0)
-				rotate(stc_b, 'b');
-		}
-		i++;
-	}
+	if (pos > size_a / 2 && fut > size_b / 2)
+		rev_rotate_both(stc_a, stc_b, pos, fut);
+	else if (pos <= size_a / 2 && fut <= size_b / 2)
+		rotate_both(stc_a, stc_b, pos, fut);
+	else if (pos > size_a / 2 && fut <= size_b / 2)
+		down_a_up_b(stc_a, stc_b, pos, fut);
+	else if (pos <= size_a / 2 && fut > size_b / 2)
+		up_a_down_b(stc_a, stc_b, pos, fut);
 	push(stc_b, stc_a, 'b');
 }

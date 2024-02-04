@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 20:19:27 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:33:08 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv)
 	else
 		stc_a = create_lst(++argv);
 	stc_b = NULL;
+	if (check_duplicates(stc_a) == 1)
+		print_error(stc_a, stc_b);
 	stc_b = sort_stc(stc_a, stc_b, ft_lstsize(*stc_a));
 	if (stc_b != NULL)
 		finish_stc(stc_a, stc_b);
@@ -81,7 +83,7 @@ t_list	**create_lst(char **argv)
 
 t_list	**sort_stc(t_list **stc_a, t_list **stc_b, int size)
 {
-	int	min_cost;
+	int	pos;
 
 	if (checker(stc_a, stc_b) == 1)
 		return (NULL);
@@ -100,8 +102,8 @@ t_list	**sort_stc(t_list **stc_a, t_list **stc_b, int size)
 		}
 		if (ft_lstsize(*stc_a) > 3)
 		{
-			min_cost = calc_cost(stc_a, stc_b);
-			push_stc(stc_a, stc_b, min_cost, find_min(stc_a));
+			pos = calc_cost(stc_a, stc_b);
+			push_stc(stc_a, stc_b, pos);
 		}
 	}
 	sort_small(stc_a);

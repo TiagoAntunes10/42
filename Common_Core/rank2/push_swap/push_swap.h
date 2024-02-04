@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:00:51 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 20:17:35 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:37:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,17 @@ void	push(t_list **lst_rec, t_list **lst_giv, char stack);
 void	print_error(t_list **lst_a, t_list **lst_b);
 int		ft_nb_len(int nb);
 void	start_stc(t_list **stc_a, t_list **stc_b);
-int		find_min(t_list **stc);
+// int		find_min(t_list **stc);
 int		get_fut(t_list **stc, int pos);
 int		checker(t_list **stc_a, t_list **stc_b);
+int		check_duplicates(t_list **stc);
 void	sort_small(t_list **stc);
-void	push_stc(t_list **stc_a, t_list **stc_b, int cost, int pos);
+void	push_stc(t_list **stc_a, t_list **stc_b, int pos);
 int		calc_cost(t_list **stc_a, t_list **stc_b);
+void	max_and_min(t_list *lst, t_list **stc_b, int size);
+void	price_sep(t_list *lst, t_list *lst_b, int size_a, int size_b);
 void	finish_stc(t_list **stc_a, t_list **stc_b);
+void	rev_rotate_both(t_list **stc_a, t_list **stc_b, int pos, int fut);
+void	rotate_both(t_list **stc_a, t_list **stc_b, int pos, int fut);
+void	down_a_up_b(t_list **stc_a, t_list **stc_b, int pos, int fut);
+void	up_a_down_b(t_list **stc_a, t_list **stc_b, int pos, int fut);

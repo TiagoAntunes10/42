@@ -11,6 +11,7 @@ SOURCES = ${addprefix $(PRE), $(SOURCE)}
 SOURCES_BON = ${addprefix $(BONUS), $(SOURCE_BON)}
 
 NAME = pipex
+NAME_BONUS = pipex_bonus
 LIB = $(FUNCTION)/libftprintf.a
 
 CC = cc
@@ -30,7 +31,9 @@ $(LIB):
 .c.o:
 		$(CC) $(FLAGS) -I $(HEADER) -c $< -o $(<:.c=.o)
 
-bonus: $(OBJ_BON) $(LIB)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJ_BON) $(LIB)
 	cc $(FLAGS) -o $(NAME) $^
 
 .c.o2:

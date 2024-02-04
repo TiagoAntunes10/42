@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:07:28 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 21:00:30 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:37:24 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,45 +33,50 @@ static void	get_cost(t_list **stc)
 	}
 }
 
-static void	sum_cost(t_list *lst, t_list **stc_b)
+static void	sum_cost(t_list *lst, t_list **stc_b, int size_a)
 {
 	t_list	*lst_b;
+	int		size_b;
 
 	lst_b = *stc_b;
+	size_b = ft_lstsize(*stc_b);
 	while (lst_b->next != NULL)
 	{
 		if (lst->data < lst_b->data && lst->data > lst_b->next->data)
 		{
-			lst->price += lst_b->next->price;
-			lst->fut_pos = lst_b->next->position;
-			return ;
-		}
-		if (lst->data < lst_b->data && lst_b->data > lst_b->next->data)
-		{
-			lst->price += lst_b->next->price;
-			lst->fut_pos = lst_b->next->position;
+			price_sep(lst, lst_b->next, size_a, size_b);
 			return ;
 		}
 		lst_b = lst_b->next;
 	}
-	lst->fut_pos = 0;
+	if (lst->data > (*stc_b)->data && lst->data < lst_b->data)
+	{
+			lst->fut_pos = 0;
+			return ;
+	}
+	max_and_min(lst, stc_b, size_b);
 }
 
 int	calc_cost(t_list **stc_a, t_list **stc_b)
 {
 	t_list	*lst;
 	int		min;
+	int		pos;
 
-	lst = (*stc_a);
 	get_cost(stc_a);
 	get_cost(stc_b);
+	lst = (*stc_a);
 	min = lst->price;
+	pos = 0;
 	while (lst != NULL)
 	{
-		sum_cost(lst, stc_b);
+		sum_cost(lst, stc_b, ft_lstsize(*stc_a));
 		if (lst->price < min)
+		{
 			min = lst->price;
+			pos = lst->position;
+		}
 		lst = lst->next;
 	}
-	return (min);
+	return (pos);
 }

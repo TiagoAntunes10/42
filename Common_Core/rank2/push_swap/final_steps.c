@@ -6,28 +6,11 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 08:12:10 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 20:36:50 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:27:57 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	find_pos(t_list **stc_a, t_list *stc_b)
-{
-	t_list	*lst;
-	int		i;
-
-	lst = *stc_a;
-	i = 0;
-	while (lst->next != NULL)
-	{
-		if (lst->data < stc_b->data && lst->next->data > stc_b->data)
-			return (i + 1);
-		lst = lst->next;
-		i++;
-	}
-	return (0);
-}
 
 static int	find_top(t_list *stc_a)
 {
@@ -51,6 +34,26 @@ static int	find_top(t_list *stc_a)
 	}
 	return (min_pos);
 }
+
+static int	find_pos(t_list **stc_a, t_list *stc_b)
+{
+	t_list	*lst;
+	int		i;
+
+	lst = *stc_a;
+	i = 0;
+	while (lst->next != NULL)
+	{
+		if (lst->data < stc_b->data && lst->next->data > stc_b->data)
+			return (i + 1);
+		lst = lst->next;
+		i++;
+	}
+	if (stc_b->data < (*stc_a)->data && stc_b->data > lst->data)
+		return (0);
+	return (find_top(*stc_a));
+}
+
 
 static void	top_value(t_list **stc_a)
 {

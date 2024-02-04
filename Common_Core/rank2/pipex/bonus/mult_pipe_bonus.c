@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:20:36 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/01 11:14:57 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/04 10:02:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	multi(char **argv, int argc)
 	char	**cmd_path;
 
 	errno = 0;
-	if (argc < 5)
-	{
-		perror("Not enough arguments!");
-		errno = EIO;
-		exit (errno);
-	}
 	check_outfile(argv, --argc);
 	if (access(argv[1], F_OK | R_OK) == -1)
 	{
