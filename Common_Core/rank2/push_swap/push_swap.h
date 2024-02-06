@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:00:51 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/04 11:37:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:18:33 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		check_duplicates(t_list **stc);
 void	sort_small(t_list **stc);
 void	push_stc(t_list **stc_a, t_list **stc_b, int pos);
 int		calc_cost(t_list **stc_a, t_list **stc_b);
-void	max_and_min(t_list *lst, t_list **stc_b, int size);
+void	max_min_sep(t_list *lst, int size_a, int size_b);
+int		find_max(t_list *stc);
 void	price_sep(t_list *lst, t_list *lst_b, int size_a, int size_b);
 void	finish_stc(t_list **stc_a, t_list **stc_b);
 void	rev_rotate_both(t_list **stc_a, t_list **stc_b, int pos, int fut);

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/03 16:33:08 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/06 22:03:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	main(int argc, char **argv)
 	stc_b = sort_stc(stc_a, stc_b, ft_lstsize(*stc_a));
 	if (stc_b != NULL)
 		finish_stc(stc_a, stc_b);
-	if (checker(stc_a, stc_b) == 0)
-		ft_printf("Not ordered!");
+	checker(stc_a, stc_b);
 	ft_lstclear(stc_a);
 	ft_lstclear(stc_b);
 }
@@ -100,6 +99,8 @@ t_list	**sort_stc(t_list **stc_a, t_list **stc_b, int size)
 			*stc_b = NULL;
 			start_stc(stc_a, stc_b);
 		}
+		if (checker(stc_a, stc_b) == 1)
+			return (stc_b);
 		if (ft_lstsize(*stc_a) > 3)
 		{
 			pos = calc_cost(stc_a, stc_b);

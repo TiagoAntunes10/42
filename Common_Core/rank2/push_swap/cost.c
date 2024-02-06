@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:07:28 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/04 11:37:24 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:51:29 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	sum_cost(t_list *lst, t_list **stc_b, int size_a)
 			lst->fut_pos = 0;
 			return ;
 	}
-	max_and_min(lst, stc_b, size_b);
+	lst->fut_pos = find_max(*stc_b);
+	max_min_sep(lst, size_a, size_b);
 }
 
 int	calc_cost(t_list **stc_a, t_list **stc_b)
@@ -66,7 +67,10 @@ int	calc_cost(t_list **stc_a, t_list **stc_b)
 	get_cost(stc_a);
 	get_cost(stc_b);
 	lst = (*stc_a);
-	min = lst->price;
+	if (ft_lstsize(*stc_a) >= ft_lstsize(*stc_b))
+		min = ft_lstsize(*stc_a);
+	else
+		min = ft_lstsize(*stc_b);
 	pos = 0;
 	while (lst != NULL)
 	{
