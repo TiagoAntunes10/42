@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/06 22:03:59 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:21:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 		print_error(stc_a, stc_b);
 	stc_b = sort_stc(stc_a, stc_b, ft_lstsize(*stc_a));
 	if (stc_b != NULL)
-		finish_stc(stc_a, stc_b);
+		finish_push_stc(stc_b, stc_a, finish_stc(stc_b, stc_a));
 	checker(stc_a, stc_b);
 	ft_lstclear(stc_a);
 	ft_lstclear(stc_b);

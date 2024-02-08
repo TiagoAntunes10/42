@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:36:15 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/04 10:28:42 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:50:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,6 @@ void	start_stc(t_list **stc_a, t_list **stc_b)
 		i++;
 	}
 }
-
-// int	find_min(t_list **stc)
-// {
-// 	int		pos;
-// 	int		min;
-// 	t_list	*lst;
-
-// 	lst = *stc;
-// 	min = lst->price;
-// 	pos = lst->position;
-// 	while (lst != NULL)
-// 	{
-// 		if (lst->price < min)
-// 		{
-// 			min = lst->price;
-// 			pos = lst->position;
-// 		}
-// 		lst = lst->next;
-// 	}
-// 	return (pos);
-// }
 
 int	get_fut(t_list **stc, int pos)
 {
