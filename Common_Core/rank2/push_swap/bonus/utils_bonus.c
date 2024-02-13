@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 21:36:15 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/13 11:00:27 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:41:05 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	print_error(t_list **lst_a, t_list **lst_b, char **arr)
 {
@@ -64,31 +64,4 @@ int	ft_cont_alpha(char *str)
 		str++;
 	}
 	return (0);
-}
-
-void	start_stc(t_list **stc_a, t_list **stc_b)
-{
-	int		i;
-
-	i = 0;
-	while (i < 2 && ft_lstsize(*stc_a) > 3)
-	{
-		push(stc_b, stc_a, 'b');
-		i++;
-	}
-}
-
-int	get_fut(t_list **stc, int pos)
-{
-	t_list	*lst;
-	int		i;
-
-	lst = *stc;
-	i = 0;
-	while (i < pos)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (lst->fut_pos);
 }

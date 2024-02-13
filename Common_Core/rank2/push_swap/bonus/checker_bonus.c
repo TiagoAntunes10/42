@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 21:25:37 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/13 14:24:50 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:39:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 int	check_arg(char *str, int nb)
 {
@@ -33,7 +33,7 @@ void	handle_free(char **argv, int argc, t_list **lst)
 		print_error(lst, NULL, NULL);
 }
 
-int	checker(t_list **stc_a, t_list **stc_b)
+int	checker(t_list **stc_a)
 {
 	t_list	*lst;
 	t_list	*stc_next;
@@ -45,7 +45,7 @@ int	checker(t_list **stc_a, t_list **stc_b)
 		if (stc_next->data < lst->data)
 			return (0);
 		else if (stc_next->data == lst->data)
-			print_error(stc_a, stc_b, NULL);
+			print_error(stc_a, NULL, NULL);
 		lst = lst->next;
 		stc_next = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:39:02 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/25 15:31:29 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:34:03 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_split(char const *str, char c)
 	if (words == 0)
 		return (NULL);
 	words_temp = words;
-	while (*str != '\0' && *(str + 1) != '\0')
+	while (*str != '\0' || *(str + 1) != '\0')
 	{
 		while (*str == c)
 			str += 1;

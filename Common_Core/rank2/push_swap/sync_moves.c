@@ -6,17 +6,16 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 16:12:37 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/04 14:49:35 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:55:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
 void	rev_rotate_both(t_list **stc_a, t_list **stc_b, int pos, int fut)
 {
 	int	size_a;
-	int size_b;
+	int	size_b;
 
 	size_a = ft_lstsize(*stc_a);
 	size_b = ft_lstsize(*stc_b);
@@ -26,12 +25,12 @@ void	rev_rotate_both(t_list **stc_a, t_list **stc_b, int pos, int fut)
 		pos++;
 		fut++;
 	}
-	while (pos <= size_a)
+	while (pos < size_a)
 	{
 		rev_rotate(stc_a, 'a');
 		pos++;
 	}
-	while (fut <= size_b)
+	while (fut < size_b)
 	{
 		rev_rotate(stc_b, 'b');
 		fut++;

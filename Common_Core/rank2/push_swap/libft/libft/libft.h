@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:43:06 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/02 09:53:18 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:49:29 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-t_list			*ft_lstnew(int content);
+t_list			*ft_lstnew(int data);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 int				ft_lstsize(t_list *lst);
 t_list			*ft_lstlast(t_list *lst);

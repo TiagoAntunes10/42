@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/13 15:00:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:01:10 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void			free_array(char **arr);
 static t_list	**create_lst(char **argv, int argc);
-static t_list	**sort_stc(t_list **stc_a, t_list **stc_b, int size);
+static void		sort_stc(t_list **stc_a);
 
 int	main(int argc, char **argv)
 {
 	t_list	**stc_a;
-	t_list	**stc_b;
 	char	**stc;
 
 	if (argc == 1)
@@ -33,15 +32,14 @@ int	main(int argc, char **argv)
 	}
 	else
 		stc_a = create_lst(++argv, argc);
-	stc_b = NULL;
 	if (check_duplicates(stc_a) == 1)
-		print_error(stc_a, stc_b, NULL);
-	stc_b = sort_stc(stc_a, stc_b, ft_lstsize(*stc_a));
-	if (stc_b != NULL)
-		final_stc(stc_a, stc_b);
-	checker(stc_a, stc_b);
+		print_error(stc_a, NULL, NULL);
+	sort_stc(stc_a);
+	if (checker(stc_a) == 0)
+		write(1, "KO\n", 3);
+	else
+		write(1, "OK\n", 3);
 	ft_lstclear(stc_a);
-	ft_lstclear(stc_b);
 }
 
 void	free_array(char **arr)
@@ -86,38 +84,31 @@ static t_list	**create_lst(char **argv, int argc)
 	return (lst);
 }
 
-static void	transfer_stc(t_list **stc_a, t_list **stc_b)
+static void	sort_stc(t_list **stc_a)
 {
-	int	pos;
+	char	*line;
+	t_list	**stc_b;
 
-	pos = calc_cost(stc_a, stc_b);
-	push_stc(stc_a, stc_b, pos);
-}
-
-static t_list	**sort_stc(t_list **stc_a, t_list **stc_b, int size)
-{
-	if (checker(stc_a, stc_b) == 1)
-		return (NULL);
-	if (size == 2)
+	stc_b = malloc(sizeof(t_list *));
+	if (stc_b == NULL)
+		print_error(stc_a, NULL, NULL);
+	*stc_b = NULL;
+	line = get_next_line(0);
+	while (line != NULL)
 	{
-		swap(stc_a, 'a');
-		return (NULL);
-	}
-	while (ft_lstsize(*stc_a) > 3)
-	{
-		if (stc_b == NULL)
+		if (line[0] == 's')
+			swap_cond(stc_a, stc_b, line);
+		else if (line[0] == 'p')
+			push_cond(stc_a, stc_b, line);
+		else if (line[0] == 'r')
+			rotate_cond(stc_a, stc_b, line);
+		else
 		{
-			stc_b = malloc(sizeof(t_list *));
-			if (stc_b == NULL)
-				print_error(stc_a, NULL, NULL);
-			*stc_b = NULL;
-			start_stc(stc_a, stc_b);
+			free(line);
+			print_error(stc_a, stc_b, NULL);
 		}
-		if (checker(stc_a, stc_b) == 1)
-			return (stc_b);
-		if (ft_lstsize(*stc_a) > 3)
-			transfer_stc(stc_a, stc_b);
+		free(line);
+		line = get_next_line(0);
 	}
-	sort_small(stc_a);
-	return (stc_b);
+	ft_lstclear(stc_b);
 }

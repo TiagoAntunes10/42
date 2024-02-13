@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 21:07:39 by tialbert          #+#    #+#             */
-/*   Updated: 2024/01/29 21:42:04 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:09:35 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 
 void	ft_lstclear(t_list **lst)
 {
+	t_list	*lst_next;
+
+	if (lst == NULL)
+		return ;
 	while (*lst != NULL)
 	{
+		lst_next = (*lst)->next;
 		ft_lstdelone(*lst);
-		*lst = (*lst)->next;
+		*lst = lst_next;
 	}
-	lst = NULL;
+	free(lst);
 }
 
 /*

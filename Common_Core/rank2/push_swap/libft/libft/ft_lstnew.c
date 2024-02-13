@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:35:41 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/01 15:05:28 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:52:29 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ t_list	*ft_lstnew(int data)
 {
 	t_list	*lst;
 
-	lst = malloc(sizeof(t_list *));
+	lst = malloc(sizeof(t_list));
+	if (lst == NULL)
+		return (NULL);
 	lst->data = data;
 	lst->price = 0;
 	lst->position = 0;
