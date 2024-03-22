@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:59 by tialbert          #+#    #+#             */
-/*   Updated: 2024/03/15 14:19:06 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:49:33 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	check_set(t_mlx *mlx, float x, float y, float c)
 // TODO: Change the calculation of x and y to take into account the changes in zoom
 // TODO: Add a zoom variable to the mlx struct
 // TODO: Make mlx->x and mlx->y start at 0 position
-void	mandel(t_mlx *mlx, float x, float y, float c)
+// TODO: Add c constant to the mlx struct
+static void	mandel_render_start(t_mlx *mlx)
 {
 	float	z_x;
 	float	z_y;
@@ -60,7 +61,7 @@ void	mandel(t_mlx *mlx, float x, float y, float c)
 		mlx->y = 0;
 		while (z_y * mlx->zoom <= mlx->win_height / 2)
 		{
-			check_set(mlx, z_x, z_y, c);
+			check_set(mlx, z_x, z_y, mlx->c);
 			z_y += 1 / mlx->zoom * 10;
 			mlx->y++;
 		}
@@ -68,4 +69,43 @@ void	mandel(t_mlx *mlx, float x, float y, float c)
 		mlx->x++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
+}
+
+static void	mandel_render_hook(t_mlx *mlx, int x, int y)
+{
+	float	z_x;
+	float	z_y;
+
+	z_x = - (mlx->win_length / 2 / mlx->zoom);
+	mlx->x = 0;
+	while (z_x * mlx->zoom <= mlx->win_length / 2)
+	{
+		z_y = - (mlx->win_height / 2 / mlx->zoom);
+		mlx->y = 0;
+		while (z_y * mlx->zoom <= mlx->win_height / 2)
+		{
+			check_set(mlx, z_x, z_y, mlx->c);
+			z_y += 1 / mlx->zoom * 10;
+			mlx->y++;
+		}
+		z_x += 1 / mlx->zoom * 10;
+		mlx->x++;
+	}
+	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
+}
+
+void	mandel(char **argv)
+{
+	mlx	t_mlx	*mlx;
+	
+	mlx = open_window();
+	mlx->c = argv[2];
+	mlx_loop_hook(mlx->mlx, &mandel_render_start, mlx);
+	mlx_hook(mlx->window, KeyPress, KeyPressMask, &handle_keypress, mlx);
+	mlx_hook(mlx->window, ClientMessage, StructureNotifyMask, &handle_buttonpress, mlx);
+	mlx_loop(mlx->mlx);
+	if (mlx->window == NULL)
+		mlx_destroy_window(mlx->mlx, mlx->window);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx);
 }
