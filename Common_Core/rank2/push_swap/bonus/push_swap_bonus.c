@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:44:44 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/13 15:01:10 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:45:27 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 {
 	t_list	**stc_a;
 	char	**stc;
+	int		ele_num;
 
 	if (argc == 1)
 		exit (1);
@@ -32,10 +33,11 @@ int	main(int argc, char **argv)
 	}
 	else
 		stc_a = create_lst(++argv, argc);
+	ele_num = ft_lstsize(*stc_a);
 	if (check_duplicates(stc_a) == 1)
 		print_error(stc_a, NULL, NULL);
 	sort_stc(stc_a);
-	if (checker(stc_a) == 0)
+	if (checker(stc_a) == 0 || ft_lstsize(*stc_a) != ele_num)
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);
