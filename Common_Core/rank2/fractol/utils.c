@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:35:27 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/18 15:01:07 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:04:17 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ void	handle_errors(t_mlx *mlx)
 		free(mlx);
 	}
 	exit(1);
+}
+
+// TODO: Probably need to change ft_atoi to get long doubles
+// TODO: Also need to protect this function for invalid arguments
+void	get_c(char **argv, int argc, t_mlx *mlx)
+{
+	if (argc >= 3)
+		mlx->c_real = ft_atoi(argv[3]);
+	if (argc > 3)
+		mlx->c_ima = ft_atoi(argv[4]);
 }
 
 t_mlx	*create_struct()

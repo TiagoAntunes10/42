@@ -6,17 +6,19 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 21:41:43 by tialbert          #+#    #+#             */
-/*   Updated: 2024/02/18 21:14:25 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:06:25 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_mlx	*open_window()
+// TODO: get_c function that also checks if there are incorrect arguments
+t_mlx	*open_window(char **argv)
 {
 	t_mlx	*mlx;
 
 	mlx = create_struct();
+	get_c(mlx);
 	mlx->mlx = mlx_init();
 	if (mlx->mlx == NULL)
 		handle_errors(mlx);
@@ -24,6 +26,7 @@ t_mlx	*open_window()
 							  mlx->win_height, "Fract-ol");
 	if (mlx->window == NULL)
 		handle_errors(mlx);
+	mlx->c_real = ft_atoi(argv[2]);
 	return (mlx);
 }
 
