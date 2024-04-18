@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:17:34 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/15 22:13:22 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:03:35 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <math.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include <mlx.h>
+// #include <mlx.h>
 #include "./libft/ft_printf.h"
 #include "set.h"
 
