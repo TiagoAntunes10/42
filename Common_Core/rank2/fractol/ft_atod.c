@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:47:00 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/18 14:09:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:11:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 // 	return (result);
 // }
 
+// TODO: Add checks for invalid characters
 long double	ft_atod(char *nb)
 {
 	long double	ld;
