@@ -6,13 +6,13 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 21:48:16 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/06 17:41:29 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:55:11 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandel_render_hook(t_mlx *mlx, int x, int y)
+int	mandel_render_hook(t_mlx *mlx)
 {
 	float	z_x;
 	float	z_y;
@@ -36,7 +36,8 @@ int	mandel_render_hook(t_mlx *mlx, int x, int y)
 	return (0);
 }
 
-// TODO: Check key codes and make a better zoom calculator
+// TODO: Make a better zoom calculator
+// Maybe use a static variable to store the zoom we are at
 int	zoom_press(int keysym, t_mlx *mlx)
 {
 	if (keysym == 4)
@@ -58,6 +59,7 @@ int	keypress(int keysym, t_mlx *mlx)
 
 int	xpress(int buttonsym, t_mlx *mlx)
 {
+	(void) buttonsym;
 	mlx_destroy_window(mlx->mlx, mlx->window);
 	mlx->window = NULL;
 	return (0);

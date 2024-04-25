@@ -6,42 +6,36 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:59 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/14 16:05:34 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/25 21:23:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// If I have to include more colours, create another function that has
-// all the if statements and returns a colour directly
-// TODO: Maybe include a better way to calculate colours based on the counter
+// TODO: Check if there is an infinite loop
 void	check_set(t_mlx *mlx, long double x, long double y)
 {
-	int			counter;
+	int			i;
 	int			max_ite;
+	int			colour;
 	long double	r;
 	long double	temp;
 	
-	counter = 0;
+	i = 0;
 	r = 2;
 	max_ite = 500;
-	while ((x * x + y * y) < r * r && counter < max_ite)
+	while ((x * x + y * y) < r * r && i < max_ite)
 	{
 		temp = x * x - (y * y) + mlx->c_real + mlx->c_ima;
 		y = 2 * x * y;
 		x = temp;
-		counter++;
+		i++;
 	}
-	if ((x * x + y * y) >= r * r || counter >= max_ite)  
-		my_mlx_pixel_put(mlx, mlx->x, mlx->y, mlx->backgr);
-	else if (counter >= 0 && counter < max_ite * 3 / 4)  
-		my_mlx_pixel_put(mlx, mlx->x, mlx->y, mlx->foregr);
-	else if (counter < max_ite && counter >= max_ite / 4)  
-		my_mlx_pixel_put(mlx, mlx->x, mlx->y, mlx->color1);
-	else if (counter < max_ite / 4 && counter >= max_ite * 2 / 4)  
-		my_mlx_pixel_put(mlx, mlx->x, mlx->y, mlx->color2);
-	else if (counter < max_ite * 2 / 4 && counter >= max_ite * 3 / 4)  
-		my_mlx_pixel_put(mlx, mlx->x, mlx->y, mlx->color3);
+	colour = colours(i % 8 * 32, i % 16 * 16, i % 32 * 8);
+	if (errno == -1)
+		handle_errors(mlx);
+	if (colour != 0)
+		my_mlx_pixel_put(mlx, mlx->x, mlx->y, colour);
 }
 
 static int	mandel_render_start(t_mlx *mlx)
@@ -72,10 +66,9 @@ void	mandel(char **argv, int argc)
 {
 	t_mlx	*mlx;
 	
-	mlx = open_window(argv);
-	get_c(argv, argc, mlx);
+	mlx = open_window(argv, argc);
 	mlx_loop_hook(mlx->mlx, &mandel_render_start, mlx);
-	mlx_mouse_hook (mlx->window, &zoom_press, mlx);
+	mlx_mouse_hook(mlx->window, &zoom_press, mlx);
 	mlx_hook(mlx->window, KeyPress, KeyPressMask, &keypress, mlx);
 	mlx_hook(mlx->window, ClientMessage, StructureNotifyMask, &xpress, mlx);
 	mlx_loop(mlx->mlx);
