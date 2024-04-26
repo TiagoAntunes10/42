@@ -1,5 +1,6 @@
 PRE = ./
 HEADER = ./
+MLX = ./minilibx-linux
 FUNCTION = ./libft
 BONUS = ./bonus/
 
@@ -16,24 +17,29 @@ SOURCES_BON = ${addprefix $(BONUS), $(SOURCE_BON)}
 NAME = fractol
 NAME_BONUS = fractol_bonus
 LIB = $(FUNCTION)/libftprintf.a
+MLX_COM = $(MLX)/libmlx.a
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g 
-LIB_FLAGS = -lm -lmlx -lXext -lX11
+MLX_FLAGS = -lm -lz -lmlx -lXext -lX11
 
 OBJ = $(SOURCES:.c=.o)
 OBJ_BON = $(SOURCES_BON:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIB)
-	cc $(FLAGS) -o $@ $^ $(LIB_FLAGS)
+$(NAME): $(OBJ) $(LIB) $(MLX_COM)
+	cc $(FLAGS) -o $@ $^ $(MLX_FLAGS)
 
 $(LIB):
 	$(MAKE) -C $(FUNCTION)
 
+$(MLX_COM):
+	$(MAKE) -C $(MLX)
+
+# TODO: Solve compilation problem with minilibx
 .c.o:
-		$(CC) $(FLAGS) -I $(HEADER) -c $< -o $(<:.c=.o)
+		$(CC) $(FLAGS) -I $(HEADER) $(MLX) -c $< -o $(<:.c=.o)
 
 bonus: $(NAME_BONUS)
 

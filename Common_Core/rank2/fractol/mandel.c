@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:59 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/25 21:23:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/04/26 08:50:29 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static int	mandel_render_start(t_mlx *mlx)
 
 	z_x = - (mlx->win_length / 2 / mlx->zoom);
 	mlx->x = 0;
-	while (z_x * mlx->zoom <= mlx->win_length / 2)
+	while (mlx->x < mlx->win_length)
 	{
 		z_y = - (mlx->win_height / 2 / mlx->zoom);
 		mlx->y = 0;
-		while (z_y * mlx->zoom <= mlx->win_height / 2)
+		while (mlx->y < mlx->win_height)
 		{
 			check_set(mlx, z_x, z_y);
 			z_y += 1 / mlx->zoom * 10;
