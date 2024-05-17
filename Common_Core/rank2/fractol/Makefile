@@ -20,7 +20,7 @@ MLX_COM = $(MLX)/libmlx.a
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g 
-MLX_FLAGS = -lm -lz -lmlx -lXext -lX11
+MLX_FLAGS = -lm -lz -lXext -lX11
 
 OBJ = $(SOURCES:.c=.o)
 OBJ_BON = $(SOURCES_BON:.c=.o)
