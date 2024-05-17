@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   errors_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:50:01 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:20:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:02:06 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/fractol.h"
 
-// TODO: create show_options function for bonus part
 void	handle_errors(t_mlx *mlx)
 {
 	if (mlx != NULL)
@@ -34,7 +33,8 @@ void	show_options(int argc)
 	{
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("You can also modify the Julia set with up to 2 floats");
+		ft_printf("3 - newton or -n\n");
+		ft_printf("Modify the Julia and Newton sets with up to 2 floats");
 		exit(1);
 	}
 	else if (argc > 4)
@@ -42,12 +42,14 @@ void	show_options(int argc)
 		ft_printf("Too many arguments\n\n");
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("You can also modify the Julia set with up to 2 floats");
+		ft_printf("3 - newton or -n\n");
+		ft_printf("Modify the Julia and Newton sets with up to 2 floats");
 		exit(1);
 	}
 	ft_printf("Invalid option\n\n");
 	ft_printf("Select one option:\n");
 	ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-	ft_printf("You can also modify the Julia set with up to 2 floats");
+	ft_printf("3 - newton or -n\n");
+	ft_printf("Modify the Julia and Newton sets with up to 2 floats");
 	exit(1);
 }

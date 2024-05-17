@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:23 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/25 12:30:30 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:56:10 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 typedef struct s_mlx {
 	void		*mlx;
 	void		*window;
-	int			win_height;
-	int			win_length;
+	float		win_height;
+	float		win_length;
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
@@ -27,16 +27,21 @@ typedef struct s_mlx {
 	int			x;
 	int			y;
 	long double	c_real;
+	long double	c_real_beg;
+	long double	c_real_end;
+	long double	c_ima_beg;
+	long double	c_ima_end;
 	long double	c_ima;
-	int			zoom;
-	int			backgr;
+	float		zoom;
+	int			zoom_level;
 }				t_mlx;
 
 int		mandel_render_hook(t_mlx *mlx);
 void	check_set(t_mlx *mlx, long double x, long double y);
 void	mandel(char **argv, int argc);
-int		zoom_press(int keysym, t_mlx *mlx);
-int		xpress(int buttonsym, t_mlx *mlx);
+void	julia(char **argv, int argc);
+int		zoom_press(int keysym, int x, int y, t_mlx *mlx);
+int		xpress(t_mlx *mlx);
 int		keypress(int keysym, t_mlx *mlx);
 
 #endif

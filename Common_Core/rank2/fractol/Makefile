@@ -1,18 +1,17 @@
 PRE = ./
-HEADER = ./
-MLX = ./minilibx-linux
+INCLUDE = ./Include
 FUNCTION = ./libft
+MLX = ./minilibx-linux
 BONUS = ./bonus/
 
 SOURCE = fractol.c errors.c ft_atod.c mlx_utils.c mlx_hooks.c \
-		utils.c mandel.c
+		utils.c mandel.c julia.c
 
-# SOURCE_BON = checker_bonus.c push_swap_bonus.c utils_bonus.c \
-# 			 moveset_cross_bonus.c moveset_mult_bonus.c \
-# 			 moveset_stack_bonus.c
+SOURCE_BON = fractol_bonus.c errors_bonus.c ft_atod.c mlx_utils.c mlx_hooks.c \
+		utils.c mandel_bonus.c julia_bonus.c newton_bonus.c utils_bonus.c
 
 SOURCES = ${addprefix $(PRE), $(SOURCE)}
-SOURCES_BON = ${addprefix $(BONUS), $(SOURCE_BON)}
+SOURCES_BON = ${addprefix $(PRE), $(SOURCE_BON)}
 
 NAME = fractol
 NAME_BONUS = fractol_bonus
@@ -37,21 +36,21 @@ $(LIB):
 $(MLX_COM):
 	$(MAKE) -C $(MLX)
 
-# TODO: Solve compilation problem with minilibx
 .c.o:
-		$(CC) $(FLAGS) -I $(HEADER) $(MLX) -c $< -o $(<:.c=.o)
+		$(CC) $(FLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_BON) $(LIB)
-	cc $(FLAGS) -o $@ $^
+$(NAME_BONUS): $(OBJ_BON) $(LIB) $(MLX_COM)
+	cc $(FLAGS) -o $@ $^ $(MLX_FLAGS)
 
 .c.o2:
-	$(CC) $(FLAGS) -I $(BONUS) -c $< -o $(<:.c=.o)
+	$(CC) $(FLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
 
 clean: 
 	rm -f $(OBJ) $(OBJ_BON)
 	$(MAKE) clean -C $(FUNCTION)
+	$(MAKE) clean -C $(MLX)
         
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)

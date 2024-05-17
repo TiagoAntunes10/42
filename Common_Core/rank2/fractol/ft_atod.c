@@ -6,28 +6,11 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:47:00 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/25 12:35:24 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:47:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-
-// static int	ft_power(int base, int exp)
-// {
-// 	int	result;
-
-// 	if (exp > 0)
-// 		result = base;
-// 	else if (exp < 0)
-// 		result = 1 / base;
-// 	if (exp == 0)
-// 		return (1);
-// 	else if (exp > 0)
-// 		result *= ft_power(base, exp - 1);
-// 	else if (exp < 0)
-// 		result *= ft_power(base, exp + 1);
-// 	return (result);
-// }
+#include "./Include/fractol.h"
 
 static int	check_num(char *str)
 {
@@ -36,12 +19,12 @@ static int	check_num(char *str)
 	com = 0;
 	while (*str != 0)
 	{
-		if (*str == '.')
+		if (*str == '.' || *str == ',')
 			com++;
 		else if (ft_isdigit(*str) == 0)
-			return (1);	
+			return (1);
 		if (com > 1)
-			return (1);	
+			return (1);
 		str++;
 	}
 	return (0);

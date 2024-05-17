@@ -6,40 +6,38 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:35:27 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/25 15:18:52 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:54:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "./Include/fractol.h"
 
 void	get_c(char **argv, int argc, t_mlx *mlx)
 {
 	if (argc >= 3)
 	{
-		if (*argv[3] == '-')
-			mlx->c_real = ft_atod(argv[3] + 1, 1);
+		if (*argv[2] == '-')
+			mlx->c_real = ft_atod(argv[2] + 1, 1);
 		else
-			mlx->c_real = ft_atod(argv[3], 0);
-			
+			mlx->c_real = ft_atod(argv[2], 0);
 	}
 	if (argc > 3)
 	{
-		if (*argv[4] == '-')
-			mlx->c_ima = ft_atod(argv[4] + 1, 1);
+		if (*argv[3] == '-')
+			mlx->c_ima = ft_atod(argv[3] + 1, 1);
 		else
-			mlx->c_ima = ft_atod(argv[4], 0);
-			
+			mlx->c_ima = ft_atod(argv[3], 0);
 	}
 	if (errno == -1)
 		handle_errors(mlx);
 }
 
-static int	*get_hex(int r, int g, int b)
+static unsigned int	*get_hex(unsigned int r, unsigned int g, unsigned int b)
 {
-	int	*hex;
-	int	i;
+	unsigned int	*hex;
+	int				i;
 
-	hex = malloc(sizeof(int) * 6);
+	hex = malloc(sizeof(unsigned int) * 6);
 	i = 0;
 	while (i < 2)
 	{
@@ -62,11 +60,29 @@ static int	*get_hex(int r, int g, int b)
 	return (hex);
 }
 
-int	colours(int r, int g, int b)
+static int	ft_power(int base, int exp)
 {
-	int	colour;
-	int	i;
-	int	*hex;
+	int	result;
+
+	if (exp > 0)
+		result = base;
+	else if (exp < 0)
+		result = 1 / base;
+	if (exp == 0)
+		return (1);
+	else if (exp > 0)
+		result *= ft_power(base, exp - 1);
+	else if (exp < 0)
+		result *= ft_power(base, exp + 1);
+	return (result);
+}
+
+unsigned int	colours(unsigned int r, unsigned int g, unsigned int b)
+{
+	unsigned int	colour;
+	int				i;
+	int				j;
+	unsigned int	*hex;
 
 	if (r > 255 || g > 255 || b > 255)
 	{
@@ -74,17 +90,20 @@ int	colours(int r, int g, int b)
 		return (0);
 	}
 	hex = get_hex(r, g, b);
-	i = 0;
-	while (i < 6)
+	i = 5;
+	j = 0;
+	colour = 0;
+	while (i >= 0)
 	{
-		colour = hex[i] * pow(16, i);
-		i++;
+		colour += hex[i] * ft_power(16, j);
+		j++;
+		i--;
 	}
 	free(hex);
 	return (colour);
 }
 
-t_mlx	*create_struct()
+t_mlx	*create_struct(void)
 {
 	t_mlx	*mlx;
 
@@ -98,9 +117,13 @@ t_mlx	*create_struct()
 	mlx->line_lenght = 0;
 	mlx->bits_per_pixel = 0;
 	mlx->endian = 0;
-	mlx->zoom = 100;
+	mlx->zoom = 1;
+	mlx->zoom_level = 0;
 	mlx->c_real = 1;
+	mlx->c_real_beg = -2;
+	mlx->c_real_end = 0.47;
 	mlx->c_ima = 0;
-	mlx->backgr = 0x00000000;
+	mlx->c_ima_beg = 1;
+	mlx->c_ima_end = -1;
 	return (mlx);
 }

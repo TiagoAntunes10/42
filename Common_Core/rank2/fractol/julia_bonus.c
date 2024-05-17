@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandel.c                                           :+:      :+:    :+:   */
+/*   julia_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 21:23:59 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 21:41:32 by tialbert         ###   ########.fr       */
+/*   Created: 2024/02/15 21:23:41 by tialbert          #+#    #+#             */
+/*   Updated: 2024/05/15 22:26:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/fractol.h"
+#include "./Include/bonus.h"
 
-static int	mandel_render_start(t_mlx *mlx)
+static int	julia_render_start(t_mlx *mlx)
 {
-	mlx->c_real = mlx->c_real_beg;
+	long double	z_x;
+	long double	z_y;
+
 	mlx->x = 0;
 	while (mlx->x < mlx->win_length)
 	{
-		mlx->c_real += (-mlx->c_real_beg + mlx->c_real_end)
-			/ mlx->win_length / mlx->zoom;
-		mlx->c_ima = mlx->c_ima_beg / mlx->zoom;
+		z_x = (mlx->x * (3.5 / mlx->win_length) + mlx->c_real_beg + 0.2)
+			/ mlx->zoom;
 		mlx->y = 0;
 		while (mlx->y < mlx->win_height)
 		{
-			check_set(mlx, 0, 0);
-			mlx->c_ima -= (-mlx->c_ima_end + mlx->c_ima_beg)
-				/ mlx->win_height / mlx->zoom;
+			z_y = (mlx->y * (3.5 / mlx->win_height) - 0.75 + mlx->c_ima_end)
+				/ mlx->zoom;
+			check_set(mlx, z_x, z_y);
 			mlx->y++;
 		}
 		mlx->x++;
@@ -36,14 +38,14 @@ static int	mandel_render_start(t_mlx *mlx)
 	return (0);
 }
 
-void	mandel(char **argv, int argc)
+void	julia_bonus(char **argv, int argc)
 {
 	t_mlx	*mlx;
 
 	mlx = open_window(argv, argc);
-	mlx_loop_hook(mlx->mlx, &mandel_render_start, mlx);
-	mlx_mouse_hook(mlx->window, &zoom_press, mlx);
-	mlx_hook(mlx->window, KeyPress, KeyPressMask, &keypress, mlx);
+	mlx_loop_hook(mlx->mlx, &julia_render_start, mlx);
+	mlx_mouse_hook(mlx->window, &zoom_press_bonus, mlx);
+	mlx_hook(mlx->window, KeyPress, KeyPressMask, &keypress_bonus, mlx);
 	mlx_hook(mlx->window, ClientMessage, StructureNotifyMask, &xpress, mlx);
 	mlx_loop(mlx->mlx);
 }

@@ -6,61 +6,47 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 21:48:16 by tialbert          #+#    #+#             */
-/*   Updated: 2024/04/25 15:55:11 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:30:16 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "./Include/fractol.h"
 
-int	mandel_render_hook(t_mlx *mlx)
+int	zoom_press(int keysym, int x, int y, t_mlx *mlx)
 {
-	float	z_x;
-	float	z_y;
-
-	z_x = - (mlx->win_length / 2 / mlx->zoom);
-	mlx->x = 0;
-	while (z_x * mlx->zoom <= mlx->win_length / 2)
-	{
-		z_y = - (mlx->win_height / 2 / mlx->zoom);
-		mlx->y = 0;
-		while (z_y * mlx->zoom <= mlx->win_height / 2)
-		{
-			check_set(mlx, z_x, z_y);
-			z_y += 1 / mlx->zoom * 10;
-			mlx->y++;
-		}
-		z_x += 1 / mlx->zoom * 10;
-		mlx->x++;
-	}
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
-	return (0);
-}
-
-// TODO: Make a better zoom calculator
-// Maybe use a static variable to store the zoom we are at
-int	zoom_press(int keysym, t_mlx *mlx)
-{
+	(void) x;
+	(void) y;
 	if (keysym == 4)
+	{
 		mlx->zoom *= 1.1;
+		if (mlx->zoom_level % 3 == 0)
+			mlx->c_real_beg += 0.05 / mlx->zoom;
+		mlx->zoom_level++;
+	}
+	else if (mlx->zoom <= 1 && keysym == 5)
+		return (0);
 	else if (keysym == 5)
-		mlx->zoom *= 0.9;
+	{
+		mlx->zoom_level--;
+		mlx->zoom /= 1.1;
+		if (mlx->zoom < 1)
+			mlx->zoom = 1;
+		if (mlx->zoom_level % 3 == 0)
+			mlx->c_real_beg -= 0.05 / mlx->zoom;
+	}
+	mlx->c_real_end = 0.47 / mlx->zoom;
 	return (0);
 }
 
 int	keypress(int keysym, t_mlx *mlx)
 {
 	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->window);
-		mlx->window = NULL;
-	}
+		handle_errors(mlx);
 	return (0);
 }
 
-int	xpress(int buttonsym, t_mlx *mlx)
+int	xpress(t_mlx *mlx)
 {
-	(void) buttonsym;
-	mlx_destroy_window(mlx->mlx, mlx->window);
-	mlx->window = NULL;
+	handle_errors(mlx);
 	return (0);
 }

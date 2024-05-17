@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 21:17:20 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:16:47 by tialbert         ###   ########.fr       */
+/*   Created: 2024/05/06 18:48:55 by tialbert          #+#    #+#             */
+/*   Updated: 2024/05/11 11:07:00 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/fractol.h"
+#ifndef BONUS_H
+# define BONUS_H
 
-int	main(int argc, char **argv)
-{
-	errno = 0;
-	if (argc < 2 || argc > 4)
-		show_options(argc);
-	if (ft_strncmp(argv[1], "julia", 5) == 0
-		|| ft_strncmp(argv[1], "-j", 2) == 0)
-		julia(argv, argc);
-	else if (ft_strncmp(argv[1], "mandelbrot", 10) == 0
-		|| ft_strncmp(argv[1], "-m", 2) == 0)
-		mandel(argv, argc);
-	else
-		show_options(argc);
-}
+# include "fractol.h"
+
+# define KEY_DOWN 65364
+# define KEY_UP 65362
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+
+
+int		keypress_bonus(int keysym, t_mlx *mlx);
+int		zoom_press_bonus(int keysym, int x, int y, t_mlx *mlx);
+void	julia_bonus(char **argv, int argc);
+void	mandel_bonus(char **argv, int argc);
+void	newton(char **argv, int argc);
+
+#endif
