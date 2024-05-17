@@ -6,12 +6,14 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:47:00 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 21:47:59 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:48:18 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/fractol.h"
 
+// TODO: Norminette
+// TODO: I am having segmentation faults if there are empty arguments
 static int	check_num(char *str)
 {
 	int	com;
