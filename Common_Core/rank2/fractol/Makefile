@@ -8,7 +8,7 @@ SOURCE = fractol.c errors.c ft_atod.c mlx_utils.c mlx_hooks.c \
 		utils.c mandel.c julia.c
 
 SOURCE_BON = fractol_bonus.c errors_bonus.c ft_atod.c mlx_utils.c mlx_hooks.c \
-		utils.c mandel_bonus.c julia_bonus.c newton_bonus.c utils_bonus.c
+		utils.c mandel_bonus.c julia_bonus.c utils_bonus.c tricorn.c
 
 SOURCES = ${addprefix $(PRE), $(SOURCE)}
 SOURCES_BON = ${addprefix $(PRE), $(SOURCE_BON)}
@@ -55,5 +55,6 @@ clean:
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
 	$(MAKE) fclean -C $(FUNCTION)
+	$(MAKE) fclean -C $(MLX)
 
 re: fclean all

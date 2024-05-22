@@ -6,13 +6,12 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:50:01 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:20:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:18:07 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/fractol.h"
 
-// TODO: create show_options function for bonus part
 void	handle_errors(t_mlx *mlx)
 {
 	if (mlx != NULL)
@@ -21,8 +20,11 @@ void	handle_errors(t_mlx *mlx)
 			mlx_destroy_image(mlx->mlx, mlx->img);
 		if (mlx->window != NULL)
 			mlx_destroy_window(mlx->mlx, mlx->window);
-		mlx_destroy_display(mlx->mlx);
-		free(mlx->mlx);
+		if (mlx->mlx != NULL)
+		{
+			mlx_destroy_display(mlx->mlx);
+			free(mlx->mlx);
+		}
 		free(mlx);
 	}
 	exit(1);
@@ -34,7 +36,7 @@ void	show_options(int argc)
 	{
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("You can also modify the Julia set with up to 2 floats");
+		ft_printf("You can also modify the Julia set with up to 2 floats\n");
 		exit(1);
 	}
 	else if (argc > 4)
@@ -42,12 +44,12 @@ void	show_options(int argc)
 		ft_printf("Too many arguments\n\n");
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("You can also modify the Julia set with up to 2 floats");
+		ft_printf("You can also modify the Julia set with up to 2 floats\n");
 		exit(1);
 	}
 	ft_printf("Invalid option\n\n");
 	ft_printf("Select one option:\n");
 	ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-	ft_printf("You can also modify the Julia set with up to 2 floats");
+	ft_printf("You can also modify the Julia set with up to 2 floats\n");
 	exit(1);
 }

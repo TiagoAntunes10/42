@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:41 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:24:24 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:30:02 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	julia(char **argv, int argc)
 
 	mlx = open_window(argv, argc);
 	mlx_loop_hook(mlx->mlx, &julia_render_start, mlx);
-	mlx_mouse_hook(mlx->window, &zoom_press, mlx);
+	mlx_mouse_hook(mlx->window, &zoom_press_julia, mlx);
 	mlx_hook(mlx->window, KeyPress, KeyPressMask, &keypress, mlx);
 	mlx_hook(mlx->window, ClientMessage, StructureNotifyMask, &xpress, mlx);
 	mlx_loop(mlx->mlx);

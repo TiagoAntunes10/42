@@ -6,28 +6,59 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:52:05 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:26:32 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:53:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/fractol.h"
 #include "Include/bonus.h"
 
+static void	init_root(float *root_x, float *root_y)
+{
+	root_x[0] = 1;
+	root_x[1] = -1.0 / 2;
+	root_x[2] = -1.0 / 2;
+	root_y[0] = 0;
+	root_y[1] = sqrt(3) / 2;
+	root_y[2] = -sqrt(3) / 2;
+}
+
+static int	check_root(long double x, long double y)
+{
+	float	tol;
+	float	*root_x;
+	float	*root_y;
+	int		i;
+
+	tol = 0.1;
+	root_x = malloc(sizeof(float) * 3);
+	root_y = malloc(sizeof(float) * 3);
+	init_root(root_x, root_y);
+	i = 0;
+	while (i < 3)
+	{
+		if (fabsl(x - root_x[i]) <= tol && fabsl(y - root_y[i]) <= tol)
+			return (1);
+		i++;
+	}
+	free(root_x);
+	free(root_y);
+	return (0);
+}
+
 static void	check_set_newton(t_mlx *mlx, long double x, long double y)
 {
 	int			i;
 	int			max_ite;
 	int			colour;
-	long double	r;
 	long double	temp;
 
 	i = 0;
-	r = 2;
 	max_ite = 100;
-	while ((x * x + y * y) < r * r && i < max_ite)
+	while (check_root(x, y) == 0 && i < max_ite)
 	{
-		temp = pow(x, 3) + 3 * x * pow(y, 2) + mlx->c_real;
-		y = pow(y, 3) + 3 * y * pow(x, 2) + mlx->c_ima;
+		temp = x - ((pow(x, 3) + 3 * x * pow(y, 2) + mlx->c_real) / (3 * pow(x, 2) + 3 * pow(y, 2)));
+		y = y - ((pow(y, 2) + 3 * pow(x, 2) + mlx->c_ima) / (6 * x));
 		x = temp;
 		i++;
 	}

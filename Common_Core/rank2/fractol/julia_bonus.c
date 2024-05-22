@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:41 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 22:26:40 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:30:31 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static int	julia_render_start(t_mlx *mlx)
 	mlx->x = 0;
 	while (mlx->x < mlx->win_length)
 	{
-		z_x = (mlx->x * (3.5 / mlx->win_length) + mlx->c_real_beg + 0.2)
-			/ mlx->zoom;
+		z_x = (mlx->x * (3.5 / mlx->win_length)) / mlx->zoom
+			+ mlx->c_real_beg;
 		mlx->y = 0;
 		while (mlx->y < mlx->win_height)
 		{
-			z_y = (mlx->y * (3.5 / mlx->win_height) - 0.75 + mlx->c_ima_end)
-				/ mlx->zoom;
+			z_y = (mlx->y * (3.5 / mlx->win_height)) / mlx->zoom
+				+ mlx->c_ima_end;
 			check_set(mlx, z_x, z_y);
 			mlx->y++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 21:41:43 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/16 15:17:34 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:28:59 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ t_mlx	*open_window(char **argv, int argc)
 
 	mlx = create_struct();
 	get_c(argv, argc, mlx);
-	if (errno == -1)
-	{
-		perror("Invalid float");
-		handle_errors(mlx);
-	}
 	mlx->mlx = mlx_init();
 	if (mlx->mlx == NULL)
 		handle_errors(mlx);
@@ -69,7 +64,7 @@ void	check_set(t_mlx *mlx, long double x, long double y)
 		x = temp;
 		i++;
 	}
-	colour = colours(i % 5 * 6, i % 8 * 4, i % 4 * 5);
+	colour = colours(i % 9 * 6, i % 8 * 4, i % 9 * 5);
 	if (errno == -1)
 		handle_errors(mlx);
 	my_mlx_pixel_put(mlx, mlx->x, mlx->y, colour);

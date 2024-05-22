@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:50:01 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/16 15:02:06 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 21:17:09 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void	handle_errors(t_mlx *mlx)
 			mlx_destroy_image(mlx->mlx, mlx->img);
 		if (mlx->window != NULL)
 			mlx_destroy_window(mlx->mlx, mlx->window);
-		mlx_destroy_display(mlx->mlx);
-		free(mlx->mlx);
+		if (mlx->mlx != NULL)
+		{
+			mlx_destroy_display(mlx->mlx);
+			free(mlx->mlx);
+		}
 		free(mlx);
 	}
 	exit(1);
@@ -33,8 +36,8 @@ void	show_options(int argc)
 	{
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("3 - newton or -n\n");
-		ft_printf("Modify the Julia and Newton sets with up to 2 floats");
+		ft_printf("3 - tricorn or -t\n");
+		ft_printf("Modify the Julia set with up to 2 floats\n");
 		exit(1);
 	}
 	else if (argc > 4)
@@ -42,14 +45,14 @@ void	show_options(int argc)
 		ft_printf("Too many arguments\n\n");
 		ft_printf("Select one option:\n");
 		ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-		ft_printf("3 - newton or -n\n");
-		ft_printf("Modify the Julia and Newton sets with up to 2 floats");
+		ft_printf("3 - tricorn or -t\n");
+		ft_printf("Modify the Julia set with up to 2 floats\n");
 		exit(1);
 	}
 	ft_printf("Invalid option\n\n");
 	ft_printf("Select one option:\n");
 	ft_printf("1 - julia or -j\n2 - mandelbrot or -m\n");
-	ft_printf("3 - newton or -n\n");
-	ft_printf("Modify the Julia and Newton sets with up to 2 floats");
+	ft_printf("3 - tricorn or -t\n");
+	ft_printf("Modify the Julia set with up to 2 floats\n");
 	exit(1);
 }

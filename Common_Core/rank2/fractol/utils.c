@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:35:27 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/15 21:54:01 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:22:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	get_c(char **argv, int argc, t_mlx *mlx)
 			mlx->c_ima = ft_atod(argv[3], 0);
 	}
 	if (errno == -1)
+	{
+		ft_printf("Invalid float\n");
 		handle_errors(mlx);
+	}
 }
 
 static unsigned int	*get_hex(unsigned int r, unsigned int g, unsigned int b)
@@ -120,10 +123,10 @@ t_mlx	*create_struct(void)
 	mlx->zoom = 1;
 	mlx->zoom_level = 0;
 	mlx->c_real = 1;
-	mlx->c_real_beg = -2;
-	mlx->c_real_end = 0.47;
+	mlx->c_real_beg = -2.5;
+	mlx->c_real_end = 1.5;
 	mlx->c_ima = 0;
-	mlx->c_ima_beg = 1;
-	mlx->c_ima_end = -1;
+	mlx->c_ima_beg = 1.7;
+	mlx->c_ima_end = -1.7;
 	return (mlx);
 }

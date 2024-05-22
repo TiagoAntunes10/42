@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:55:36 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/16 15:26:14 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:14:19 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,44 +41,13 @@ static int	key_move(int keysym, t_mlx *mlx)
 int	keypress_bonus(int keysym, t_mlx *mlx)
 {
 	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->window);
-		mlx->window = NULL;
-	}
+		handle_errors(mlx);
 	else
 		key_move(keysym, mlx);
 	return (0);
 }
 
-static void	move_in(t_mlx *mlx, long double move_real, long double move_ima)
-{
-
-	if (move_real >= 0)
-		mlx->c_real_beg = (mlx->c_real_beg + move_real * 0.6);
-	else if (move_real < 0)
-		mlx->c_real_end = (mlx->c_real_end + move_real * 0.6);
-	if (move_ima >= 0)
-		mlx->c_ima_end = (mlx->c_ima_end + move_ima * 0.6);
-	else if (move_ima < 0)
-		mlx->c_ima_beg = (mlx->c_ima_beg + move_ima * 0.6);
-}
-
-static void	move_out(t_mlx *mlx, long double move_real, long double move_ima)
-{
-
-	if (move_real >= 0)
-		mlx->c_real_beg = (mlx->c_real_beg - move_real * 0.6);
-	else if (move_real < 0)
-		mlx->c_real_end = (mlx->c_real_end - move_real * 0.6);
-	if (move_ima >= 0)
-		mlx->c_ima_end = (mlx->c_ima_end - move_ima * 0.6);
-	else if (move_ima < 0)
-		mlx->c_ima_beg = (mlx->c_ima_beg - move_ima * 0.6);
-}
-// TODO: Insert new zoom algorithm
-// TODO: zoom out should go back to the original position
-// TODO: Norminette
-int	zoom_press_bonus(int keysym, int x, int y, t_mlx *mlx)
+static void	move_in(t_mlx *mlx, int x, int y)
 {
 	long double	step_real;
 	long double	step_ima;
@@ -87,17 +56,44 @@ int	zoom_press_bonus(int keysym, int x, int y, t_mlx *mlx)
 
 	step_real = (mlx->c_real_end - mlx->c_real_beg) / mlx->win_length;
 	step_ima = (mlx->c_ima_beg - mlx->c_ima_end) / mlx->win_height;
-	move_real = (x - mlx->win_length / 2) * step_real;
-	move_ima = (mlx->win_height / 2 - y) * step_ima;
+	move_real = (x - mlx->win_length / 2) * step_real * 0.4 / mlx->zoom;
+	move_ima = (mlx->win_height / 2 - y) * step_ima * 0.4 / mlx->zoom;
+	mlx->c_real_beg = (mlx->c_real_beg + move_real);
+	mlx->c_real_end = (mlx->c_real_end + move_real);
+	mlx->c_ima_beg = (mlx->c_ima_beg + move_ima);
+	mlx->c_ima_end = (mlx->c_ima_end + move_ima);
+}
+
+static void	move_out(t_mlx *mlx, int x, int y)
+{
+	long double	step_real;
+	long double	step_ima;
+	long double	move_real;
+	long double	move_ima;
+
+	step_real = (mlx->c_real_end - mlx->c_real_beg) / mlx->win_length;
+	step_ima = (mlx->c_ima_beg - mlx->c_ima_end) / mlx->win_height;
+	move_real = (x - mlx->win_length / 2) * step_real * 0.1 / mlx->zoom;
+	move_ima = (mlx->win_height / 2 - y) * step_ima * 0.1 / mlx->zoom;
+	mlx->c_real_beg = (mlx->c_real_beg - move_real);
+	mlx->c_real_end = (mlx->c_real_end - move_real);
+	mlx->c_ima_beg = (mlx->c_ima_beg - move_ima);
+	mlx->c_ima_end = (mlx->c_ima_end - move_ima);
+}
+
+int	zoom_press_bonus(int keysym, int x, int y, t_mlx *mlx)
+{
 	if (keysym == 4)
 	{
 		mlx->zoom *= 1.1;
-		move_in(mlx, move_real, move_ima);
+		move_in(mlx, x, y);
+		mlx->zoom_level++;
 	}
-	else if (keysym == 5 && mlx->zoom > 1)
+	else if (keysym == 5 && mlx->zoom_level > 0)
 	{
 		mlx->zoom /= 1.1;
-		move_out(mlx, move_real, move_ima);
+		move_out(mlx, x, y);
+		mlx->zoom_level--;
 	}
 	return (0);
 }
