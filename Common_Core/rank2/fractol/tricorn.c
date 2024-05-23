@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 18:08:03 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/22 22:30:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/23 08:56:53 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	check_set_tri(t_mlx *mlx, long double x, long double y)
 		x = temp;
 		i++;
 	}
-	colour = colours(i % 5 * 6, i % 8 * 4, i % 4 * 5);
+	colour = colours(i % 9 * 6, i % 8 * 4, i % 9 * 5);
 	if (errno == -1)
 		handle_errors(mlx);
 	my_mlx_pixel_put(mlx, mlx->x, mlx->y, colour);

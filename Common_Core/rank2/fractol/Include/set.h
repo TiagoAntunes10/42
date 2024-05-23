@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 21:23:23 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/22 21:00:18 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/23 08:37:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 # define SET_H
 
-typedef struct s_mlx {
+typedef struct s_mlx
+{
 	void		*mlx;
 	void		*window;
 	float		win_height;

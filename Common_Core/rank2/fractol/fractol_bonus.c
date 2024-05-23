@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:17:20 by tialbert          #+#    #+#             */
-/*   Updated: 2024/05/22 21:15:30 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:01:55 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 	else if ((ft_strncmp(argv[1], "mandelbrot", 10) == 0
 			|| ft_strncmp(argv[1], "-m", 2) == 0) && argc == 2)
 		mandel_bonus(argv, argc);
-	else if (ft_strncmp(argv[1], "tricorn", 10) == 0
-		|| ft_strncmp(argv[1], "-t", 2) == 0)
+	else if ((ft_strncmp(argv[1], "tricorn", 7) == 0
+			|| ft_strncmp(argv[1], "-t", 2) == 0) && argc == 2)
 		tricorn(argv, argc);
 	else
 		show_options(argc);
