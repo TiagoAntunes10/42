@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:17 by tialbert          #+#    #+#             */
-/*   Updated: 2024/06/10 19:24:10 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/06/15 23:37:45 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philo;
+	t_philo_const	*philo;
 
 	if (argc < 5 || argc > 6)
 	{
 		argument_error(0);
 		return (-1);
 	}
-	philo = malloc(sizeof(t_philo));
+	philo = malloc(sizeof(t_philo_const));
 	if (philo == NULL)
 		return (0);
 	if (get_args(philo, argv, argc) != 0)
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	start_philo(philo);
-	free(philo->mutex);
 	free(philo);
 	return (0);
 }

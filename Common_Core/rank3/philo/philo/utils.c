@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/06/10 19:39:42 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/06/16 21:15:30 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_nb(char const *str)
 	return (0);
 }
 
-static int	ft_atoi(char const *str)
+static long long	ft_atoi(char const *str)
 {
 	unsigned int	nb;
 
@@ -34,7 +34,7 @@ static int	ft_atoi(char const *str)
 	return (nb);
 }
 
-int	get_args(t_philo *philo, char **argv, int argc)
+int	get_args(t_philo_const *philo, char **argv, int argc)
 {
 	philo->philos_num = ft_atoi(argv[1]);
 	if (philo->philos_num == -1 || philo->philos_num == 0)
@@ -57,4 +57,35 @@ int	get_args(t_philo *philo, char **argv, int argc)
 	else
 		philo->eat_num = -1;
 	return (0);
+}
+
+void	start_mutex(t_philo_lst *philo_lst)
+{
+	while (philo_lst->seat <= philo_lst->philo_const->philos_num)
+	{
+		pthread_mutex_init(&philo_lst->mutex, NULL);
+		philo_lst = philo_lst->next;
+	}
+}
+
+void	end_lst(t_philo_lst *philo_lst)
+{
+	t_philo_lst	*lst_next;
+	int			i;
+	int			philos_num;
+
+	i = 0;
+	philos_num = philo_lst->philo_const->philos_num;
+	while (philo_lst->seat <= philo_lst->philo_const->philos_num)
+	{
+		pthread_mutex_destroy(&philo_lst->mutex);
+		philo_lst = philo_lst->next;
+	}
+	while (i < philos_num)
+	{
+		lst_next = philo_lst->next;
+		free(philo_lst);
+		philo_lst = lst_next;
+		i++;
+	}
 }
