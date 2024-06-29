@@ -4,14 +4,15 @@
 
 int	main(void)
 {
-	struct timeval	time;
-	struct timezone	tm_zone;
+	struct timeval	t_init;
+	struct timeval	t_now;
 
-	if (gettimeofday(&time, &tm_zone) != 0)
+	if (gettimeofday(&t_init, NULL) != 0)
 		return (-1);
-	printf("%ld\n", time.tv_sec);
-	usleep(10000000);
-	if (gettimeofday(&time, &tm_zone) != 0)
+	printf("%ld\n", t_init.tv_usec);
+	usleep(200000);
+	if (gettimeofday(&t_now, NULL) != 0)
 		return (-1);
-	printf("%ld\n", time.tv_sec);
+	printf("%ld\n", t_now.tv_usec);
+	printf("%ld\n", (t_now.tv_usec - t_init.tv_usec) / 1000);
 }

@@ -3,7 +3,7 @@ INCLUDE = $(PRE)Include
 # BONUS = ./philo_bonus/
 # INCLUDE_BONUS = $(BONUS)Include
 
-SOURCE = main.c errors.c philo.c utils.c lst_op.c
+SOURCE = main.c errors.c philo.c utils.c lst_op.c time_utils.c
 
 # SOURCE_BON = 
 

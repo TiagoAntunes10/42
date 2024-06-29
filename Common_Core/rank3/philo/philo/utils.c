@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/06/16 21:15:30 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:40:18 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,18 @@ int	get_args(t_philo_const *philo, char **argv, int argc)
 
 void	start_mutex(t_philo_lst *philo_lst)
 {
-	while (philo_lst->seat <= philo_lst->philo_const->philos_num)
+	int			i;
+	t_philo_lst	*lst;
+
+	i = 1;
+	lst = philo_lst;
+	while (i++ <= lst->philo_const->philos_num)
 	{
-		pthread_mutex_init(&philo_lst->mutex, NULL);
-		philo_lst = philo_lst->next;
+		lst->mutex_struct = malloc(sizeof(t_mutex));
+		pthread_mutex_init(&lst->mutex_struct->mutex, NULL);
+		lst = lst->next;
 	}
+	pthread_mutex_init(&lst->philo_cond->death_mutex, NULL);
 }
 
 void	end_lst(t_philo_lst *philo_lst)
@@ -76,9 +83,12 @@ void	end_lst(t_philo_lst *philo_lst)
 
 	i = 0;
 	philos_num = philo_lst->philo_const->philos_num;
+	pthread_mutex_destroy(&philo_lst->philo_cond->death_mutex);
+	free(philo_lst->philo_cond);
 	while (philo_lst->seat <= philo_lst->philo_const->philos_num)
 	{
-		pthread_mutex_destroy(&philo_lst->mutex);
+		pthread_mutex_destroy(&philo_lst->mutex_struct->mutex);
+		free(philo_lst->mutex_struct);
 		philo_lst = philo_lst->next;
 	}
 	while (i < philos_num)
