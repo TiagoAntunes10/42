@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:17 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 10:38:24 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:23:39 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	start_philo(t_philo_lst **philo_lst)
 	pthread_t		*thread;
 	int				i;
 
-	thread = malloc(sizeof(pthread_t) * (*philo_lst)->philo_const->philos_num + 1);
+	thread = malloc(sizeof(pthread_t) * ((*philo_lst)->philo_const->philos_num + 1));
 	if (thread == NULL)
 		return ;
 	i = 0;
@@ -40,7 +40,8 @@ static void	start_philo(t_philo_lst **philo_lst)
 		if (pthread_join(thread[i++], NULL) != 0)
 			return (free(thread));
 	}
-	return (free(thread));
+	free(thread);
+	return ;
 }
 
 int	main(int argc, char **argv)
@@ -67,5 +68,6 @@ int	main(int argc, char **argv)
 	if (philo_lst == NULL)
 		return (end_lst(philo_lst));
 	start_philo(&philo_lst);
-	return (end_lst(philo_lst));
+	end_lst(philo_lst);
+	return (1);
 }

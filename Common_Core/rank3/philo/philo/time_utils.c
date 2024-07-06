@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 10:51:49 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 10:38:13 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:55:56 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	get_eat_time(t_philo_lst *philo_lst)
 	return (0);
 }
 
-int	starve_check(t_philo_lst *philo_lst)
+int	starve_check(t_philo_lst **philo_lst)
 {
 	long	t_now;
 
-	t_now = get_time(philo_lst);
-	if ((t_now - philo_lst->t_after_eat) >= philo_lst->philo_const->t_die)
+	t_now = get_time(*philo_lst);
+	if ((t_now - (*philo_lst)->t_after_eat) >= (*philo_lst)->philo_const->t_die)
 		return (1);
 	return (0);
 }

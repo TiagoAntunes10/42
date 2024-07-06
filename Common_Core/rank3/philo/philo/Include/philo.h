@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:52 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 10:41:18 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:55:12 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			end_lst(t_philo_lst *philo_lst);
 int			get_init_time(t_philo_lst **philo_lst);
 long long	get_time(t_philo_lst *philo_lst);
 int			get_eat_time(t_philo_lst *philo_lst);
-int			starve_check(t_philo_lst *philo_lst);
+int			starve_check(t_philo_lst **philo_lst);
 void		write_state(t_philo_lst **philo_lst, char *state);
 
 #endif

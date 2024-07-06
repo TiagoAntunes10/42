@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 23:19:39 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 10:41:34 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:25:50 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	*run_thread(void *arg)
 	philo_lst->philo_const->queue++;
 	pthread_mutex_unlock(&philo_lst->philo_cond->death_mutex);
 	while (philo_lst->philo_cond->start != 1)
-		usleep(5);
+		usleep(1);
 	eat_limit = philo_lst->philo_const->eat_num;
 	if (get_eat_time(philo_lst) == -1)
 		return (NULL);
@@ -119,7 +119,7 @@ void	*watcher(void *arg)
 	while (philo_lst->philo_cond->death == 0)
 	{
 		pthread_mutex_lock(&philo_lst->philo_cond->death_mutex);
-		if (starve_check(philo_lst) == 1 && philo_lst->eating == 0)
+		if (starve_check(&philo_lst) == 1 && philo_lst->eating == 0)
 			philo_lst->philo_cond->death = philo_lst->seat;
 		pthread_mutex_unlock(&philo_lst->philo_cond->death_mutex);
 		if (philo_lst->philo_cond->death == -1)
