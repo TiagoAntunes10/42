@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/06/29 15:40:18 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/06 10:33:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,25 @@ int	get_args(t_philo_const *philo, char **argv, int argc)
 	return (0);
 }
 
-void	start_mutex(t_philo_lst *philo_lst)
+int	start_mutex(t_philo_lst **philo_lst)
 {
 	int			i;
 	t_philo_lst	*lst;
 
 	i = 1;
-	lst = philo_lst;
+	lst = *philo_lst;
 	while (i++ <= lst->philo_const->philos_num)
 	{
-		lst->mutex_struct = malloc(sizeof(t_mutex));
-		pthread_mutex_init(&lst->mutex_struct->mutex, NULL);
+		if (pthread_mutex_init(&lst->mutex, NULL) != 0)
+			return (-1);
 		lst = lst->next;
 	}
-	pthread_mutex_init(&lst->philo_cond->death_mutex, NULL);
+	if (pthread_mutex_init(&lst->philo_cond->death_mutex, NULL) != 0)
+		return (-1);
+	return (0);
 }
 
-void	end_lst(t_philo_lst *philo_lst)
+int	end_lst(t_philo_lst *philo_lst)
 {
 	t_philo_lst	*lst_next;
 	int			i;
@@ -83,19 +85,17 @@ void	end_lst(t_philo_lst *philo_lst)
 
 	i = 0;
 	philos_num = philo_lst->philo_const->philos_num;
-	pthread_mutex_destroy(&philo_lst->philo_cond->death_mutex);
+	if (pthread_mutex_destroy(&philo_lst->philo_cond->death_mutex) != 0)
+		return (-1);
 	free(philo_lst->philo_cond);
-	while (philo_lst->seat <= philo_lst->philo_const->philos_num)
-	{
-		pthread_mutex_destroy(&philo_lst->mutex_struct->mutex);
-		free(philo_lst->mutex_struct);
-		philo_lst = philo_lst->next;
-	}
-	while (i < philos_num)
+	free(philo_lst->philo_const);
+	while (i++ < philos_num)
 	{
 		lst_next = philo_lst->next;
+		if (pthread_mutex_destroy(&philo_lst->mutex) != 0)
+			return (-1);
 		free(philo_lst);
 		philo_lst = lst_next;
-		i++;
 	}
+	return (0);
 }
