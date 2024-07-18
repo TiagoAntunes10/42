@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 18:46:20 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 16:58:54 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:16:21 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_philo_lst	*start_lst(t_philo_const *philo)
 	lst->next = NULL;
 	lst->prev = NULL;
 	lst->kill = 0;
-	lst->eating = 0;
 	lst->philo_const = philo;
 	lst->philo_cond = philo_cond;
 	lst->seat = 1;
@@ -48,7 +47,6 @@ static int	lst_add_front(t_philo_lst *philo_lst)
 	new->prev = lst;
 	new->next = NULL;
 	new->kill = 0;
-	new->eating = 0;
 	new->philo_const = lst->philo_const;
 	new->philo_cond = lst->philo_cond;
 	new->seat = lst->seat + 1;
@@ -71,34 +69,46 @@ static int	lst_add_last(t_philo_lst *philo_lst)
 	lst->next = new;
 	new->prev = lst;
 	new->kill = 0;
-	new->eating = 0;
 	new->philo_const = lst->philo_const;
 	new->philo_cond = lst->philo_cond;
 	new->seat = lst->seat + 1;
 	return (0);
 }
 
-t_philo_lst	*create_lst(t_philo_const *philo)
+static int	fill_lst(t_philo_const *philo, t_philo_lst *philo_lst)
 {
-	t_philo_lst	*philo_lst;
 	long long	i;
 
-	philo_lst = start_lst(philo);
-	if (philo_lst == NULL)
-		return (NULL);
 	i = 1;
 	while (i < philo->philos_num)
 	{
 		if (i++ == philo->philos_num - 1)
 		{
 			if (lst_add_last(philo_lst) == -1)
-				return (NULL);
+				return (-1);
 		}
 		else
 		{
 			if (lst_add_front(philo_lst) == -1)
-				return (NULL);
+				return (-1);
 		}
+	}
+	return (0);
+}
+
+t_philo_lst	*create_lst(t_philo_const *philo)
+{
+	t_philo_lst	*philo_lst;
+
+	philo_lst = start_lst(philo);
+	if (philo_lst == NULL)
+		return (NULL);
+	if (fill_lst(philo, philo_lst) == -1)
+		return (NULL);
+	if (philo->philos_num == 1)
+	{
+		philo_lst->next = philo_lst;
+		philo_lst->prev = philo_lst;
 	}
 	if (start_mutex(&philo_lst) == -1)
 		return (NULL);

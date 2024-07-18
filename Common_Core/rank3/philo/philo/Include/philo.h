@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:52 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 16:55:12 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:42:01 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,43 @@ typedef struct s_philo_const {
 }				t_philo_const;
 
 typedef struct s_cond {
-	pthread_mutex_t	death_mutex;
 	int				death;
 	int				start;
+	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	kill_mutex;
+	pthread_mutex_t	time_mutex;
 }				t_cond;
 
 typedef struct s_philo_lst {
 	int					seat;
 	int					kill;
-	int					eating;
-	t_philo_const		*philo_const;
 	long long			t_init;
 	long long			t_after_eat;
+	long long			t_now;
 	pthread_mutex_t		mutex;
+	t_philo_const		*philo_const;
+	t_cond				*philo_cond;
 	struct s_philo_lst	*next;
 	struct s_philo_lst	*prev;
-	t_cond				*philo_cond;
 }					t_philo_lst;
 
 int			get_args(t_philo_const *philo, char **argv, int argc);
 void		argument_error(int type);
 t_philo_lst	*create_lst(t_philo_const *philo);
+int			mutex_unlock(t_philo_lst *philo_lst);
 void		*run_thread(void *arg);
 void		*watcher(void *arg);
+int			philo_sim(t_philo_lst *philo_lst);
 int			start_mutex(t_philo_lst **philo_lst);
 int			end_lst(t_philo_lst *philo_lst);
 int			get_init_time(t_philo_lst **philo_lst);
-long long	get_time(t_philo_lst *philo_lst);
-int			get_eat_time(t_philo_lst *philo_lst);
+int			get_current_time(t_philo_lst *philo_lst, int type);
 int			starve_check(t_philo_lst **philo_lst);
+int			kill_unlock_cond(t_philo_lst *philo_lst, int type);
+int			kill_cond(t_philo_lst *philo_lst);
 void		write_state(t_philo_lst **philo_lst, char *state);
+int			start_sim(t_philo_lst *philo_lst);
+int			death_check(t_philo_lst *philo_lst);
+int			kill_philos(t_philo_lst *philo_lst);
 
 #endif

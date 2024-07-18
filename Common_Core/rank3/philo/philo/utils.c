@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 17:31:00 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:42:22 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ int	start_mutex(t_philo_lst **philo_lst)
 	}
 	if (pthread_mutex_init(&lst->philo_cond->death_mutex, NULL) != 0)
 		return (-1);
+	if (pthread_mutex_init(&lst->philo_cond->time_mutex, NULL) != 0)
+		return (-1);
+	if (pthread_mutex_init(&lst->philo_cond->kill_mutex, NULL) != 0)
+		return (-1);
 	return (0);
 }
 
@@ -83,17 +87,20 @@ int	end_lst(t_philo_lst *philo_lst)
 	int			i;
 	int			philos_num;
 
-	i = 0;
 	philos_num = philo_lst->philo_const->philos_num;
 	if (pthread_mutex_destroy(&philo_lst->philo_cond->death_mutex) != 0)
 		return (-1);
+	if (pthread_mutex_destroy(&philo_lst->philo_cond->time_mutex) != 0)
+		return (-1);
+	if (pthread_mutex_destroy(&philo_lst->philo_cond->kill_mutex) != 0)
+		return (-1);
 	free(philo_lst->philo_cond);
 	free(philo_lst->philo_const);
+	i = 0;
 	while (i++ < philos_num)
 	{
 		lst_next = philo_lst->next;
-		if (pthread_mutex_destroy(&philo_lst->mutex) != 0)
-			return (-1);
+		pthread_mutex_destroy(&philo_lst->mutex);
 		free(philo_lst);
 		philo_lst = lst_next;
 	}

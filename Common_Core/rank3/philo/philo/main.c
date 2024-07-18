@@ -6,40 +6,48 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:17 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 17:23:39 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:19:36 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/philo.h"
 
-// TODO: Reduce number of lines
+static int	start_threads(t_philo_lst *lst, pthread_t *thread)
+{
+	int	i;
+
+	i = 0;
+	if (pthread_create(&thread[i++], NULL, &watcher, (void *) lst) != 0)
+		return (-1);
+	while (i <= lst->philo_const->philos_num)
+	{
+		if (pthread_create(thread + i, NULL, &run_thread, (void *) lst) != 0)
+			return (-1);
+		i++;
+		lst = lst->next;
+	}
+	i = 0;
+	while (i <= lst->philo_const->philos_num)
+	{
+		if (pthread_join(thread[i++], NULL) != 0)
+			return (-1);
+	}
+	return (0);
+}
+
 static void	start_philo(t_philo_lst **philo_lst)
 {
 	pthread_t		*thread;
-	int				i;
+	int				philos_num;
+	t_philo_lst		*lst;
 
-	thread = malloc(sizeof(pthread_t) * ((*philo_lst)->philo_const->philos_num + 1));
+	philos_num = (*philo_lst)->philo_const->philos_num;
+	lst = *philo_lst;
+	thread = malloc(sizeof(pthread_t) * (philos_num + 1));
 	if (thread == NULL)
 		return ;
-	i = 0;
-	if (pthread_create(&thread[i++], NULL, &watcher, (void *) (*philo_lst)) != 0)
+	if (start_threads(lst, thread) != 0)
 		return (free(thread));
-	if (get_init_time(philo_lst) == -1)
-		return (free(thread));
-	while (i <= (*philo_lst)->philo_const->philos_num)
-	{
-		if (pthread_create(thread + i, NULL,
-				&run_thread, (void *) (*philo_lst)) != 0)
-			return (free(thread));
-		i++;
-		*philo_lst = (*philo_lst)->next;
-	}
-	i = 0;
-	while (i <= (*philo_lst)->philo_const->philos_num)
-	{
-		if (pthread_join(thread[i++], NULL) != 0)
-			return (free(thread));
-	}
 	free(thread);
 	return ;
 }

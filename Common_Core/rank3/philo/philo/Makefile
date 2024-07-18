@@ -3,7 +3,8 @@ INCLUDE = $(PRE)Include
 # BONUS = ./philo_bonus/
 # INCLUDE_BONUS = $(BONUS)Include
 
-SOURCE = main.c errors.c philo.c utils.c lst_op.c time_utils.c state.c
+SOURCE = main.c errors.c philo.c utils.c lst_op.c time_utils.c state.c \
+		 watcher_utils.c death_utils.c
 
 # SOURCE_BON = 
 
@@ -14,7 +15,7 @@ NAME = philo
 # NAME_BONUS = philo_bonus
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -pthread 
+FLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=thread
 # -fsanitize=address
 
 OBJ = $(SOURCES:.c=.o)

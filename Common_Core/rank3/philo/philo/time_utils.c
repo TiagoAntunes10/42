@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 10:51:49 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/06 16:55:56 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:18:48 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_init_time(t_philo_lst **philo_lst)
 	return (0);
 }
 
-long long	get_time(t_philo_lst *philo_lst)
+static long long	get_time(t_philo_lst *philo_lst)
 {
 	struct timeval	t_now;
 
@@ -39,17 +39,22 @@ long long	get_time(t_philo_lst *philo_lst)
 	return ((t_now.tv_sec * 1000 + t_now.tv_usec / 1000) - philo_lst->t_init);
 }
 
-int	get_eat_time(t_philo_lst *philo_lst)
+int	get_current_time(t_philo_lst *philo_lst, int type)
 {
-	struct timeval	t_now;
 	long long		t;
 
-	pthread_mutex_lock(&philo_lst->philo_cond->death_mutex);
-	if (gettimeofday(&t_now, NULL) != 0)
+	pthread_mutex_lock(&philo_lst->philo_cond->time_mutex);
+	t = get_time(philo_lst);
+	if (t == -1)
+	{
+		pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
 		return (-1);
-	t = (t_now.tv_sec * 1000 + t_now.tv_usec / 1000) - philo_lst->t_init;
-	philo_lst->t_after_eat = t;
-	pthread_mutex_unlock(&philo_lst->philo_cond->death_mutex);
+	}
+	if (type == 0)
+		philo_lst->t_after_eat = t;
+	else if (type == 1)
+		philo_lst->t_now = t;
+	pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
 	return (0);
 }
 
@@ -57,8 +62,13 @@ int	starve_check(t_philo_lst **philo_lst)
 {
 	long	t_now;
 
+	pthread_mutex_lock(&(*philo_lst)->philo_cond->time_mutex);
 	t_now = get_time(*philo_lst);
 	if ((t_now - (*philo_lst)->t_after_eat) >= (*philo_lst)->philo_const->t_die)
+	{
+		pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
 		return (1);
+	}
+	pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
 	return (0);
 }

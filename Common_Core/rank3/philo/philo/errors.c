@@ -6,13 +6,12 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:28:35 by tialbert          #+#    #+#             */
-/*   Updated: 2024/06/10 19:23:50 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/10 22:02:10 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/philo.h"
 
-// TODO: Add the necessary argument errors that appear in the future.
 void	argument_error(int type)
 {
 	if (type == 0)
