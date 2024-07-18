@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/18 15:42:22 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:48:49 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	start_mutex(t_philo_lst **philo_lst)
 		return (-1);
 	if (pthread_mutex_init(&lst->philo_cond->kill_mutex, NULL) != 0)
 		return (-1);
+	if (pthread_mutex_init(&lst->philo_cond->t_to_die_mutex, NULL) != 0)
+		return (-1);
 	return (0);
 }
 
@@ -93,6 +95,8 @@ int	end_lst(t_philo_lst *philo_lst)
 	if (pthread_mutex_destroy(&philo_lst->philo_cond->time_mutex) != 0)
 		return (-1);
 	if (pthread_mutex_destroy(&philo_lst->philo_cond->kill_mutex) != 0)
+		return (-1);
+	if (pthread_mutex_destroy(&philo_lst->philo_cond->t_to_die_mutex) != 0)
 		return (-1);
 	free(philo_lst->philo_cond);
 	free(philo_lst->philo_const);

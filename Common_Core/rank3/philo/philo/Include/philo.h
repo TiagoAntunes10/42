@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:52 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/18 15:42:01 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:12:33 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_cond {
 	int				start;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	kill_mutex;
+	pthread_mutex_t	t_to_die_mutex;
 	pthread_mutex_t	time_mutex;
 }				t_cond;
 

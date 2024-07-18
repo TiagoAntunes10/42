@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:17 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/18 14:19:36 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:49:47 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	start_philo(t_philo_lst **philo_lst)
 	int				philos_num;
 	t_philo_lst		*lst;
 
+	if ((*philo_lst)->philo_const->eat_num == 0)
+		return ;
 	philos_num = (*philo_lst)->philo_const->philos_num;
 	lst = *philo_lst;
 	thread = malloc(sizeof(pthread_t) * (philos_num + 1));

@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 10:51:49 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/17 22:18:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:14:14 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,21 @@ int	get_current_time(t_philo_lst *philo_lst, int type)
 {
 	long long		t;
 
-	pthread_mutex_lock(&philo_lst->philo_cond->time_mutex);
 	t = get_time(philo_lst);
 	if (t == -1)
-	{
-		pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
 		return (-1);
-	}
 	if (type == 0)
+	{
+		pthread_mutex_lock(&philo_lst->philo_cond->t_to_die_mutex);
 		philo_lst->t_after_eat = t;
+		pthread_mutex_unlock(&philo_lst->philo_cond->t_to_die_mutex);
+	}
 	else if (type == 1)
+	{
+		pthread_mutex_lock(&philo_lst->philo_cond->time_mutex);
 		philo_lst->t_now = t;
-	pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
+		pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
+	}
 	return (0);
 }
 
@@ -62,13 +65,13 @@ int	starve_check(t_philo_lst **philo_lst)
 {
 	long	t_now;
 
-	pthread_mutex_lock(&(*philo_lst)->philo_cond->time_mutex);
+	pthread_mutex_lock(&(*philo_lst)->philo_cond->t_to_die_mutex);
 	t_now = get_time(*philo_lst);
 	if ((t_now - (*philo_lst)->t_after_eat) >= (*philo_lst)->philo_const->t_die)
 	{
-		pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
+		pthread_mutex_unlock(&(*philo_lst)->philo_cond->t_to_die_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
+	pthread_mutex_unlock(&(*philo_lst)->philo_cond->t_to_die_mutex);
 	return (0);
 }

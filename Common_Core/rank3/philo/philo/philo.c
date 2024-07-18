@@ -6,13 +6,12 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 23:19:39 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/18 15:44:26 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:43:42 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/philo.h"
 
-// TODO: The performance could still be improved
 static int	mutex_lock(t_philo_lst *philo_lst)
 {
 	t_philo_lst	*lst;
