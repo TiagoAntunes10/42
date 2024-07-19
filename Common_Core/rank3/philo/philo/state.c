@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:09:18 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 11:31:45 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:30:51 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ void	write_state(t_philo_lst **philo_lst, char *state)
 {
 	if (ft_strncmp(state, "eat", 3) == 0)
 	{
-		pthread_mutex_lock(&(*philo_lst)->philo_cond->t_to_die_mutex);
+		pthread_mutex_lock(&(*philo_lst)->t_to_die_mutex);
 		printf("%lld %d is eating\n",
 			(*philo_lst)->t_after_eat, (*philo_lst)->seat);
-		pthread_mutex_unlock(&(*philo_lst)->philo_cond->t_to_die_mutex);
+		pthread_mutex_unlock(&(*philo_lst)->t_to_die_mutex);
 		usleep((*philo_lst)->philo_const->t_eat * 1000);
 	}
 	else if (ft_strncmp(state, "sleep", 5) == 0)
 	{
-		pthread_mutex_lock(&(*philo_lst)->philo_cond->time_mutex);
+		pthread_mutex_lock(&(*philo_lst)->time_mutex);
 		printf("%lld %d is sleeping\n",
 			(*philo_lst)->t_now, (*philo_lst)->seat);
-		pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
+		pthread_mutex_unlock(&(*philo_lst)->time_mutex);
 		usleep((*philo_lst)->philo_const->t_sleep * 1000);
 	}
 	else if (ft_strncmp(state, "fork", 4) == 0)
 	{
-		pthread_mutex_lock(&(*philo_lst)->philo_cond->time_mutex);
+		pthread_mutex_lock(&(*philo_lst)->time_mutex);
 		printf("%lld %d has taken a fork\n",
 			(*philo_lst)->t_now, (*philo_lst)->seat);
-		pthread_mutex_unlock(&(*philo_lst)->philo_cond->time_mutex);
+		pthread_mutex_unlock(&(*philo_lst)->time_mutex);
 	}
 }
 

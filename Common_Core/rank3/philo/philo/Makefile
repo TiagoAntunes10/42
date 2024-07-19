@@ -15,8 +15,8 @@ NAME = philo
 # NAME_BONUS = philo_bonus
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=thread
-# -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -pthread 
+# -fsanitize=thread
 
 OBJ = $(SOURCES:.c=.o)
 # OBJ_BON = $(SOURCES_BON:.c=.o)

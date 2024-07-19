@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 23:19:39 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 11:31:48 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:27:11 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	philo_sim(t_philo_lst *philo_lst)
 {
 	if (get_current_time(philo_lst, 1) == -1)
 		return (-1);
-	if (pthread_mutex_lock(&philo_lst->philo_cond->time_mutex) != 0)
+	if (pthread_mutex_lock(&philo_lst->time_mutex) != 0)
 		return (-1);
 	printf("%lld %d is thinking\n", philo_lst->t_now, philo_lst->seat);
-	if (pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex) != 0)
+	if (pthread_mutex_unlock(&philo_lst->time_mutex) != 0)
 		return (-1);
 	if (mutex_lock(philo_lst) == -1)
 		return (-1);
@@ -125,10 +125,10 @@ void	*watcher(void *arg)
 		return (NULL);
 	if (get_current_time(philo_lst, 1) == -1)
 		return (NULL);
-	pthread_mutex_lock(&philo_lst->philo_cond->time_mutex);
+	pthread_mutex_lock(&philo_lst->time_mutex);
 	printf("%lld %d died\n", philo_lst->t_now,
 		philo_lst->philo_cond->death);
-	pthread_mutex_unlock(&philo_lst->philo_cond->time_mutex);
+	pthread_mutex_unlock(&philo_lst->time_mutex);
 	if (kill_philos(philo_lst) != 0)
 		return (NULL);
 	return (NULL);

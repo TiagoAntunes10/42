@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:52 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 11:31:53 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:35:43 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-typedef struct s_philo_const {
+typedef struct s_philo_const
+{
 	long long	philos_num;
 	long long	t_die;
 	long long	t_eat;
@@ -29,22 +30,24 @@ typedef struct s_philo_const {
 	int			queue;
 }				t_philo_const;
 
-typedef struct s_cond {
+typedef struct s_cond
+{
 	int				death;
 	int				start;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	kill_mutex;
-	pthread_mutex_t	t_to_die_mutex;
-	pthread_mutex_t	time_mutex;
 }				t_cond;
 
-typedef struct s_philo_lst {
+typedef struct s_philo_lst
+{
 	int					seat;
 	int					kill;
 	long long			t_init;
 	long long			t_after_eat;
 	long long			t_now;
+	pthread_mutex_t		t_to_die_mutex;
 	pthread_mutex_t		mutex;
+	pthread_mutex_t		time_mutex;
 	t_philo_const		*philo_const;
 	t_cond				*philo_cond;
 	struct s_philo_lst	*next;
