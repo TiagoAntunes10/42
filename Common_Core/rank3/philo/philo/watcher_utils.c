@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:19:18 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/18 15:42:38 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/19 09:13:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	death_check(t_philo_lst *philo_lst)
 		pthread_mutex_unlock(&philo_lst->philo_cond->death_mutex);
 		if (starve_check(&philo_lst) == 1)
 			philo_lst->philo_cond->death = philo_lst->seat;
+		usleep(75);
 		pthread_mutex_lock(&philo_lst->philo_cond->death_mutex);
 		if (philo_lst->philo_cond->death == -1)
 		{

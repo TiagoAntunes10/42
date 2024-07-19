@@ -19,7 +19,7 @@ FLAGS = -Wall -Wextra -Werror -g -pthread -fsanitize=thread
 # -fsanitize=address
 
 OBJ = $(SOURCES:.c=.o)
-OBJ_BON = $(SOURCES_BON:.c=.o)
+# OBJ_BON = $(SOURCES_BON:.c=.o)
 
 all: $(NAME)
 
@@ -29,18 +29,18 @@ $(NAME): $(OBJ)
 .c.o:
 		$(CC) $(FLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
 
-bonus: $(NAME_BONUS)
+# bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_BON)
-	cc $(FLAGS) -o $@ $^
+# $(NAME_BONUS): $(OBJ_BON)
+# 	cc $(FLAGS) -o $@ $^
 
-.c.o2:
-	$(CC) $(FLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
+# .c.o2:
+# 	$(CC) $(FLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
 
 clean: 
-	rm -f $(OBJ) $(OBJ_BON)
+	rm -f $(OBJ)
         
 fclean: clean
-	rm -f $(NAME) $(NAME_BONUS)
+	rm -f $(NAME)
 
 re: fclean all
