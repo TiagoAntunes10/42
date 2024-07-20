@@ -6,11 +6,31 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:09:18 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 17:30:51 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:51:28 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/philo.h"
+
+void	eating_queue(t_philo_lst *philo_lst, int eat_limit)
+{
+	long long	t_think;
+	long long	t_sleep;
+
+	if (philo_lst->philo_const->philos_num % 2 == 0)
+		return ;
+	if (eat_limit == philo_lst->philo_const->eat_num - 1)
+	{
+		if (philo_lst->seat % 2 == 0)
+			usleep(50);
+	}
+	t_sleep = philo_lst->philo_const->t_sleep;
+	t_think = philo_lst->philo_const->t_eat * 2 - t_sleep;
+	if (t_think < 0)
+		t_think = 0;
+	if (eat_limit < philo_lst->philo_const->eat_num - 1)
+		usleep(t_think * 1000 * 0.5);
+}
 
 static int	ft_strncmp(const char *s1, const char *s2, int size)
 {
@@ -31,7 +51,7 @@ void	write_state(t_philo_lst **philo_lst, char *state)
 	if (ft_strncmp(state, "eat", 3) == 0)
 	{
 		pthread_mutex_lock(&(*philo_lst)->t_to_die_mutex);
-		printf("%lld %d is eating\n",
+		printf(WB"\%lld"G" %d is eating\n",
 			(*philo_lst)->t_after_eat, (*philo_lst)->seat);
 		pthread_mutex_unlock(&(*philo_lst)->t_to_die_mutex);
 		usleep((*philo_lst)->philo_const->t_eat * 1000);
@@ -39,7 +59,7 @@ void	write_state(t_philo_lst **philo_lst, char *state)
 	else if (ft_strncmp(state, "sleep", 5) == 0)
 	{
 		pthread_mutex_lock(&(*philo_lst)->time_mutex);
-		printf("%lld %d is sleeping\n",
+		printf(WB"\%lld"B" %d is sleeping\n",
 			(*philo_lst)->t_now, (*philo_lst)->seat);
 		pthread_mutex_unlock(&(*philo_lst)->time_mutex);
 		usleep((*philo_lst)->philo_const->t_sleep * 1000);
@@ -47,7 +67,7 @@ void	write_state(t_philo_lst **philo_lst, char *state)
 	else if (ft_strncmp(state, "fork", 4) == 0)
 	{
 		pthread_mutex_lock(&(*philo_lst)->time_mutex);
-		printf("%lld %d has taken a fork\n",
+		printf(WB"\%lld"W" %d has taken a fork\n",
 			(*philo_lst)->t_now, (*philo_lst)->seat);
 		pthread_mutex_unlock(&(*philo_lst)->time_mutex);
 	}
@@ -62,7 +82,7 @@ int	start_sim(t_philo_lst *philo_lst)
 		return (-1);
 	while (eat_limit-- >= 0 || eat_limit < 0)
 	{
-		if (philo_sim(philo_lst) == -1)
+		if (philo_sim(philo_lst, eat_limit) == -1)
 			return (0);
 		if (eat_limit == 0)
 		{

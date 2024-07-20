@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 22:27:25 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 17:32:17 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:34:40 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	check_nb(char const *str)
 {
+	if (*str == '+')
+		str++;
 	while (*str != 0)
 	{
 		if (*str < '0' || *(str++) > '9')
@@ -29,6 +31,8 @@ static long long	ft_atoi(char const *str)
 	if (check_nb(str) == 1)
 		return (-1);
 	nb = 0;
+	if (*str == '+')
+		str++;
 	while (*str != 0)
 		nb = nb * 10 + (*(str++) - 48);
 	return (nb);

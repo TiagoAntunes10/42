@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:42:52 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 17:35:43 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:32:34 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <string.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+# define WB "\033[1;37m"
+# define W "\033[0;37m"
+# define CR "\033[0;31m"
+# define G "\033[0;32m"
+# define Y "\033[0;33m"
+# define B "\033[0;34m"
 
 typedef struct s_philo_const
 {
@@ -60,7 +67,7 @@ t_philo_lst	*create_lst(t_philo_const *philo);
 int			mutex_unlock(t_philo_lst *philo_lst);
 void		*run_thread(void *arg);
 void		*watcher(void *arg);
-int			philo_sim(t_philo_lst *philo_lst);
+int			philo_sim(t_philo_lst *philo_lst, int eat_limit);
 int			start_mutex(t_philo_lst **philo_lst);
 int			end_lst(t_philo_lst *philo_lst);
 int			get_init_time(t_philo_lst **philo_lst);
@@ -72,5 +79,6 @@ void		write_state(t_philo_lst **philo_lst, char *state);
 int			start_sim(t_philo_lst *philo_lst);
 int			death_check(t_philo_lst *philo_lst);
 int			kill_philos(t_philo_lst *philo_lst);
+void		eating_queue(t_philo_lst *philo_lst, int eat_limit);
 
 #endif

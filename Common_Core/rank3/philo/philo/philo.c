@@ -6,19 +6,20 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 23:19:39 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/19 17:27:11 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:37:33 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Include/philo.h"
 
-static int	mutex_lock(t_philo_lst *philo_lst)
+static int	mutex_lock(t_philo_lst *philo_lst, int eat_limit)
 {
 	t_philo_lst	*lst;
 
 	lst = philo_lst;
 	if (philo_lst->seat == lst->philo_const->philos_num)
 		lst = lst->next;
+	eating_queue(philo_lst, eat_limit);
 	if (pthread_mutex_lock(&lst->mutex) != 0)
 		return (-1);
 	if (get_current_time(philo_lst, 1) == -1)
@@ -58,16 +59,16 @@ int	mutex_unlock(t_philo_lst *philo_lst)
 	return (0);
 }
 
-int	philo_sim(t_philo_lst *philo_lst)
+int	philo_sim(t_philo_lst *philo_lst, int eat_limit)
 {
 	if (get_current_time(philo_lst, 1) == -1)
 		return (-1);
 	if (pthread_mutex_lock(&philo_lst->time_mutex) != 0)
 		return (-1);
-	printf("%lld %d is thinking\n", philo_lst->t_now, philo_lst->seat);
+	printf(WB"\%lld"Y" %d is thinking\n", philo_lst->t_now, philo_lst->seat);
 	if (pthread_mutex_unlock(&philo_lst->time_mutex) != 0)
 		return (-1);
-	if (mutex_lock(philo_lst) == -1)
+	if (mutex_lock(philo_lst, eat_limit) == -1)
 		return (-1);
 	if (kill_unlock_cond(philo_lst, 1) != 0)
 		return (-1);
@@ -126,7 +127,7 @@ void	*watcher(void *arg)
 	if (get_current_time(philo_lst, 1) == -1)
 		return (NULL);
 	pthread_mutex_lock(&philo_lst->time_mutex);
-	printf("%lld %d died\n", philo_lst->t_now,
+	printf(WB"\%lld"CR" %d died\n", philo_lst->t_now,
 		philo_lst->philo_cond->death);
 	pthread_mutex_unlock(&philo_lst->time_mutex);
 	if (kill_philos(philo_lst) != 0)
