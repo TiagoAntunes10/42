@@ -6,7 +6,7 @@
 /*   By: tialbert <tialbert@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:09:18 by tialbert          #+#    #+#             */
-/*   Updated: 2024/07/20 22:51:28 by tialbert         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:45:42 by tialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	eating_queue(t_philo_lst *philo_lst, int eat_limit)
 	long long	t_think;
 	long long	t_sleep;
 
-	if (philo_lst->philo_const->philos_num % 2 == 0)
-		return ;
 	if (eat_limit == philo_lst->philo_const->eat_num - 1)
 	{
 		if (philo_lst->seat % 2 == 0)
 			usleep(50);
 	}
+	if (philo_lst->philo_const->philos_num % 2 == 0)
+		return ;
 	t_sleep = philo_lst->philo_const->t_sleep;
 	t_think = philo_lst->philo_const->t_eat * 2 - t_sleep;
 	if (t_think < 0)
